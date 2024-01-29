@@ -19,7 +19,7 @@ const LoginForm = () => {
       <input type="submit" value="เข้าสู่ระบบ" className="login-form-submit" />
 
       <div className="login-form-help">
-        <p>มีข้อซักถามหรือต้องการความช่วยเหลือ??</p>
+        <p>มีข้อซักถามหรือต้องการความช่วยเหลือ?</p>
       </div>
     </form>
   );
