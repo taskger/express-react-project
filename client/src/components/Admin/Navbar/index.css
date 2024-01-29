@@ -1,0 +1,50 @@
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-header {
+  background-color: #245953;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightMenu,
+.leftMenu {
+  display: flex;
+  align-items: center;
+  background-color: #245953;
+}
+
+.menuButton {
+  display: none; /* Hide the menu button on larger screens */
+}
+
+/* Adjust styles for smaller screens */
+@media screen and (max-width: 768px) {
+  .rightMenu,
+  .leftMenu {
+    display: none; /* Hide the menus on smaller screens */
+  }
+
+  .menuButton {
+    display: block; /* Display the menu button on smaller screens */
+  }
+}
+.nav-header {
+  }
+.menuButton{
+    background-color: #ffffff;
+}
+.menuButton {
+    background-color: #245953;
+}
+  
+  /* Add this rule if you want to style the brand font color as well */
+  .brand-font {
+    color: #ffffff; /* Assuming white color, adjust as needed */
+  }
+  
