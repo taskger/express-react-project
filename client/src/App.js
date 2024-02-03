@@ -9,6 +9,10 @@ import Confirm from './components/Admin/Confirm/confirm';
 import Userhome from './components/User/Home/home';
 import Userschedule from './components/User/Schedule/schedule';
 import Useraddcourse from './components/User/Addcourse/addcourse';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './js/main'
+
+
 
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'

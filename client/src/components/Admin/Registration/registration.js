@@ -4,7 +4,7 @@ import Navbar from '../Navbar';
 const Registration = () => {
   return (
     <div>
-      <Navbar /> {/* Render the Navbar component */}
+      <Navbar /> 
       <form action="/login" method="post" className="login-form">
         <h1 className="login-form-title">กำหนดวันลงทะเบียน</h1>
 
