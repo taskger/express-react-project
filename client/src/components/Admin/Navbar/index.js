@@ -1,6 +1,6 @@
 import React from 'react';
 import "./index.css"; // Import the external CSS file
-
+import { Link } from 'react-router-dom'; // Import Link from React Router
 const Navbar = () => {
   return (
     <div>
@@ -29,12 +29,11 @@ const Navbar = () => {
               </span>
               <nav className="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                 <ul className="site-menu main-menu js-clone-nav ml-auto ">
-                  <li className="nav-item active"><a href="#" className="nav-link">Home</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Portfolio</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">About</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Services</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Blog</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Contact</a></li>
+                  <li className="nav-item active"><Link to="/admin" className="nav-link">หน้าแรก</Link></li>
+                  <li className="nav-item"><Link to="/admin/schedule" className="nav-link">จัดตาราง</Link></li>
+                  <li className="nav-item"><Link to="/admin/course" className="nav-link">นำเข้าหลักสูตร</Link></li>
+                  <li className="nav-item"><Link to="/admin/registration" className="nav-link">กำหนดวันลงทะเบียน</Link></li>
+                  <li className="nav-item"><Link to="/admin/confirm" className="nav-link">รอการยืนยัน</Link></li>
                 </ul>
               </nav>
             </div>

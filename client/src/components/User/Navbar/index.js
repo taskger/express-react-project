@@ -1,46 +1,30 @@
 import React from 'react';
 import "./index.css"; // Import the external CSS file
+import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const Navbar = () => {
   return (
     <div>
-      <div className="site-mobile-menu site-navbar-target">
-        <div className="site-mobile-menu-header">
-          <div className="site-mobile-menu-close mt-3">
-            <span className="icon-close2 js-menu-toggle"></span>
-          </div>
-        </div>
-        <div className="site-mobile-menu-body"></div>
-      </div>
-
-      <header className="site-navbar site-navbar-target" role="banner">
-        <div className="container">
-          <div className="row align-items-center position-relative">
-            <div className="col-3">
-              <div className="site-logo">
-                <a href="index.html" className="font-weight-bold">Brand</a>
-              </div>
-            </div>
-            <div className="col-9  text-right">
-              <span className="d-inline-block d-lg-none">
-                <a href="#" className="text-primary site-menu-toggle js-menu-toggle py-5">
-                  <span className="icon-menu h3 text-white"></span>
-                </a>
-              </span>
-              <nav className="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
-                <ul className="site-menu main-menu js-clone-nav ml-auto ">
-                  <li className="nav-item active"><a href="#" className="nav-link">Home</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Portfolio</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">About</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Services</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Blog</a></li>
-                  <li className="nav-item"><a href="#" className="nav-link">Contact</a></li>
-                </ul>
-              </nav>
+      <nav className="navbar navbar-expand-lg  navbar-light" style={{ backgroundColor: '#245953' }}>
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="container collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" >
+                    <li className="nav-item active">
+                      <Link to="/user" className="nav-link" >หน้าแรก</Link> 
+                    </li>
+                    <li className="nav-item "><Link to="/user/schedule" className="nav-link">ตารางสอน</Link></li>
+                    <li className="nav-item"><Link to="/user/addcourse" className="nav-link">เพิ่มรายวิชา</Link></li>
             </div>
           </div>
+          <ul class="nav justify-content-end">
+              <li className="nav-item"><Link to="/user/addcourse" className="nav-link">Logout</Link></li>
+            </ul>
         </div>
-      </header>
+      </nav>
     </div>
   );
 };

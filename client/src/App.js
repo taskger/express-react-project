@@ -10,7 +10,6 @@ import Userhome from './components/User/Home/home';
 import Userschedule from './components/User/Schedule/schedule';
 import Useraddcourse from './components/User/Addcourse/addcourse';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './js/main'
 
 
 
@@ -20,13 +19,13 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/login' element={<Login/>}></Route>
-      <Route path='/admin/home' element={<Home/>}></Route>
+      <Route path='/' element={<Login/>}></Route>
+      <Route path='/admin/' element={<Home/>}></Route>
       <Route path='/admin/schedule' element={<Schedule/>}></Route>
       <Route path='/admin/course' element={<Course/>}></Route>
       <Route path='/admin/registration' element={<Registration/>}></Route>
       <Route path='/admin/confirm' element={<Confirm/>}></Route>
-      <Route path='/user/home' element={<Userhome/>}></Route>
+      <Route path='/user/' element={<Userhome/>}></Route>
       <Route path='/user/schedule' element={<Userschedule/>}></Route>
       <Route path='/user/addcourse' element={<Useraddcourse/>}></Route>
     </Routes>
