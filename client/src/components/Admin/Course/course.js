@@ -19,14 +19,9 @@ const Course = () => {
 
           <div className="importfile-LhagSu">
             <p> ไฟล์หลักสูตร </p>
-              <input className = "input-PeLhagSu"></input>
             <div class="mb-3">
               <input class="form-control" type="file" id="formFile"/>
             </div>       
-          </div>
-
-          <div>
-            <button className="input-confirm">ยืนยัน</button>
           </div>
         </div>
 
