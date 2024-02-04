@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import "./course.css";
+import * as XLSX from "xlsx";
 const Course = () => {
   return (
     <div>
@@ -10,10 +11,10 @@ const Course = () => {
           <div className="choose-PeLhagSu">
             <p> ปีหลักสูตร </p>
             <select className="PeLhagSu">
-              <option value="2566">2566</option>
-              <option value="2565">2565</option>
-              <option value="2564">2564</option>
-              <option value="2563">2563</option>
+              <option value="2566">2567</option>
+              <option value="2565">2566</option>
+              <option value="2564">2565</option>
+              <option value="2563">2564</option>
             </select>
           </div>
 
