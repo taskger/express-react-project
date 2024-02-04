@@ -1,7 +1,12 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import "./course.css";
+import { useState } from "react";
 import * as XLSX from "xlsx";
+
+const [data, setData] = useState([]);
+const handleFileUpload = (e) => {}
+
 const Course = () => {
   return (
     <div>
@@ -21,7 +26,7 @@ const Course = () => {
           <div className="importfile-LhagSu">
             <p> ไฟล์หลักสูตร </p>
             <div class="mb-3">
-              <input class="form-control" type="file" id="formFile"/>
+              <input class="form-control" accept=".xlsx, .xls" type="file" onChange={handleFileUpload} id="formFile"/>
             </div>       
           </div>
         </div>
