@@ -1,51 +1,80 @@
-body {
-  font-family: Arial, sans-serif;
+.container-login {
+  display: flex;
+  height: 100%;
 }
 
-.login-form {
-  width: 300px;
-  margin: 0 auto;
+.img-kaset {
+  width: 1100px;
+  height: 100%;
+}
+
+.logo {
+  width: 100%;
+}
+
+.container-input {
   display: flex;
   flex-direction: column;
+  width: 820px;
+}
+.empty {
+  height: 175px;
 }
 
-.login-form-title {
+.input-User {
+  width: 589px;
+  height: 86px;
+  border-radius: 10px;
+  background-color: #D8D8D8;
+  border: 0px;
+  display: block;
+  margin: auto;
+  font-size: 24px;
+  padding-left: 25px;
+}
+
+.first-font {
+  font-size: 36px;
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 10px;
 }
 
-.login-form-subtitle {
-  text-align: center;
-  margin-bottom: 30px;
+.sec-font{
+  margin-left: 125px;
 }
 
-.login-form-label {
-  margin-top: 10px;
+.button-samak {
+  height: 130px;  
 }
 
-.login-form-input {
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.login-form-submit {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #4caF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.button-ssamak{
+  border-top: 0px solid #FFFFFF;
+  border-left: 0px solid #FFFFFF;
+  border-right: 0px solid #FFFFFF;
+  background-color: #FFFFFF;
+  font-size: 24px;
+  margin-left: 550px;
+  margin-top: 10px; 
   cursor: pointer;
 }
 
-.login-form-submit:hover {
-  background-color: #45a049;
+.button-login{
+  width: 362px;
+  height: 74px;
+  font-size: 28px;
+  border: 0px;
+  border-radius: 10px;
+  background-color: #96BB7C;
+  color: #FFFFFF;
+  display: block;
+  margin: auto;
+  cursor: pointer;
 }
 
-.login-form-help {
-  margin-top: 20px;
+.Rabop-font {
+  font-size: 64px;
+  color: #007E70;
+  font-family: Roboto;
   text-align: center;
+  text-shadow: #000000;
 }
+
