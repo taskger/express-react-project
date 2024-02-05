@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
 
+
 div .nav-link {
     font-family: 'Mitr', sans-serif;
     color: white;
@@ -13,7 +14,7 @@ div .nav-link {
     transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
 }       
 div .nav-link.course{
-    width: 264px;
+    width: auto;
 }
 
 div .nav-link.registration{
