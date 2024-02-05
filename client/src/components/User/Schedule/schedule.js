@@ -8,7 +8,7 @@ const Schedule = () => {
       <div className="container">
         <div className="row ">
           <div className="col-1">
-            <label htmlFor="semester" className="form-label">ภาคการศึกษา</label>
+            <label htmlFor="semester" className="form-label">ภาคการศึกษาo</label>
           </div>
           <div className="col">
             <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
