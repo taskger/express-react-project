@@ -12,7 +12,14 @@ div .nav-link {
     align-items: center; /* Center the text vertically */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
 }       
+div .nav-link.course{
+    width: 264px;
+}
 
+div .nav-link.registration{
+    width: 343px;
+
+}
 div .nav-link:hover {
     background-color: #123733;
     color: rgb(255, 255, 255);
