@@ -18,7 +18,7 @@ div .nav-link.course{
 }
 
 div .nav-link.registration{
-    width: 343px;
+    width: auto;
 
 }
 div .nav-link:hover {
