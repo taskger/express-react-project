@@ -4,8 +4,7 @@
 }
 
 .img-kaset {
-  width: 1100px;
-  height: 100%;
+  max-width: 1100px;
 }
 
 .logo {
@@ -18,7 +17,11 @@
   width: 820px;
 }
 .empty {
-  height: 175px;
+  height: 200px;
+}
+
+.input-all {
+  height: 650px;
 }
 
 .input-User {
@@ -39,23 +42,15 @@
 }
 
 .sec-font{
-  margin-left: 125px;
+  margin-left: 120px;
 }
 
-.button-samak {
-  height: 130px;  
+.three-font{
+  margin-left: 120px;
+  margin-top: 25px;
 }
 
-.button-ssamak{
-  border-top: 0px solid #FFFFFF;
-  border-left: 0px solid #FFFFFF;
-  border-right: 0px solid #FFFFFF;
-  background-color: #FFFFFF;
-  font-size: 24px;
-  margin-left: 550px;
-  margin-top: 10px; 
-  cursor: pointer;
-}
+
 
 .button-login{
   width: 362px;
@@ -75,6 +70,33 @@
   color: #007E70;
   font-family: Roboto;
   text-align: center;
+  margin-top: 60px;
   text-shadow: #000000;
 }
 
+.show-password-button {
+  right: 10px;
+  
+  
+  padding: 0;
+  cursor: pointer;
+  font-size: 20px;
+} 
+
+.four-font {
+  text-align: center;
+  margin-top: 40px;
+  height: 90px;
+}
+
+.login-google{
+  width: 589px;
+  height: 86px;
+  border-radius: 10px;
+  background-color: #D8D8D8;
+  border: 0px;
+  display: block;
+  margin: auto;
+  font-size: 24px;
+  padding-left: 25px;
+}
