@@ -4,8 +4,8 @@ const Schedule = () => {
   return (
     <div>
       <div className="container">
-        <div className="row ">
-        <div className="col">
+        <div className="row">
+          <div className="col">
           </div>
           <div className="col-1">
           </div>
@@ -18,7 +18,7 @@ const Schedule = () => {
               <option value="3">Three</option>
             </select>
             <label htmlFor="year" className="form-label">รับจำนวน</label>
-              <input type="text" class="form-control" id="InputStudents" />
+            <input type="text" class="form-control" id="InputStudents" />
             <label htmlFor="semester" className="form-label">หมู่เรียน</label>
             <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
               <option selected>กรุณาเลือกหมู่เรียน</option>
@@ -48,18 +48,49 @@ const Schedule = () => {
             <div class="cs-form">
               <input type="time" class="form-control" value="10:05 AM" />
             </div>
-            
+            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา</label>
+
+            <div>
+              <div className='form-check form-check-inline'>
+                <input class="form-check-input" type="checkbox" value="1" id="check1"/>
+                <label class="form-check-label" htmlFor="check1"> ชั้นปี 1 </label>
+              </div>
+              <div className='form-check form-check-inline'>
+                <input class="form-check-input" type="checkbox" value="3" id="check3"/>
+                <label class="form-check-label" htmlFor="check3"> ชั้นปี 2 </label>
+              </div>
+              <div className='form-check form-check-inline'>
+                <input class="form-check-input" type="checkbox" value="1" id="check1"/>
+                <label class="form-check-label" htmlFor="check1"> ชั้นปี 3 </label>
+              </div>
+              <div className='form-check form-check-inline'>
+                <input class="form-check-input" type="checkbox" value="3" id="check3"/>
+                <label class="form-check-label" htmlFor="check3"> ชั้นปี 4 </label>
+              </div>
+              <div className='form-check form-check-inline'>
+                <input class="form-check-input" type="checkbox" value="3" id="check3"/>
+                <label class="form-check-label" htmlFor="check3"> ชั้นปีอื่นๆ </label>
+              </div>
+            </div>
+
+
+            <div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+              <label class="form-check-label" for="inlineRadio1">วิชาหลัก</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+              <label class="form-check-label" for="inlineRadio2">วิชาเลือก</label>
+            </div>
+
+            </div>
           </div>
           <div className="col-1">
-
           </div>
-          <div className="col">
-
+          <div className="col ">
           </div>
-
-
-          <input type="submit" value="เข้าสู่ระบบ" className="login-form-submit" />
-
         </div>
       </div>
     </div>

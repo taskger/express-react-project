@@ -1,26 +1,36 @@
 import React from 'react';
 import Navbar from '../Navbar';
+import "./registration.css"; // Import the external CSS file
 
 const Registration = () => {
   return (
     <div>
       <Navbar /> 
-      <form action="/login" method="post" className="login-form">
-        <h1 className="login-form-title">กำหนดวันลงทะเบียน</h1>
+      <div className="container">
+      <div class="row">
+        <div className="col">
+            </div>
+              <div className="col">
+                <h1 className="login-form-title">กำหนดวันลงทะเบียน</h1>
 
-        <label htmlFor="startdate" className="login-form-label">
-          วันเริ่มการลงทะเบียน
-        </label>
-        <input type="date" id="startdate" name="startdate" required className="login-form-input" />
+                <label htmlFor="startdate" className="login-form-label">
+                  วันเริ่มการลงทะเบียน
+                </label>
+                <input type="date" id="startdate" name="startdate" required className="login-form-input" />
 
-        <label htmlFor="enddate" className="login-form-label">
-          วันสิ้นสุดการลงทะเบียน
-        </label>
-        <input type="date" id="enddate" name="enddate" required className="login-form-input" />
+                <label htmlFor="enddate" className="login-form-label">
+                  วันสิ้นสุดการลงทะเบียน
+                </label>
+                <input type="date" id="enddate" name="enddate" required />
 
-        <input type="submit" value="ยืนยัน" className="login-form-submit" />
+                <button type="submit" class="btn btn-primary btn-block">ยืนยัน</button>
 
-      </form>
+              </div>
+            <div className="col">
+            </div>
+          </div>
+
+        </div>
     </div>
   );
 };

@@ -3,7 +3,48 @@ div .form-label{
 }
 
 .col.center{
-    background-color:antiquewhite;
+
+    margin-top: 30px;
+    margin-bottom: 50px;
+
+}
+.container.addcourse{
+    margin-top: 20px;
+}
+.form-select.form-select-sm.mb-3{
+    background-color: rgb(255, 255, 255);
+}
+button.btn{
+    width: 500px;
+    margin-bottom: 50px;
+    border: 3px solid #96BB7C;
+    background-color: rgb(255, 255, 255);
+    color: #96BB7C;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
 
 
 }
+button.btn:hover{
+    border: 3px solid #96BB7C;
+    background-color: #96BB7C;
+    color: #ffffff;
+
+
+}
+div.bg{
+    margin-top: 50px;
+
+    margin-bottom: 50px;
+    border: 3px solid #000000;
+    border-radius: 15px;
+    width: 60%;
+    background-color: #ffffff;
+}
+div.form-check{
+    margin-top: 5px;
+
+}
+div label.StudentYear{
+    margin-top: 25px;
+
+}   
