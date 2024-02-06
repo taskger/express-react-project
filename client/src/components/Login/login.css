@@ -62,7 +62,7 @@ div .empty h1{
 
 
 
-.button-login{
+button.button-login{
   width: 362px;
   height: 74px;
   font-size: 28px;
@@ -73,8 +73,13 @@ div .empty h1{
   display: block;
   margin: auto;
   cursor: pointer;
-}
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
 
+}
+button.button-login:hover{
+  background-color: #668154;
+  color: #ffffff;
+}
 .Rabop-font {
   font-size: 64px;
   color: #007E70;

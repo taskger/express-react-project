@@ -1,0 +1,17 @@
+button.btn{
+  width: 500px;
+  margin-bottom: 50px;
+  border: 3px solid #96BB7C;
+  background-color: rgb(255, 255, 255);
+  color: #96BB7C;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+
+
+}
+button.btn:hover{
+  border: 3px solid #96BB7C;
+  background-color: #96BB7C;
+  color: #ffffff;
+
+
+}
