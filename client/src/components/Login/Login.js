@@ -78,7 +78,7 @@ const LoginForm = () => {
             </div>
             
             <div >
-                <button type="submit" className="button-login" onClick={btnLogin}>ยืนยัน</button>
+                <button type="submit" className="button-login" onClick={btnLogin}>เข้าสู่ระบบ</button>
 
             </div>
         </div>

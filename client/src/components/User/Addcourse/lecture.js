@@ -1,13 +1,15 @@
 import React from 'react';
 
-const Schedule = () => {
+const lecture = () => {
   return (
-    <div>
+      <div>
+        
       <div className="container">
         <div className="row">
           <div className="col">
+            
           </div>
-          <div className="col-1">
+          <div className="col-1 lecture">
           </div>
           <div className="col center">
             <label htmlFor="semester" className="form-label">ชื่อวิชา</label>
@@ -84,7 +86,11 @@ const Schedule = () => {
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
               <label class="form-check-label" for="inlineRadio2">วิชาเลือก</label>
             </div>
+            <div >
 
+            <button type="submit" class="addlecture btn btn-lg">เพิ่มหมู่บรรยาย</button>
+
+            </div>
             </div>
           </div>
           <div className="col-1">
@@ -97,4 +103,4 @@ const Schedule = () => {
   );
 };
 
-export default Schedule;
+export default lecture;

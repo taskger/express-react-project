@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import Navbar from '../Navbar';
 import "./addcourse.css";
-import Lecter from './Lecter';
+import Lecture from './lecture';
+import Practice from './practice'; // Assuming the Practice component is exported properly
 
 const Schedule = () => {
-  const [selectedRadio, setSelectedRadio] = useState('lecture'); // Default value for lecture
+  const [selectedLecture, setSelectedLecture] = useState(false); // Default value for lecture checkbox
+  const [selectedPractice, setSelectedPractice] = useState(false); // Default value for practice checkbox
 
-  const handleRadioChange = (event) => {
-    setSelectedRadio(event.target.value);
+  const handleLectureChange = (event) => {
+    setSelectedLecture(event.target.checked);
+  };
+
+  const handlePracticeChange = (event) => {
+    setSelectedPractice(event.target.checked);
   };
 
   return (
@@ -28,12 +34,10 @@ const Schedule = () => {
             <div className="col">
               <input
                 className="form-check-input"
-                type="radio"
-                name="lectureType"
+                type="checkbox"
                 id="lecture"
-                value="lecture"
-                checked={selectedRadio === 'lecture'}
-                onChange={handleRadioChange}
+                checked={selectedLecture}
+                onChange={handleLectureChange}
               />
               <label className="form-check-label" htmlFor="lecture">
                 บรรยาย
@@ -43,12 +47,10 @@ const Schedule = () => {
             <div className="col">
               <input
                 className="form-check-input"
-                type="radio"
-                name="lectureType"
+                type="checkbox"
                 id="practice"
-                value="practice"
-                checked={selectedRadio === 'practice'}
-                onChange={handleRadioChange}
+                checked={selectedPractice}
+                onChange={handlePracticeChange}
               />
               <label className="form-check-label" htmlFor="practice">
                 ปฏิบัติ
@@ -78,19 +80,18 @@ const Schedule = () => {
           </div>
           <div className="col"></div>
           <div class="bg">
-          {selectedRadio === 'lecture' && <Lecter />}
-
+            {selectedLecture && <Lecture />}
+            {selectedPractice && <Practice />}
           </div>
           <div className="row">
             <div className='col'>
             </div>
             <div className='col'>
               <button type="submit" class="btn btn-lg">ยืนยัน</button>
-              </div>
-
-              <div className='col'>
             </div>
+            <div className='col'>
             </div>
+          </div>
         </div>
       </div>
     </div>
