@@ -46,15 +46,17 @@ const lecture = () => {
               <option value="6">วันเสาร์</option>
               <option value="7">วันอาทิตย์</option>
             </select>
-            <label htmlFor="year" className="form-label">เวลา</label>
             <div class="cs-form">
-              <div className='row'>
+            <div className='row'>
                 <div className='col'>
-                  <input type="time" class="form-control" />
+                  <h7>เรื่มสอน</h7>
+                  <input type="time" class="form-control "  />
                 </div>                
                 <div className='col'>
+                  <h7>สิ้นสุดการสอน</h7>
                  <input type="time" class="form-control" />
                 </div>
+                
               </div>
             </div>
             <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา</label>
