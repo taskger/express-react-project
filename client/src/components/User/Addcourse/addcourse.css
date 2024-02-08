@@ -48,3 +48,14 @@ div label.StudentYear{
     margin-top: 25px;
 
 }   
+.lecture-container .content {
+    display: none;
+  }
+  
+  .lecture-container.expanded .content {
+    display: block;
+  }
+button.addlecture{
+    width: 250px;
+    margin-top: 30px;
+}

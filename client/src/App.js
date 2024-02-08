@@ -9,7 +9,6 @@ import Confirm from './components/Admin/Confirm/confirm';
 import Userhome from './components/User/Home/home';
 import Userschedule from './components/User/Schedule/schedule';
 import Useraddcourse from './components/User/Addcourse/addcourse';
-import Lecter from './components/User/Addcourse/Lecter';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -30,7 +29,6 @@ function App() {
       <Route path='/user/schedule' element={<Userschedule/>}></Route>
       <Route path='/user/addcourse' element={<Useraddcourse/>}></Route>
       
-      <Route path='/Lecter' element={<Lecter/>}></Route>
     </Routes>
 
     </BrowserRouter>
