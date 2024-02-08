@@ -12,16 +12,16 @@ const lecture = () => {
           <div className="col-1 lecture">
           </div>
           <div className="col center">
-            <label htmlFor="semester" className="form-label">ชื่อวิชา</label>
+            <label htmlFor="semester" className="form-label">ชื่อวิชา<span class="form-required" title="This field is required.">*</span></label>
             <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
               <option selected>Open this select menu</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
-            <label htmlFor="year" className="form-label" >รับจำนวน</label>
+            <label htmlFor="year" className="form-label" >รับจำนวน<span class="form-required" title="This field is required.">*</span></label>
             <input type="text" class="form-control" id="InputStudents" />
-            <label htmlFor="semester" className="form-label">หมู่เรียน</label>
+            <label htmlFor="semester" className="form-label">หมู่เรียน<span class="form-required" title="This field is required.">*</span></label>
             <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
               <option selected>กรุณาเลือกหมู่เรียน</option>
               <option value="801">801</option>
@@ -35,7 +35,7 @@ const lecture = () => {
               <option value="809">809</option>
               <option value="810">810</option>
             </select>
-            <label htmlFor="year" className="form-label">วัน</label>
+            <label htmlFor="year" className="form-label">วัน<span class="form-required" title="This field is required.">*</span></label>
             <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
               <option selected Disabled>กรุณาเลือกวัน</option>
               <option value="1">วันจัทนร์</option>
@@ -46,11 +46,11 @@ const lecture = () => {
               <option value="6">วันเสาร์</option>
               <option value="7">วันอาทิตย์</option>
             </select>
-            <label htmlFor="year" className="form-label">เวลา</label>
+            <label htmlFor="year" className="form-label">เวลา<span class="form-required" title="This field is required.">*</span></label>
             <div class="cs-form ">
               <input type="time" class="form-control" />
             </div>
-            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา</label>
+            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา<span class="form-required" title="This field is required.">*</span></label>
 
             <div>
               <div className='form-check form-check-inline'>

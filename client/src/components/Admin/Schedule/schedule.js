@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from '../Navbar';
-import "./schedule.css";
 import Filter from '../../filter/filter';
 const Schedule = () => {
   return (
