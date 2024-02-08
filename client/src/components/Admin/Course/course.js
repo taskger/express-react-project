@@ -62,6 +62,8 @@ return (
                 </table>
                 </div>
           )}
+          <button type="submit" class="btn registration submit btn-primary btn-block">ยืนยัน</button>
+
         </div>              
     </div>
   );
