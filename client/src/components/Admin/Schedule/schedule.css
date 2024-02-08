@@ -1,10 +1,37 @@
+
 input.boxcheck {
     margin-right:8px;
     
 } 
 
 .container-fluid.border {
-
+    width: 267px;
+    height: auto;
+    margin-left: 30px;
     border:1px ;
+    border-radius: 5px;
+}
+div.col input.boxcheck{
+    
+    accent-color: #74992e;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-top: 5px;
+
 }
 
+label.rank{
+    font-size: 25px;
+    font-weight:500;
+}
+
+div.form-check-main .row .col{
+    margin-left: 20px;
+    color: #8D8D8D;
+}
+div.line{
+    margin: 10px;
+
+    border-top: 2px solid #D6D6D6;
+}

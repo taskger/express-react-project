@@ -22,7 +22,6 @@ const Course = () => {
 return (
     <div>
       <Navbar/>
-      <h1>หน้านำเข้าหลักสูตรของ ผู้จัดตาราง</h1>
         <div className="App">
           <div className="choose-PeLhagSu">
             <p> ปีหลักสูตร </p>
@@ -41,24 +40,27 @@ return (
             </div>       
           </div>
           {data.length > 0 && (
-            <table className="table">
-            <thead>
-              <tr>
-                {Object.keys(data[0]).map((key) => (
-                  <th key={key}>{key} </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-                {data.map((row, index) => (
-                  <tr key={index}>
-                    {Object.values(row).map((value, index) => (
-                      <td key={index}>{value}</td>
-                      ))}
+
+              <div className='scrollwrapper'>
+                <table className="table table-bordered course ">
+                <thead>
+                  <tr >
+                    {Object.keys(data[0]).map((key) => (
+                      <th key={key}>{key} </th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                    {data.map((row, index) => (
+                      <tr key={index}>
+                        {Object.values(row).map((value, index) => (
+                          <td className='table-success' key={index}>{value}</td>
+                          ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                </div>
           )}
         </div>              
     </div>

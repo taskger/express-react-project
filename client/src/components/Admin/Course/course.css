@@ -1,8 +1,4 @@
-.App {
-    width: 1920px;
-    height: 1080px;
-    
-}
+
 
 .choose-PeLhagSu {
     display:flex;
@@ -10,6 +6,7 @@
 }
 
 .PeLhagSu {
+    
     width: 271px;
     height: 50px;
 }
@@ -32,3 +29,18 @@
     width: 300px;
     height: 50px;
 }
+
+table.table.table-bordered.course tr{
+    text-align: left;
+}
+.scrollwrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width:fit-content;
+    max-height: 500px; /* Set a maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrollbar if needed */
+    border: 2px solid #000;
+    border-radius: 3px;
+}
+
+  

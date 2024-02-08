@@ -23,7 +23,7 @@ const Schedule = () => {
         <div className="row justify-content-center">
           <div className="col-1"></div>
           <div className="col">
-            <label htmlFor="semester" className="form-label">ปีหลักสูตร</label>
+            <label htmlFor="semester" className="form-label">ปีหลักสูตร<span class="form-required" title="This field is required.">*</span></label>
             <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
               <option selected>Open this select menu</option>
               <option value="1">One</option>
@@ -32,6 +32,8 @@ const Schedule = () => {
             </select>
 
             <div className="col">
+              <label htmlFor="semester" className="form-label">ประเภทวิชาที่ต้องการ<span class="form-required" title="This field is required.">*</span></label>
+
               <input
                 className="form-check-input addcourse"
                 type="checkbox"
@@ -62,7 +64,7 @@ const Schedule = () => {
           <div className="col">
             <div className="col-1"></div>
             <div className="col">
-              <label htmlFor="semester" className="form-label">ภาคการศึกษา</label>
+              <label htmlFor="semester" className="form-label">ภาคการศึกษา<span class="form-required" title="This field is required.">*</span></label>
               <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                 <option selected>Open this select menu</option>
                 <option value="1">One</option>
@@ -70,7 +72,7 @@ const Schedule = () => {
                 <option value="3">Three</option>
               </select>
             </div>
-            <label htmlFor="year" className="form-label">ปีการศึกษา</label>
+            <label htmlFor="year" className="form-label">ปีการศึกษา<span class="form-required" title="This field is required.">*</span></label>
             <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
               <option selected>Open this select menu</option>
               <option value="1">One</option>
