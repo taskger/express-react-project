@@ -1,18 +1,26 @@
-
+p {
+    font-size: 24px;
+}
 
 .choose-PeLhagSu {
     display:flex;
-    text-align: center;
+    margin-top: 50px;
+    margin-left: 600px;
 }
 
 .PeLhagSu {
-    
+    margin-left: 85px;
     width: 271px;
     height: 50px;
+    border-radius: 10px;
+    border-color: #dadada;
 }
 
 .importfile-LhagSu {
     display:flex;
+    margin-top: 50px;
+    
+    margin-left: 600px;
 }
 
 .input-PeLhagSu {
@@ -43,4 +51,6 @@ table.table.table-bordered.course tr{
     border-radius: 3px;
 }
 
-  
+.mb-3 {
+    margin-left: 60px;
+}
