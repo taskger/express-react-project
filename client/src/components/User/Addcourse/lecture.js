@@ -48,7 +48,7 @@ const lecture = () => {
             </select>
             <label htmlFor="year" className="form-label">เวลา</label>
             <div class="cs-form">
-              <input type="time" class="form-control" value="10:05 AM" />
+              <input type="time" class="form-control" />
             </div>
             <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา</label>
 

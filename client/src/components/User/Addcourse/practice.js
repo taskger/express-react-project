@@ -46,7 +46,7 @@ const practice = () => {
             </select>
             <label htmlFor="year" className="form-label">เวลา</label>
             <div class="cs-form">
-              <input type="time" class="form-control" value="10:05 AM" />
+              <input type="time" class="form-control" />
             </div>
             <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา</label>
 
@@ -88,7 +88,7 @@ const practice = () => {
             <div className="col ">
             </div>
             <div className="col ">
-            <button type="submit" class="addlecture btn">เพิ่มหมู่ปฏิบัติ</button>
+            <button type="submit" class="btn addlecture">เพิ่มหมู่ปฏิบัติ</button>
 
             </div>
             <div className="col ">
