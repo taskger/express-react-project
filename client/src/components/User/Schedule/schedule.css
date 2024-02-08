@@ -9,7 +9,7 @@ input.boxcheck {
 .container-fluid.border {
     margin-left: 10px;
     width: 267px;
-    height: 610px;
+    height: auto;
     border:1px ;
 }
 
