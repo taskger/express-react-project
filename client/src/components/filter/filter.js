@@ -1,5 +1,5 @@
 import React from 'react';
-import "./schedule.css";
+import "./filter.css";
 
 const filter = () => {
   return (
