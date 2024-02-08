@@ -33,20 +33,20 @@ const Schedule = () => {
 
             <div className="col">
               <input
-                className="form-check-input"
+                className="form-check-input addcourse"
                 type="checkbox"
                 id="lecture"
                 checked={selectedLecture}
                 onChange={handleLectureChange}
               />
-              <label className="form-check-label" htmlFor="lecture">
+              <label className="form-check-label addcourse" htmlFor="lecture">
                 บรรยาย
               </label>
             </div>
 
             <div className="col">
               <input
-                className="form-check-input"
+                className="form-check-input addcourse"
                 type="checkbox"
                 id="practice"
                 checked={selectedPractice}
@@ -87,7 +87,26 @@ const Schedule = () => {
             <div className='col'>
             </div>
             <div className='col'>
-              <button type="submit" class="btn btn-lg">ยืนยัน</button>
+              <button type="submit" class="btn addcourse submit btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">ยืนยัน</button>
+              <button type="submit" class="btn addcourse cancel  btn-lg">ล้างข้อมูล</button>
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">ยืนยันข้อมูล</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                      <button type="button" class="btn btn-primary">ตกลง</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className='col'>
             </div>

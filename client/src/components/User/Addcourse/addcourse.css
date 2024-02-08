@@ -14,9 +14,9 @@ div .form-label{
 .form-select.form-select-sm.mb-3{
     background-color: rgb(255, 255, 255);
 }
-button.btn{
+button.btn.addcourse.submit{
     width: 500px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     border: 3px solid #96BB7C;
     background-color: rgb(255, 255, 255);
     color: #96BB7C;
@@ -24,16 +24,31 @@ button.btn{
 
 
 }
-button.btn:hover{
+button.btn.addcourse.submit:hover{
     border: 3px solid #96BB7C;
     background-color: #96BB7C;
     color: #ffffff;
 
 
 }
+button.btn.addcourse.cancel{
+    width: 500px;
+    margin-bottom: 25px;
+    border: 3px solid #FF4B4B;
+    background-color: rgb(255, 255, 255);
+    color: #FF4B4B;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+
+}
+button.btn.addcourse.cancel:hover{
+    border: 3px solid #FF4B4B;
+    background-color: #FF4B4B;
+    color: #ffffff;
+
+
+}
 div.bg{
     margin-top: 50px;
-
     margin-bottom: 50px;
     border: 3px solid #000000;
     border-radius: 15px;
@@ -48,7 +63,7 @@ div label.StudentYear{
     margin-top: 25px;
 
 }   
-.lecture-container .content {
+.lecture-container .content  {
     display: none;
   }
   
@@ -56,6 +71,19 @@ div label.StudentYear{
     display: block;
   }
 button.addlecture{
-    width: 250px;
+
+    width: 150px;
     margin-top: 30px;
+    border: 3px solid #22bae4;
+    background-color: #22bae4;
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+}
+button.addlecture:hover{
+    border: 3px solid #20a8cd;
+    background-color: #20a8cd;
+    color: #ffffff;
+}
+div .form-check-input.addcourse{
+    margin-right: 10px;
 }

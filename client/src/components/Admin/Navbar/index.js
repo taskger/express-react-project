@@ -10,7 +10,6 @@ const Navbar = () => {
       </head>
       <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#245953' }}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">Navbars</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -26,7 +25,7 @@ const Navbar = () => {
             </div>
           </div>
           <ul className="nav justify-content-end">
-            <li className="nav-item"><Link to="/user/addcourse" className="nav-link">Logout</Link></li>
+            <li className="nav-item"><Link to="#" className="nav-link">Logout</Link></li>
           </ul>
         </div>
       </nav>

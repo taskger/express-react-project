@@ -6,7 +6,7 @@ div .nav-link {
     color: white;
     font-size: 30px;
     font-weight: 300;
-    width: 194px;
+    width: auto;
     height: 116px;
     display: flex;
     justify-content: center; /* Center the text horizontally */
@@ -14,11 +14,11 @@ div .nav-link {
     transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
 }       
 div .nav-link.course{
-    width: auto;
+    width: 264px;
 }
 
 div .nav-link.registration{
-    width: auto;
+    width: 343px;
 
 }
 div .nav-link:hover {
@@ -45,3 +45,12 @@ div .nav-link:hover {
     }       
 
   }
+
+.navbar-brand{
+    color: white;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+
+}
+.navbar-brand:hover{
+    color: rgb(0, 128, 255);
+}

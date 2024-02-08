@@ -84,9 +84,15 @@ const practice = () => {
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
               <label class="form-check-label" for="inlineRadio2">วิชาเลือก</label>
             </div>
-            <div>
+            <div className='row'>
+            <div className="col ">
+            </div>
+            <div className="col ">
+            <button type="submit" class="addlecture btn">เพิ่มหมู่ปฏิบัติ</button>
 
-            <button type="submit" class="addlecture btn btn-lg">เพิ่มหมู่ปฏิบัติ</button>
+            </div>
+            <div className="col ">
+            </div>
             </div>
             </div>
           </div>

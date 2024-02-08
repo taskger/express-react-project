@@ -19,7 +19,7 @@ const lecture = () => {
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
-            <label htmlFor="year" className="form-label">รับจำนวน</label>
+            <label htmlFor="year" className="form-label" >รับจำนวน</label>
             <input type="text" class="form-control" id="InputStudents" />
             <label htmlFor="semester" className="form-label">หมู่เรียน</label>
             <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
@@ -86,10 +86,16 @@ const lecture = () => {
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
               <label class="form-check-label" for="inlineRadio2">วิชาเลือก</label>
             </div>
-            <div >
+            
+            <div className='row'>
+            <div className="col ">
+            </div>
+            <div className="col ">
+            <button type="submit" class="addlecture btn">เพิ่มหมู่บรรยาย</button>
 
-            <button type="submit" class="addlecture btn btn-lg">เพิ่มหมู่บรรยาย</button>
-
+            </div>
+            <div className="col ">
+            </div>
             </div>
             </div>
           </div>
