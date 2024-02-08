@@ -1,13 +1,11 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import "./schedule.css";
-
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+import Filter from '../../filter/filter';
 const Schedule = () => {
   return (
     <div>
     <Navbar/>
-      <h1></h1>
       <div className="container">
         <div className="row ">
           <div className="col-1">
@@ -34,81 +32,7 @@ const Schedule = () => {
           </div>
         </div>
         </div>
-
-
-        <div className="container-fluid border">    
-          <div className='form-check-main'>
-                <label class="rank" htmlFor="check1"> ชั้นปี 1 </label>
-            <div class = "row">
-              <div class = "col"> 
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_main" htmlFor="check1"> วิชาหลัก </label>
-              </div>
-            </div> 
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="form-checks" htmlFor="check1"> วิชาสาย </label>
-              </div>
-            </div>
-          </div>
-
-          <div className='form-check-main'>
-                <label class="rank" htmlFor="check1"> ชั้นปี 2 </label>
-            <div class = "row">
-              <div class = "col"> 
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_main" htmlFor="check1"> วิชาหลัก </label>
-              </div>
-            </div> 
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_sai" htmlFor="check1"> วิชาสาย </label>
-              </div>
-            </div>
-          </div>
-
-          <div className='form-check-main'>
-                <label class="rank" htmlFor="check1"> ชั้นปี 3 </label>
-            <div class = "row">
-              <div class = "col"> 
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_main" htmlFor="check1"> วิชาหลัก </label>
-              </div>
-            </div> 
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_sai" htmlFor="check1"> วิชาสาย </label>
-              </div>
-            </div>
-          </div>
-
-          <div className='form-check-main'>
-                <label class="rank" htmlFor="check1"> ชั้นปี 4 </label>
-            <div class = "row">
-              <div class = "col"> 
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_main" htmlFor="check1"> วิชาหลัก </label>
-              </div>
-            </div> 
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_sai" htmlFor="check1"> วิชาสาย </label>
-              </div>
-            </div>
-          </div>
-
-          
-
-
-          <div className="col">
-          </div>
-          <div className="col">
-          </div>
-        </div>
+        <Filter />
         
       
 
