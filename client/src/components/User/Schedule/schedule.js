@@ -1,10 +1,11 @@
 import React from 'react';
 import Navbar from '../Navbar';
-
+import "./schedule.css";
+import Filter from '../../filter/filter';
 const Schedule = () => {
   return (
     <div>
-      <Navbar/>
+    <Navbar/>
       <div className="container">
         <div className="row ">
           <div className="col-1">
@@ -29,15 +30,20 @@ const Schedule = () => {
               <option value="3">Three</option>
             </select>
           </div>
-
-          <div className="col">
-          </div>
-          <div className="col">
-          </div>
         </div>
-      </div>
+        </div>
+        <Filter />
+        
+      
+
     </div>
+    
+      
+    
+
+  
   );
+  
 };
 
 export default Schedule;
