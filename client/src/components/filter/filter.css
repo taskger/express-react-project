@@ -4,6 +4,7 @@ input.boxcheck {
     height: 26px;
     margin-right:8px;
     accent-color: #74992e;
+    cursor: pointer;
 } 
 
 

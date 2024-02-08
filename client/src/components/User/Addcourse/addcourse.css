@@ -86,6 +86,8 @@ button.addlecture:hover{
 }
 div .form-check-input.addcourse{
     margin-right: 10px;
+    cursor: pointer;
+
 }
 span.form-required{
     color: #FF4B4B;
