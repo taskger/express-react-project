@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../Navbar';
 import "./schedule.css";
 
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Schedule = () => {
   return (
     <div>
@@ -35,8 +36,6 @@ const Schedule = () => {
 
 
         <div className="container-fluid border">    
-        <div className='line'></div>
-
           <div className='form-check-main'>
                 <label class="rank" htmlFor="check1"> ชั้นปี 1 </label>
             <div class = "row">
@@ -52,7 +51,6 @@ const Schedule = () => {
               </div>
             </div>
           </div>
-          <div className='line'></div>
 
           <div className='form-check-main'>
                 <label class="rank" htmlFor="check1"> ชั้นปี 2 </label>
@@ -69,7 +67,6 @@ const Schedule = () => {
               </div>
             </div>
           </div>
-          <div className='line'></div>
 
           <div className='form-check-main'>
                 <label class="rank" htmlFor="check1"> ชั้นปี 3 </label>
@@ -86,7 +83,6 @@ const Schedule = () => {
               </div>
             </div>
           </div>
-          <div className='line'></div>
 
           <div className='form-check-main'>
                 <label class="rank" htmlFor="check1"> ชั้นปี 4 </label>
@@ -103,42 +99,6 @@ const Schedule = () => {
               </div>
             </div>
           </div>
-          <div className='line'></div>
-          <div className='form-check-main'>
-                <label class="rank" htmlFor="check1"> อาจารย์ </label>
-            <div class = "row">
-              <div class = "col"> 
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_main" htmlFor="check1"> อาจารย์คนที่ 1 </label>
-              </div>
-            </div> 
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_sai" htmlFor="check1"> อาจารย์คนที่ 2 </label>
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_sai" htmlFor="check1"> อาจารย์คนที่ 3 </label>
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_sai" htmlFor="check1"> อาจารย์คนที่ 4 </label>
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col">
-                <input class="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label class="subject_sai" htmlFor="check1"> อาจารย์คนที่ 5 </label>
-              </div>
-            </div>
-          </div>
-          <div className='line'></div>
-          
 
           
 
