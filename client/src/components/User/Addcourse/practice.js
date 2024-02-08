@@ -48,12 +48,67 @@ const practice = () => {
               <div className='row'>
                 <div className='col'>
                   <h7>เรื่มสอน</h7>
-                  <input type="time" class="form-control"  />
+                  <select id="starttime" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                    <option selected>กรุณาเลือกเวลา</option>
+                    <option value="0800">08.00</option>
+                    <option value="0830">08.30</option>
+                    <option value="0900">09.00</option>
+                    <option value="0930">09.30</option>
+                    <option value="1000">10.00</option>
+                    <option value="1030">10.30</option>
+                    <option value="1100">11.00</option>
+                    <option value="1130">11.30</option>
+                    <option value="1200">12.00</option>
+                    <option value="1230">12.30</option>
+                    <option value="1300">13.00</option>
+                    <option value="1330">13.30</option>
+                    <option value="1400">14.00</option>
+                    <option value="1430">14.30</option>
+                    <option value="1500">15.00</option>
+                    <option value="1530">15.30</option>
+                    <option value="1600">16.00</option>
+                    <option value="1630">16.30</option>
+                    <option value="1700">17.00</option>
+                    <option value="1730">17.30</option>
+                    <option value="1800">18.00</option>
+                    <option value="1830">18.30</option>
+                    <option value="1900">19.00</option>
+                    <option value="1930">19.30</option>
+                    <option value="2000">20.00</option>
+                  </select>
                 </div>                
                 <div className='col'>
                   <h7>สิ้นสุดการสอน</h7>
-                 <input type="time" class="form-control" />
+                    <select id="endttime" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                      <option selected>กรุณาเลือกเวลา</option>
+                      <option value="0800">08.00</option>
+                      <option value="0830">08.30</option>
+                      <option value="0900">09.00</option>
+                      <option value="0930">09.30</option>
+                      <option value="1000">10.00</option>
+                      <option value="1030">10.30</option>
+                      <option value="1100">11.00</option>
+                      <option value="1130">11.30</option>
+                      <option value="1200">12.00</option>
+                      <option value="1230">12.30</option>
+                      <option value="1300">13.00</option>
+                      <option value="1330">13.30</option>
+                      <option value="1400">14.00</option>
+                      <option value="1430">14.30</option>
+                      <option value="1500">15.00</option>
+                      <option value="1530">15.30</option>
+                      <option value="1600">16.00</option>
+                      <option value="1630">16.30</option>
+                      <option value="1700">17.00</option>
+                      <option value="1730">17.30</option>
+                      <option value="1800">18.00</option>
+                      <option value="1830">18.30</option>
+                      <option value="1900">19.00</option>
+                      <option value="1930">19.30</option>
+                      <option value="2000">20.00</option>
+                    </select>                
                 </div>
+                
               </div>
             </div>
             <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา</label>

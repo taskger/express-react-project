@@ -11,9 +11,6 @@ import Userschedule from './components/User/Schedule/schedule';
 import Useraddcourse from './components/User/Addcourse/addcourse';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 function App() {
   return (
