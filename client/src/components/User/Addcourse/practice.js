@@ -46,7 +46,14 @@ const practice = () => {
             </select>
             <label htmlFor="year" className="form-label">เวลา</label>
             <div class="cs-form">
-              <input type="time" class="form-control" />
+              <div className='row'>
+                <div className='col'>
+                  <input type="time" class="form-control" />
+                </div>                
+                <div className='col'>
+                 <input type="time" class="form-control" />
+                </div>
+              </div>
             </div>
             <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา</label>
 
