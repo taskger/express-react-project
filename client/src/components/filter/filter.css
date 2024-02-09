@@ -46,3 +46,25 @@ div.col input.boxcheck{
     margin-top: 15px;
     margin-bottom: 15px;
 }
+div.col.table{
+    padding-left:50px;
+    font-weight: 500;
+    border-radius: 15px;
+}
+.row.all.com{
+    width: 100%;
+
+}
+tbody th.day{
+    color: #B2B2B2;
+    font-weight: 400;
+}
+thead th.time{
+    color: #B2B2B2;
+    font-weight: 400;
+}
+
+table.table.table-bordered.schedule {
+
+        background-color: #74992e;
+  }

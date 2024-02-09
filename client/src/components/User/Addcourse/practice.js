@@ -114,37 +114,37 @@ const practice = () => {
 
             <div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="1" id="check1"/>
-                <label class="form-check-label" htmlFor="check1"> ชั้นปี 1 </label>
+                <input class="form-check-input" type="checkbox" value="1" id="check1practice"/>
+                <label class="form-check-label" htmlFor="check1practice"> ชั้นปี 1 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="3" id="check3"/>
-                <label class="form-check-label" htmlFor="check3"> ชั้นปี 2 </label>
+                <input class="form-check-input" type="checkbox" value="3" id="check2practice"/>
+                <label class="form-check-label" htmlFor="check2practice"> ชั้นปี 2 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="1" id="check1"/>
-                <label class="form-check-label" htmlFor="check1"> ชั้นปี 3 </label>
+                <input class="form-check-input" type="checkbox" value="1" id="check3practice"/>
+                <label class="form-check-label" htmlFor="check3practice"> ชั้นปี 3 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="3" id="check3"/>
-                <label class="form-check-label" htmlFor="check3"> ชั้นปี 4 </label>
+                <input class="form-check-input" type="checkbox" value="3" id="check4practice"/>
+                <label class="form-check-label" htmlFor="check4practice"> ชั้นปี 4 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="3" id="check3"/>
-                <label class="form-check-label" htmlFor="check3"> ชั้นปีอื่นๆ </label>
+                <input class="form-check-input" type="checkbox" value="3" id="checkotherpractice"/>
+                <label class="form-check-label" htmlFor="checkotherpractice"> ชั้นปีอื่นๆ </label>
               </div>
             </div>
 
 
             <div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-              <label class="form-check-label" for="inlineRadio1">วิชาหลัก</label>
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="optionmainpractice" value="option1" />
+              <label class="form-check-label" for="optionmainpractice">วิชาหลัก</label>
             </div>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-              <label class="form-check-label" for="inlineRadio2">วิชาเลือก</label>
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="optioncchoicepractice" value="option2" />
+              <label class="form-check-label" for="optioncchoicepractice">วิชาเลือก</label>
             </div>
             <div className='row'>
             <div className="col ">

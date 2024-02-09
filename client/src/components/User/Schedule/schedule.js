@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import Filter from '../../filter/filter';
+import Table from '../../filter/table';
+
 const Schedule = () => {
   return (
     <div>
@@ -31,7 +33,16 @@ const Schedule = () => {
           </div>
         </div>
         </div>
-        <Filter />
+        <div className='row all com'> 
+          <div className='col-auto'>
+           <Filter />
+           </div>
+           <div className='col table'>
+           <Table />
+           </div>
+
+
+        </div>
         
       
 

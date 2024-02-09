@@ -88,6 +88,7 @@ button.addlecture:hover{
     color: #ffffff;
 }
 div .form-check-input.addcourse{
+    margin-left: 10px;
     margin-right: 10px;
     cursor: pointer;
 
@@ -95,4 +96,8 @@ div .form-check-input.addcourse{
 span.form-required{
     color: #FF4B4B;
     margin-left: 3px;
+}
+#InputStudents{
+    margin-left: 8px;
+    height: 30.6px;
 }
