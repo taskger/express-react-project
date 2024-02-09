@@ -82,8 +82,18 @@ const Schedule = () => {
           </div>
           <div className="col"></div>
           <div class="bg">
-            {selectedLecture && <Lecture />}
-            {selectedPractice && <Practice />}
+            <div class="row">
+            {selectedLecture && (
+              <div className='col'>
+              {selectedLecture && <Lecture />}
+              </div>
+            )}
+              {selectedPractice && (
+                <div className='col'>
+                  {selectedPractice && <Practice />}
+                </div>
+              )}
+            </div>
           </div>
           <div className="row">
             <div className='col'>

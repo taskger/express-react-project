@@ -7,8 +7,7 @@ const practice = () => {
         <div className="row">
           <div className="col">
           </div>
-          <div className="col-1">
-          </div>
+
           <div className="col center">
             <label htmlFor="semester" className="form-label">ชื่อวิชา<span class="form-required" title="This field is required.">*</span></label>
             <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
@@ -158,8 +157,6 @@ const practice = () => {
             </div>
             </div>
             </div>
-          </div>
-          <div className="col-1">
           </div>
           <div className="col ">
           </div>
