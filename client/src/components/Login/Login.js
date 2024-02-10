@@ -4,7 +4,7 @@ import Axios from "axios";
 
 import { useState, useEffect } from "react";
 
-const LoginForm = () => {
+function LoginForm(){
     const [showPassword,setShowPassword] = useState(false);
     
     const togglePasswordVisibility = () => {
