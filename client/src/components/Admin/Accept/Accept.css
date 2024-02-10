@@ -1,0 +1,89 @@
+.box-accept {
+    border: 3px solid #dadada;
+    width: 1624px;
+    height: 202px;
+    border-radius: 20px;
+    background-color: #f4f4f4;
+    display: block;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.logo-accept {
+    
+}
+
+.in-accept {
+    display: flex;
+}
+
+.first-font-accept {
+    width: 252px;
+    margin-top: 70px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.sec-font-accept {
+    width: 252px;
+    margin-top: 70px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.three-font-accept {
+    margin-top: 70px;
+    text-align: center;
+    font-size: 32px;
+}
+
+.img-accept {
+    width: 255px;
+    height: 202px;
+    
+}
+
+.name-accept {
+    width: 504px;
+    height: 202px;
+    display:flex;
+}
+
+.email-accept {
+    width: 453px;
+}
+.kit-accept {
+    border-left: 3px solid #dadada;
+    height: 89px;
+    margin-top: 45px;
+}
+
+.button-accept {
+    width: 412px;
+}
+
+.yan-accpet {
+    width: 229px;
+    height: 61px;
+    border: 3px solid #96BB7C;
+    background-color: #FFFFFF;
+    color: #96BB7C;
+    border-radius: 10px;
+    font-size: 32px;
+    margin-left: 50px ;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.yox-accpet {
+    width: 229px;
+    height: 61px;
+    border: 3px solid #FF4B4B;
+    background-color: #FFFFFF;
+    color: #FF4B4B;
+    border-radius: 10px;
+    font-size: 32px;
+    margin-left: 50px ;
+    margin-top: 20px;
+    cursor: pointer;
+}

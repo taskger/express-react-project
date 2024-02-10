@@ -1,12 +1,13 @@
 import React from 'react';
 import Navbar from '../Navbar';
+import Accept from '../Accept/Accept.js';
 
 const Confirm = () => {
   return (
     <div>
-    <Navbar/>
-    <h1>หน้ารอการยืนยันของ ผู้จัดตาราง</h1>
-  </div>
+      <Navbar/>
+      <Accept/>
+    </div>
   );
 };
 
