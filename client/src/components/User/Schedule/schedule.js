@@ -7,7 +7,7 @@ const Schedule = () => {
   return (
     <div>
     <Navbar/>
-      <div className="container">
+      <div className="container schedule">
         <div className="row ">
           <div className="col-1">
             <label htmlFor="semester" className="form-label">ภาคการศึกษา</label>

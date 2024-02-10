@@ -8,7 +8,7 @@ const Schedule = () => {
     <div>
     <Navbar/>
 
-      <div className="container">
+      <div className="container schedule">
         <div className="row ">
           <div className="col-1">
             <label htmlFor="semester" className="form-label">ภาคการศึกษา</label>
@@ -35,7 +35,7 @@ const Schedule = () => {
         </div>
         </div>
         <div className='row all com'> 
-          <div className='col-auto'>
+          <div className='col-auto filter'>
            <Filter />
            </div>
            <div className='col table'>

@@ -3,7 +3,8 @@ import "./filter.css";
 
 const filter = () => {
   return (
-        <div className="container-fluid border">   
+    <div className='container'>
+      <div className="container-fluid border">   
         <label class="rank" htmlFor="check1"> ตัวกรอง </label>
           <div className='liner' ></div>
           <div className='form-check-main'>
@@ -96,7 +97,8 @@ const filter = () => {
           </div>
           <div className="col">
           </div>
-        </div>
+      </div>
+    </div>
   );
 };
 export default filter;
