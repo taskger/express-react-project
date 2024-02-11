@@ -111,8 +111,13 @@ button.button-login:hover{
   border-radius: 10px;
   background-color: #D8D8D8;
   border: 0px;
-  display: block;
+  display: flex;
   margin: auto;
   font-size: 24px;
   padding-left: 25px;
+}
+
+.outline-login-google {
+  display: flex;
+  margin: auto;
 }
