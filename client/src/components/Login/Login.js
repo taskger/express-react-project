@@ -1,10 +1,31 @@
 import React from "react";
 import "./login.css";
 import Axios from "axios";
-
+import { gapi } from "gapi-script";
+import { GoogleLogin } from "react-google-login";
 import { useState, useEffect } from "react";
 
 function LoginForm(){
+    const clientId = "1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com";
+
+    useEffect(() => {
+        const initClient = () => {
+            gapi.client.init ({
+                clientID : clientId,
+                scope: ''
+            })
+        }
+        gapi.load("client:auth2", initClient)
+    }, [])
+
+    const onSuccess = (res) => {
+        console.log('success',res)
+    }
+
+    const onFailure = (res) => {
+        console.log('failed',res)
+    }
+
     const [showPassword,setShowPassword] = useState(false);
     
     const togglePasswordVisibility = () => {
@@ -74,7 +95,17 @@ function LoginForm(){
                     )}
                 </div>
                 <h1 className="four-font">หรือ</h1>
-                <button className="login-google">Login with GOOGLE</button>
+                <div className="outline-login-google">
+                    <GoogleLogin
+                        className="login-google"
+                        clientId={clientId}
+                        buttonText = "เข้าสู่ระบบผ่าน Google"
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                        cookiePolicy={"single_host_origin"}
+                        isSignedIn={true}
+                    />
+                </div>
             </div>
             
             <div >
