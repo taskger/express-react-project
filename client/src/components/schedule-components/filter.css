@@ -74,6 +74,7 @@ thead th.time{
 }
 table.table.table-bordered.outschedule {
 
+    width:100%;
 
 
 }
@@ -87,7 +88,7 @@ table.table.table-bordered.schedule {
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.251);
 }
-  
+
 tr.rowday .day {
     border: 1px solid #C4C4C4;
     padding: 20px;
@@ -130,37 +131,83 @@ div.lecturecorrect{
     font-weight: 400;
     color: #418200;
     transition: background-color 0.5s, color 0.5s; /* Smooth transition effect */
-    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 div.lecturecorrect:hover{
     background-color: #A0F948;
 }
 div.lecturecorrect .subject{
-    font-size: 18px;
+    font-size:90%;
     font-weight: 500;
 }
 div.lecturecorrect .name{
-    font-size: 18px;
+    font-size: 75%;
 
 }
 div.lecturecorrect .time{
-    font-size: 18px;
+    font-size: 75%;
 
 }
-.editlecturecorrect{
-    font-size: 28px;
-    border: 0px;
-
+.btn.editlecturecorrect{
+    color: #418200;
+    width: 100%;
+    height: 100%;
 }
 
 .btn.editlecturecorrect:hover{
-    border: 0px;
-    color: #4eb8ff;
+    color: #418200;
     transition: color 0.5s; /* Smooth transition effect */
 
 }
+.btn.editoverlapping{
+    color: #820000;
+    width: 100%;
+    height: 100%;
+}
 
-div.rowbutton {
-    text-align: left;
-    margin-top: 20px;
+thead.theadtable .time{
+    width: 0px;
+}
+.row.inoverlapping{
+    padding: 1%;
+}
+
+.btn.btn-danger.bitrash  {
+    display: contents;
+    padding: 0px;
+}
+.btn.btn-outline-secondary{
+    transition: background-color 0.3s, color 0.2s; /* Smooth transition effect */
+    border-right: 0px #FF4B4B solid ;
+    text-align: start;
+}
+.bi-trash {
+    display:flex;
+    color: #FF4B4B;
+    font-size: 30px;
+    background-color: #ffffff;
+    border-bottom: 1px #FF4B4B solid ;
+    border-top: 1px #FF4B4B solid ;
+    border-right: 1px #FF4B4B solid ;
+    border-left: 1px #FF4B4B solid ;
+
+    border-top-right-radius:7px ;
+    border-bottom-right-radius:7px ;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+
+}
+.bi-trash:hover {
+    color: rgb(255, 255, 255);
+    background-color: #FF4B4B;
+}
+@media only screen and (max-width: 1000px) {
+    div.col-auto.filter {
+      display: none;
+    }
   }

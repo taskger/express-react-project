@@ -1,6 +1,7 @@
 import React from "react";
 import "./login.css";
 import Axios from "axios";
+
 import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
 import { useState, useEffect } from "react";
@@ -27,14 +28,12 @@ function LoginForm(){
     }
 
     const [showPassword,setShowPassword] = useState(false);
-    
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-
     const [User,setUser] = useState("");
     const [password,setPassword] = useState("");
-
     const btnLogin = () => {
         Axios.post("http://localhost:3000/",{
             User : User,
@@ -59,7 +58,6 @@ function LoginForm(){
             alert ("User หรือ Password ไม่ถูกต่้อง!!!");
         });
     };
-
   return (
     <div className="container-login">
         <div className='img-kaset'>
@@ -95,6 +93,7 @@ function LoginForm(){
                     )}
                 </div>
                 <h1 className="four-font">หรือ</h1>
+                <button className="login-google">Login with GOOGLE</button>
                 <div className="outline-login-google">
                     <GoogleLogin
                         className="login-google"
@@ -107,14 +106,12 @@ function LoginForm(){
                     />
                 </div>
             </div>
-            
+
             <div >
                 <button type="submit" className="button-login" onClick={btnLogin}>เข้าสู่ระบบ</button>
-
             </div>
         </div>
     </div>
   );
 };
-
 export default LoginForm;

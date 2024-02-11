@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar';
-import Filter from '../../filter/filter';
-import Table from '../../filter/table';
+import Filter from '../../schedule-components/filter';
+import Table from '../../schedule-components/table';
 
 const Schedule = () => {
   return (

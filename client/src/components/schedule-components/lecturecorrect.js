@@ -3,29 +3,20 @@ import "./filter.css";
 
 const lecturecorrect = () => {
   return (   
-        <div className='lecturecorrect' >
+    <div className='lecturecorrect' >
+
+        <button type="button" class="btn editlecturecorrect" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <div className='subject'>
-                <label>
-
                 LAB Software Enginering
-                </label>
-
             </div>
             <div className='name'>
-                <label>
                 อ.กาญจนา เอี่ยมสอาด
-                </label>
             </div>
             <div className='time'>
-                <label>
                  13.00 - 16.00
-                </label>
             </div>
-            <div className='rowbutton'>
-                <button type="button" class="btn editlecturecorrect" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    แก้ไข
-                </button>
-            </div>
+        </button>
+                
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

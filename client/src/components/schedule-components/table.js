@@ -7,9 +7,9 @@ const Schedule = () => {
     <div>
       <table class="table table-bordered outschedule">
         <table class="table table-bordered schedule  ">
-            <thead>
+            <thead class="theadtable">
                 <tr>
-                <th scope="col" ></th>
+                <th scope="col" className='time'></th>
                 <th scope="col" className='time'>08.00</th>
                 <th scope="col" className='time'>09.00</th>
                 <th scope="col" className='time'>10.00</th>
