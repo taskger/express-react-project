@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
 
 
-div .nav-link {
+div .nav-link.admin {
     font-family: 'Mitr', sans-serif;
     color: white;
     font-size: 30px;
     font-weight: 300;
-    width: auto;
+    width: 194px;
     height: 116px;
     display: flex;
     justify-content: center; /* Center the text horizontally */
@@ -34,7 +34,7 @@ div .nav-link:hover {
     div .nav-link {
         font-family: 'Mitr', sans-serif;
         color: white;
-        font-size: 2px;
+        font-size: 18px;
         font-weight: 200;
         width: 194px;
         height: 116px;
@@ -53,4 +53,7 @@ div .nav-link:hover {
 }
 .navbar-brand:hover{
     color: rgb(0, 128, 255);
+}
+img.imgprofiledefault:hover{
+    filter: brightness(90%);
 }
