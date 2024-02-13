@@ -81,6 +81,7 @@ const Schedule = () => {
             </select>
           </div>
           <div className="col"></div>
+          {selectedLecture || selectedPractice ? (
           <div class="bg">
             <div class="row">
             {selectedLecture && (
@@ -94,14 +95,15 @@ const Schedule = () => {
                 </div>
               )}
             </div>
-          </div>
+          </div>) : null}
           <div className="row">
             <div className='col'>
             </div>
+            {selectedLecture || selectedPractice ? (
+
             <div className='col'>
               <button type="submit" class="btn addcourse submit btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">ยืนยัน</button>
               <button type="submit" class="btn addcourse cancel  btn-lg">ล้างข้อมูล</button>
-
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -113,13 +115,13 @@ const Schedule = () => {
                       ...
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                      <button type="button" class="btn btn-primary">ตกลง</button>
+                      <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">ยกเลิก</button>
+                      <button type="button" class="btn btn-primary" >ตกลง</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div>) : null}
             <div className='col'>
             </div>
           </div>
