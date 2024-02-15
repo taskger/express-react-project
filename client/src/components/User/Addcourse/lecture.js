@@ -1,7 +1,5 @@
-import React , {useState} from 'react';
-import Axios from 'axios';
-const Lecture = () => {
-
+import React , {useState,useEffect } from 'react';
+const Lecture = ({handleLectureData }) => {
   const [subject, setSubject] = useState("");
   const [num_students, setNum_students] = useState("0");
   const [sec, setSec] = useState("0");
@@ -10,17 +8,17 @@ const Lecture = () => {
   const [end_time, setEnd_time] = useState("");
   const [catagory, setCatagory] = useState(null);
 
-  const addLecture = () =>{
-    Axios.post('http://localhost:3000/user/addcourse/create',{
-      subject: subject,
-      num_students: num_students,
-      sec: sec,
-      day: day,
-      start_time: start_time,
-      end_time: end_time,
-      catagory: catagory
+  useEffect(() => {
+    handleLectureData({
+      subject,
+      num_students,
+      sec,
+      day,
+      start_time,
+      end_time,
+      catagory,
     });
-  }
+  }, [subject, num_students, sec, day, start_time, end_time, catagory, handleLectureData]);
   return (
       <div>
         
@@ -83,13 +81,13 @@ const Lecture = () => {
                   setDay(event.target.value)
                 }}>
               <option selected Disabled>กรุณาเลือกวัน</option>
-              <option value="mon">วันจัทนร์</option>
-              <option value="tue">วันอังคาร</option>
-              <option value="wed">วันพุธ</option>
-              <option value="thu">วันพฤหัสบดี</option>
-              <option value="fri">วันศุกร์</option>
-              <option value="sat">วันเสาร์</option>
-              <option value="sun">วันอาทิตย์</option>
+              <option value="วันจัทนร์">วันจัทนร์</option>
+              <option value="วันอังคาร">วันอังคาร</option>
+              <option value="วันพุธ">วันพุธ</option>
+              <option value="วันพฤหัสบดี">วันพฤหัสบดี</option>
+              <option value="วันศุกร์">วันศุกร์</option>
+              <option value="วันเสาร์">วันเสาร์</option>
+              <option value="วันอาทิตย์">วันอาทิตย์</option>
 
             </select>
             <div class="cs-form ">
@@ -179,23 +177,23 @@ const Lecture = () => {
 
             <div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="1" id="check1lecture"/>
+                <input class="form-check-input" type="checkbox" value="first-year" id="check1lecture"/>
                 <label class="form-check-label" htmlFor="check1lecture"> ชั้นปี 1 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="3" id="check2lecture"/>
+                <input class="form-check-input" type="checkbox" value="second-year" id="check2lecture"/>
                 <label class="form-check-label" htmlFor="check2lecture"> ชั้นปี 2 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="1" id="check3lecture"/>
+                <input class="form-check-input" type="checkbox" value="third-year" id="check3lecture"/>
                 <label class="form-check-label" htmlFor="check3lecture"> ชั้นปี 3 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="3" id="check4lecture"/>
+                <input class="form-check-input" type="checkbox" value="four-year" id="check4lecture"/>
                 <label class="form-check-label" htmlFor="check4lecture"> ชั้นปี 4 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="3" id="checkotherlecture"/>
+                <input class="form-check-input" type="checkbox" value="other-year" id="checkotherlecture"/>
                 <label class="form-check-label" htmlFor="checkohterlecture"> ชั้นปีอื่นๆ </label>
               </div>
             </div>
@@ -225,7 +223,7 @@ const Lecture = () => {
                 onChange={(event) =>{
                   setCatagory(event.target.value)
                 }}/>
-              <label class="form-check-label" for="optioncchoicelecture">วิชาเลือก</label>
+              <label class="form-check-label" htmlFor="optioncchoicelecture">วิชาเลือก</label>
             </div>
 
             <div className='row'>
@@ -233,7 +231,6 @@ const Lecture = () => {
             </div>
             <div className="col ">
             <button type="submit" class="addlecture btn">เพิ่มหมู่บรรยาย</button>
-            <button type="button" class="btn btn-primary" onClick={addLecture} >ตกลง</button>
 
             </div>
             <div className="col ">
