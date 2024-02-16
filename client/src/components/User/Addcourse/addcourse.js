@@ -20,11 +20,11 @@ const Schedule = ({checkdatachange}) => {
   const [end_time, setEnd_time] = useState("");
   const [catagory, setCatagory] = useState(null);
 
-  const handleLectureChange = (event) => {
+  const LectureChange = (event) => {
     setSelectedLecture(event.target.checked);
   };
 
-  const handlePracticeChange = (event) => {
+  const PracticeChange = (event) => {
     setSelectedPractice(event.target.checked);
   };
  /* useEffect(() => {
@@ -61,6 +61,7 @@ const Schedule = ({checkdatachange}) => {
   }
 
   console.log(courseyear)
+  console.log(semester)
   console.log(lecture)
   console.log(practice)
   return (
@@ -96,7 +97,7 @@ const Schedule = ({checkdatachange}) => {
                 value="lecture" 
                 checked={selectedLecture}
                 onChange = { (event) => 
-                  { handleLectureChange(event); 
+                  { LectureChange(event); 
                     setLecture(event.target.value) } 
                   }
 
@@ -115,7 +116,7 @@ const Schedule = ({checkdatachange}) => {
 
                 checked={selectedPractice}
                 onChange = { (event) => 
-                  { handlePracticeChange(event); 
+                  { PracticeChange(event); 
                     setPractice(event.target.value) } 
                   }
               />
@@ -131,7 +132,7 @@ const Schedule = ({checkdatachange}) => {
             <div className="col">
               <label htmlFor="semester" className="form-label">ภาคการศึกษา<span class="form-required" title="This field is required.">*</span></label>
               <select id="semester"                onChange = { (event) => 
-                  { handlePracticeChange(event); 
+                  { PracticeChange(event); 
                     setSemester(event.target.value) } 
                   } className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                 <option selected>Open this select menu</option>
