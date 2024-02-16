@@ -5,12 +5,12 @@ import Lecture from './lecture';
 import Practice from './practice'; // Assuming the Practice component is exported properly
 import Axios from 'axios';
 
-const Schedule = ({checkdatachange}) => {
+const Schedule = () => {
   const [selectedLecture, setSelectedLecture] = useState(false); // Default value for lecture checkbox
   const [selectedPractice, setSelectedPractice] = useState(false); // Default value for practice checkbox
   const [courseyear, setCourseYear] = useState(null);
   const [lecture, setLecture] = useState(null);
-  const [practice, setPractice] = useState("");
+  const [practice, setPractice] = useState(false);
   const [semester, setSemester] = useState("");
   const [subject, setSubject] = useState("");
   const [num_students, setNum_students] = useState("0");
@@ -18,7 +18,7 @@ const Schedule = ({checkdatachange}) => {
   const [day, setDay] = useState("");
   const [start_time, setStart_time] = useState("");
   const [end_time, setEnd_time] = useState("");
-  const [catagory, setCatagory] = useState(null);
+  const [catagory, setCatagory] = useState("");
 
   const LectureChange = (event) => {
     setSelectedLecture(event.target.checked);
@@ -27,16 +27,15 @@ const Schedule = ({checkdatachange}) => {
   const PracticeChange = (event) => {
     setSelectedPractice(event.target.checked);
   };
- /* useEffect(() => {
-    testt({
-      lecture,
-    });
-  }, [lecture]);
   useEffect(() => {
-    testtt({
-      practice,
-    });
-  }, [practice]);*/
+    if (selectedLecture === false) { 
+      setLecture(null)
+    }
+    if (selectedPractice === false) { 
+      setPractice(null)
+    }
+  });
+
 
   const reciverdata = (data) => {
     console.log('Received data in Schedule component:', data);
@@ -64,6 +63,7 @@ const Schedule = ({checkdatachange}) => {
   console.log(semester)
   console.log(lecture)
   console.log(practice)
+  console.log(catagory)
   return (
     <div>
       <Navbar/>

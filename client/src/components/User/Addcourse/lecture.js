@@ -177,23 +177,33 @@ const Lecture = ({handleLectureData }) => {
 
             <div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="first-year" id="check1lecture"/>
+                <input class="form-check-input" type="checkbox" value="first-year" id="check1lecture" name='check1lecture' onChange={(event) =>{
+                  setCatagory(event.target.value)
+                }}/>
                 <label class="form-check-label" htmlFor="check1lecture"> ชั้นปี 1 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="second-year" id="check2lecture"/>
+                <input class="form-check-input" type="checkbox" value="second-year" id="check2lecture" name='check2lecture' onChange={(event) =>{
+                  setCatagory(event.target.value)
+                }}/>
                 <label class="form-check-label" htmlFor="check2lecture"> ชั้นปี 2 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="third-year" id="check3lecture"/>
+                <input class="form-check-input" type="checkbox" value="third-year" id="check3lecture"                onChange={(event) =>{
+                  setCatagory(event.target.value)
+                }}/>
                 <label class="form-check-label" htmlFor="check3lecture"> ชั้นปี 3 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="four-year" id="check4lecture"/>
+                <input class="form-check-input" type="checkbox" value="four-year" id="check4lecture"                 onChange={(event) =>{
+                  setCatagory(event.target.value)
+                }}/>
                 <label class="form-check-label" htmlFor="check4lecture"> ชั้นปี 4 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="other-year" id="checkotherlecture"/>
+                <input class="form-check-input" type="checkbox" value="other-year" id="checkotherlecture"                 onChange={(event) =>{
+                  setCatagory(event.target.value)
+                }}/>
                 <label class="form-check-label" htmlFor="checkohterlecture"> ชั้นปีอื่นๆ </label>
               </div>
             </div>
