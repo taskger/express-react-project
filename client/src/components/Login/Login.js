@@ -93,7 +93,6 @@ function LoginForm(){
                     )}
                 </div>
                 <h1 className="four-font">หรือ</h1>
-                <button className="login-google">Login with GOOGLE</button>
                 <div className="outline-login-google">
                     <GoogleLogin
                         className="login-google"
