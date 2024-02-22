@@ -18,7 +18,7 @@ div .empty h1{
 }
 
 .logo {
-  width: 100%;
+  width: 91.5%;
 }
 
 .container-input {
@@ -89,6 +89,7 @@ button.button-login:hover{
   margin-top: 60px;
   text-shadow: #000000;
 }
+
 
 .show-password-button {
   right: 10px;
