@@ -14,7 +14,7 @@ div .empty h1{
 }
 
 .img-kaset {
-  max-width: 1100px;
+  max-width: fit-content;
 }
 
 .logo {
@@ -35,8 +35,8 @@ div .empty h1{
 }
 
 .input-User {
-  width: 589px;
-  height: 86px;
+  width: 90%;
+  height: 66px;
   border-radius: 10px;
   background-color: #D8D8D8;
   border: 0px;

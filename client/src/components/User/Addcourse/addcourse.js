@@ -2,23 +2,43 @@ import React, { useState,useEffect } from 'react';
 import Navbar from '../Navbar';
 import "./addcourse.css";
 import Lecture from './lecture';
-import Practice from './practice'; // Assuming the Practice component is exported properly
+import Practice from './practice';
 import Axios from 'axios';
 
+
+// เรียกข้อมูลปฏิบัติมา modal ยื่นยัน  เรียกชั้นปีที่เรียน
+// แก้ข้อมูลที่ต้องเพิ่มรายวิชาปฏิบัติ มีเฉพาะวิชาหลัก หมู่เรียน
+// ทดสอบเรียกวิชาจากดาต้าเบส
+// หลังกดปุ่มยืนยันจะโหลดหน้าเว็บใหม่ ทำแล้วแต่ต้องแก้ให้เกิดถ้าข้อมูลกรอกไม่ครบ
+// ล้างข้อมูล
+// เลือกรายวิชาสามารถกรอกเพื่อหาได้
+// แยกช่องอันใหนวิชาหลักวิชาสาย
 const Schedule = () => {
-  const [selectedLecture, setSelectedLecture] = useState(false); // Default value for lecture checkbox
-  const [selectedPractice, setSelectedPractice] = useState(false); // Default value for practice checkbox
+  const [selectedLecture, setSelectedLecture] = useState(false);
+  const [selectedPractice, setSelectedPractice] = useState(false); 
+
+  //ปีหลักสูตรใช้ดึงข้อมูลมาโชว์ของปีหลักสูตรนั้นมาโชว์
   const [courseyear, setCourseYear] = useState(null);
-  const [lecture, setLecture] = useState(null);
-  const [practice, setPractice] = useState(false);
+
+  const [year, setYear] = useState(null);
+
+  //ทำให้รู้ว่าบรรยาย ปฏิบัติขึ้น database หลังภาคการศึกษา true false
+  const [lecture, setLecture] = useState(false); 
+  const [practice, setPractice] = useState(false); 
+
   const [semester, setSemester] = useState("");
-  const [subject, setSubject] = useState("");
-  const [num_students, setNum_students] = useState("0");
-  const [sec, setSec] = useState("0");
-  const [day, setDay] = useState("");
-  const [start_time, setStart_time] = useState("");
-  const [end_time, setEnd_time] = useState("");
-  const [catagory, setCatagory] = useState("");
+  const [professor] = useState("test");
+
+
+  //ทำแสดงชั้นปี
+  const [test, setTest] = useState();
+
+  //ดึงปีปัจจุบัน
+  useEffect(() => {
+    const currYear = new Date().getFullYear();
+    setYear(currYear+543);
+  },[setYear]);
+
 
   const LectureChange = (event) => {
     setSelectedLecture(event.target.checked);
@@ -27,52 +47,134 @@ const Schedule = () => {
   const PracticeChange = (event) => {
     setSelectedPractice(event.target.checked);
   };
+
   useEffect(() => {
     if (selectedLecture === false) { 
-      setLecture(null)
+      setLecture(false)
+    }else if (selectedLecture === true){
+      setLecture(true)
     }
     if (selectedPractice === false) { 
-      setPractice(null)
+      setPractice(false)
+    }else if (selectedPractice === true){
+      setPractice(true)
     }
-  });
+  },[selectedLecture, selectedPractice]);
 
 
-  const reciverdata = (data) => {
-    console.log('Received data in Schedule component:', data);
-    setSubject(data.subject);
-    setNum_students(data.num_students);
-    setSec(data.sec);
-    setDay(data.day);
-    setStart_time(data.start_time);
-    setEnd_time(data.end_time);
-    setCatagory(data.catagory);
+  const [subject_lecture, setSubject_lecture] = useState("");
+  const [num_students_lecture, setNum_students_lecture] = useState("0");
+  const [sec_lecture, setSec_lecture] = useState("0");
+  const [day_lecture, setDay_lecture] = useState("");
+  const [start_time_lecture, setStart_time_lecture] = useState("");
+  const [end_time_lecture, setEnd_time_lecture] = useState("");
+  const [catagory_lecture, setCatagory_lecture] = useState("");
+  const [firstyear_lecture, setFirstyear_lecture] = useState();
+  const [secondyear_lecture, setSecondyear_lecture] = useState();
+  const [thirdyear_lecture, setThirdyear_lecture] = useState();
+  const [fourthyear_lecture, setFourthyear_lecture] = useState();
+  const [otheryear_lecture, setOtheryear_lecture] = useState();
+
+  const reciverdatafromlecture = (data) => {
+    console.log('ข้อมูลจากวิชาบรรยาย', data);
+    setSubject_lecture(data.subject);
+    setNum_students_lecture(data.num_students);
+    setSec_lecture(data.sec);
+    setDay_lecture(data.day);
+    setStart_time_lecture(data.start_time);
+    setEnd_time_lecture(data.end_time);
+    setCatagory_lecture(data.catagory);
+    setFirstyear_lecture(data.firstyear);
+    setSecondyear_lecture(data.secondyear);
+    setThirdyear_lecture(data.thirdyear);
+    setFourthyear_lecture(data.fourthyear);
+    setOtheryear_lecture(data.otheryear);
+  
+  };
+
+
+  const [subject_practice, setSubject_practice] = useState("");
+  const [num_students_practice, setNum_students_practice] = useState("0");
+  const [sec_practice, setSec_practice] = useState("0");
+  const [day_practice, setDay_practice] = useState("");
+  const [start_time_practice, setStart_time_practice] = useState("");
+  const [end_time_practice, setEnd_time_practice] = useState("");
+  const [catagory_practice, setCatagory_practice] = useState("");
+  const [firstyear_practice, setFirstyear_practice] = useState();
+  const [secondyear_practice, setSecondyear_practice] = useState();
+  const [thirdyear_practice, setThirdyear_practice] = useState();
+  const [fourthyear_practice, setFourthyear_practice] = useState();
+  const [otheryear_practice, setOtheryear_practice] = useState();
+  
+
+  const reciverdatafrompractice = (data) => {
+    console.log('ข้อมูลจากวิชาปฏิบัติ:', data);
+    setSubject_practice(data.subject_practice);
+    setNum_students_practice(data.num_students_practice);
+    setSec_practice(data.sec_practice);
+    setDay_practice(data.day_practice);
+    setStart_time_practice(data.start_time_practice);
+    setEnd_time_practice(data.end_time_practice);
+    setCatagory_practice(data.catagory_practice);
+    setFirstyear_practice(data.firstyear_practice);
+    setSecondyear_practice(data.secondyear_practice);
+    setThirdyear_practice(data.thirdyear_practice);
+    setFourthyear_practice(data.fourthyear_practice);
+    setOtheryear_practice(data.otheryear_practice);
+  
+  
   };
   const addLecture = () =>{
-    Axios.post('http://localhost:3000/user/addcourse/create',{
-      subject: subject,
-      num_students: num_students,
-      sec: sec,
-      day: day,
-      start_time: start_time,
-      end_time: end_time,
-      catagory: catagory
-    });
+    if (selectedLecture === true){
+      Axios.post('http://localhost:3000/user/addcourse/createlecture',{
+        year_lecture: year,
+        semester_lecture: semester,
+        professor_lecture: professor,
+        subject_lecture: subject_lecture,
+        num_students_lecture: num_students_lecture,
+        sec_lecture: sec_lecture,
+        day_lecture: day_lecture,
+        start_time_lecture: start_time_lecture,
+        end_time_lecture: end_time_lecture,
+        lecture: lecture,
+        firstyear_lecture: firstyear_lecture,
+        secondyear_lecture: secondyear_lecture,
+        thirdyear_lecture: thirdyear_lecture,
+        fourthyear_lecture: fourthyear_lecture,
+        otheryear_lecture: otheryear_lecture,
+      });
+    }
+    if (selectedPractice === true){
+      Axios.post('http://localhost:3000/user/addcourse/createpractice',{
+        year_practice: year,
+        semester_practice: semester,
+        professor_practice: professor,
+        subject_practice: subject_practice,
+        num_students_practice: num_students_practice,
+        sec_practice: sec_practice,
+        day_practice: day_practice,
+        start_time_practice: start_time_practice,
+        end_time_practice: end_time_practice,
+        practice: practice,
+        firstyear_practice: firstyear_practice,
+        secondyear_practice: secondyear_practice,
+        thirdyear_practice: thirdyear_practice,
+        fourthyear_practice: fourthyear_practice,
+        otheryear_practice: otheryear_practice,
+      });
+    }
+    //window.location.reload();
   }
+  console.log(selectedPractice)
 
-  console.log(courseyear)
-  console.log(semester)
-  console.log(lecture)
-  console.log(practice)
-  console.log(catagory)
   return (
     <div>
       <Navbar/>
-
       <div className="container addcourse">
         <div className="row justify-content-center">
           <div className="col-1"></div>
           <div className="col">
-            <label htmlFor="course-year" className="form-label">ปีหลักสูตร<span class="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="course-year" className="form-label">ปีหลักสูตร<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="course-year" 
               className="form-select form-select-sm mb-3" 
@@ -80,15 +182,14 @@ const Schedule = () => {
               onChange={(event) =>{
                 setCourseYear(event.target.value)
               }}>
-              <option selected value={null}>Open this select menu</option>
+              <option selected defaultValue={null}>Open this select menu</option>
               <option value="te">One</option>
               <option value="qw">Two</option>
               <option value="we">Three</option>
 
             </select>
-
             <div className="col">
-              <label htmlFor="coursetype" className="form-label">ประเภทวิชาที่ต้องการ<span class="form-required" title="This field is required.">*</span></label>
+              <label htmlFor="coursetype" className="form-label">ประเภทวิชาที่ต้องการ<span className="form-required" title="This field is required.">*</span></label>
 
               <input
                 className="form-check-input addcourse"
@@ -97,9 +198,7 @@ const Schedule = () => {
                 value="lecture" 
                 checked={selectedLecture}
                 onChange = { (event) => 
-                  { LectureChange(event); 
-                    setLecture(event.target.value) } 
-                  }
+                  { LectureChange(event)}}
 
               />
               <label className="form-check-label addcourse" htmlFor="lecture">
@@ -116,9 +215,7 @@ const Schedule = () => {
 
                 checked={selectedPractice}
                 onChange = { (event) => 
-                  { PracticeChange(event); 
-                    setPractice(event.target.value) } 
-                  }
+                  { PracticeChange(event)}}
               />
               <label className="form-check-label" htmlFor="practice">
                 ปฏิบัติ
@@ -128,69 +225,77 @@ const Schedule = () => {
 
           <div className="col-1"></div>
           <div className="col">
-            <div className="col-1"></div>
-            <div className="col">
-              <label htmlFor="semester" className="form-label">ภาคการศึกษา<span class="form-required" title="This field is required.">*</span></label>
-              <select id="semester"                onChange = { (event) => 
-                  { PracticeChange(event); 
+            <label htmlFor="year" className="form-label">ปีการศึกษา<span className="form-required" title="This field is required.">*</span></label>
+            <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+              <option selected value={year} key={year}>{year}</option>
+            </select>
+            <label htmlFor="semester" className="form-label">ภาคการศึกษา<span className="form-required" title="This field is required.">*</span></label>
+              <select id="semester"                
+                  onChange = { (event) => 
+                  {
                     setSemester(event.target.value) } 
                   } className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-                <option selected>Open this select menu</option>
-                <option value="เทอมต้น">One</option>
-                <option value="เทอมปลาย">Two</option>
-                <option value="ฤดูร้อน">Three</option>
+                <option selected disabled>กรุณาเลือกภาคการศึกษา</option>
+                <option value="เทอมต้น">เทอมต้น</option>
+                <option value="เทอมปลาย">เทอมปลาย</option>
+                <option value="ภาคฤดูร้อน">ภาคฤดูร้อน</option>
               </select>
-            </div>
-            <label htmlFor="year" className="form-label">ปีการศึกษา<span class="form-required" title="This field is required.">*</span></label>
-            <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
           </div>
+
           <div className="col"></div>
+
           {selectedLecture || selectedPractice ? (
-          <div class="bg">
-            <div class="row">
+          <div className="bg">
+
+            <div className="row">
             {selectedLecture && (
               <div className='col'>
-              {selectedLecture &&   <Lecture handleLectureData={reciverdata} />}
+                <form>
+              {selectedLecture &&   <Lecture sendData={reciverdatafromlecture} />}
+                </form>
+
               </div>
             )}
               {selectedPractice && (
                 <div className='col'>
-                  {selectedPractice && <Practice />}
+                  <form>
+                  {selectedPractice && <Practice sendData={reciverdatafrompractice}/>}
+                  </form>
+
                 </div>
               )}
             </div>
+
           </div>) : null}
           <div className="row">
             <div className='col'>
             </div>
+
             {selectedLecture || selectedPractice ? (
 
             <div className='col'>
-              <button type="button" class="btn addcourse submit btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">ยืนยัน</button>
-              <button type="submit" class="btn addcourse cancel  btn-lg">ล้างข้อมูล</button>
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">ยืนยันข้อมูล</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" className="btn addcourse submit btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">ยืนยัน</button>
+              <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">ยืนยันข้อมูล</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                       <p>ภาคการศึกษา : {semester}</p>
-                      <p>วิชา : {subject}</p>
-                      <p>จำนวนนักเรียน : {num_students}</p>
-                      <p>หมู่เรียน : {sec}</p>
-                      <p>วัน : {day}</p>
-                      <p>เวลา :{start_time} - {end_time}</p>
+                      <p>ปีการศึกษา : {year}</p>
+                      <p>วิชา : {subject_lecture}</p>
+                      <p>จำนวนนักเรียน : {num_students_lecture}</p>
+                      <p>หมู่เรียน : {sec_lecture}</p>
+                      <p>วัน : {day_lecture}</p>
+                      <p>เวลา :{start_time_lecture} - {end_time_lecture}</p>
+                      <p>ประเภทวิชา : {catagory_lecture}</p>
+                      <p>ชั้นปีที่เรียน : {test}</p>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">ยกเลิก</button>
-                      <button type="button" class="btn btn-primary" onClick={addLecture} >ตกลง</button>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary"  data-bs-dismiss="modal">ยกเลิก</button>
+                      <button type="button" className="btn btn-primary" onClick={addLecture} >ตกลง</button>
                     </div>
                   </div>
                 </div>
