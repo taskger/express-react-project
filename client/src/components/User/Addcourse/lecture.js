@@ -1,5 +1,5 @@
 import React , {useState,useEffect } from 'react';
-const Lecture = ({sendData}) => {
+const Lecture = ({ listcourse,sendData}) => {
   const [subject, setSubject] = useState(null);
   const [num_students, setNum_students] = useState(null);
   const [sec, setSec] = useState(null);
@@ -29,6 +29,9 @@ const Lecture = ({sendData}) => {
       otheryear,
     });
   }, [subject, num_students, sec, day, start_time, end_time, catagory,firstyear,secondyear,thirdyear,fourthyear,otheryear,sendData]);
+
+
+
   return (
       <div>
         
@@ -38,7 +41,7 @@ const Lecture = ({sendData}) => {
             
           </div>
           <div className="col center">
-            <label htmlFor="subject" className="form-label">ชื่อวิชา<span className="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="subject" className="form-label">ชื่อวิชาบรรยาย<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="subject" 
               className="form-select form-select-sm mb-3" 
@@ -46,10 +49,10 @@ const Lecture = ({sendData}) => {
               onChange={(event) =>{
                 setSubject(event.target.value)
               }}>
-              <option selected>Open this select menu</option>
-              <option value="วิชาที่ 1">One</option>
-              <option value="วิชาที่ 4 ">Two</option>
-              <option value="วิชาที่ 3 ">Three</option>
+              <option selected>กรุณาเลือกรายวิชาบรรยาย</option>
+              {Array.isArray(listcourse) && listcourse.map(listcourse =>
+                <option key={listcourse.id} value={listcourse.subject}>{listcourse.subject}</option>
+              )}
             </select>
             <label htmlFor="num_students" className="form-label" >รับจำนวน<span className="form-required" title="This field is required.">*</span></label>
             <input 
@@ -60,7 +63,7 @@ const Lecture = ({sendData}) => {
                   setNum_students(event.target.value)
                 }}
               />
-            <label htmlFor="sec" className="form-label">หมู่เรียน<span className="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="sec" className="form-label">หมู่เรียนบรรยาย<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="sec" 
               className="form-select form-select-sm mb-3" 
@@ -69,7 +72,7 @@ const Lecture = ({sendData}) => {
                 setSec(event.target.value)
               }}
               >
-              <option selected>กรุณาเลือกหมู่เรียน</option>
+              <option selected>กรุณาเลือกหมู่เรียนบรรยาย</option>
               <option value="801">801</option>
               <option value="802">802</option>
               <option value="803">803</option>
@@ -79,7 +82,6 @@ const Lecture = ({sendData}) => {
               <option value="807">807</option>
               <option value="808">808</option>
               <option value="809">809</option>
-              <option value="810">810</option>
 
             </select>
             <label htmlFor="year" className="form-label">วัน<span className="form-required" title="This field is required.">*</span></label>
@@ -90,7 +92,7 @@ const Lecture = ({sendData}) => {
                 onChange={(event) =>{
                   setDay(event.target.value)
                 }}>
-              <option selected Disabled>กรุณาเลือกวัน</option>
+              <option selected>กรุณาเลือกวัน</option>
               <option value="วันจัทนร์">วันจัทนร์</option>
               <option value="วันอังคาร">วันอังคาร</option>
               <option value="วันพุธ">วันพุธ</option>
@@ -103,7 +105,7 @@ const Lecture = ({sendData}) => {
             <div className="cs-form ">
               <div className='row'>
                 <div className='col'>
-                  <h7>เรื่มสอน<span className="form-required" title="This field is required.">*</span></h7>
+                  <h7>เริ่มสอน<span className="form-required" title="This field is required.">*</span></h7>
                   <select 
                     id="starttime" 
                     className="form-select form-select-sm mb-3" 
@@ -183,7 +185,7 @@ const Lecture = ({sendData}) => {
                 
               </div>
             </div>
-            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา<span className="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชาบรรยาย<span className="form-required" title="This field is required.">*</span></label>
 
             <div>
               <div className='form-check form-check-inline'>

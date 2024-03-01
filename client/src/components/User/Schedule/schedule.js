@@ -6,7 +6,12 @@ import "../../schedule-components/filter.css";
 const Schedule = () => {
  //const [year, setYear] = useState(null);
   const [allyear, setAllyear] = useState([]);
-
+  const [year, setYear] = useState(null);
+  const [semester, setSemester] = useState(null);
+  const [firstyear, setFirstYear] = useState(null);
+  const updateFirstYear = (newFirstYear) => {
+    setFirstYear(newFirstYear);
+  };
   useEffect(() => {
     const currYear = new Date().getFullYear();
     const years = [];
@@ -19,6 +24,8 @@ const Schedule = () => {
     setAllyear(years);
 
   }, []);
+
+
   return (
     <div>
     <Navbar/>
@@ -29,7 +36,8 @@ const Schedule = () => {
             <label htmlFor="year" className="form-label">ปีการศึกษา</label>
           </div>
           <div className="col">
-            <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+            <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+              onChange={(event) =>{setYear(event.target.value)}}>
               <option selected disabled>กรุณาเลือกปีการศึกษา</option>
               {allyear.map((e) => <option value={e} key={e}>{e}</option> )}
             </select>
@@ -39,7 +47,8 @@ const Schedule = () => {
           </div>
           
           <div className="col">
-            <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+            <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+              onChange={(event) =>{setSemester(event.target.value)}}>
                 <option selected disabled>กรุณาเลือกภาคการศึกษา</option>
                 <option value="เทอมต้น">เทอมต้น</option>
                 <option value="เทอมปลาย">เทอมปลาย</option>
@@ -48,13 +57,15 @@ const Schedule = () => {
           </div>
         </div>
         </div>
-        <div className='row all com'> 
+        <div className='row all com'>
+          
           <div className='col-auto filter'>
-           <Filter />
+           <Filter updateFirstYear={updateFirstYear}/>
            </div>
            <div className='col table'>
-           <Table />
-           </div>
+           <Table year={year} semester={semester} firstyear={firstyear}/>
+    
+            </div>
 
 
         </div>

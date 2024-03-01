@@ -5,7 +5,7 @@ const lecturecorrect = () => {
   return (   
     <div className='lecturecorrect' >
 
-        <button type="button" class="btn editlecturecorrect" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" className="btn editlecturecorrect" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <div className='subject'>
                 LAB Software Enginering
             </div>
@@ -17,10 +17,10 @@ const lecturecorrect = () => {
             </div>
         </button>
                 
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-body">
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-body">
                     <label htmlFor="semester" className="form-label">ชื่อวิชา</label>
                         <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                         <option selected>Open this select menu</option>
@@ -29,7 +29,7 @@ const lecturecorrect = () => {
                         <option value="3">Three</option>
                         </select>                   
                     <label   label htmlFor="year" className="form-label" >รับจำนวน</label>
-                    <input type="text" class="form-control" id="InputStudents" /> 
+                    <input type="text" className="form-control" id="InputStudents" /> 
                     <label htmlFor="semester" className="form-label">หมู่เรียน</label>
                     <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                     <option selected>กรุณาเลือกหมู่เรียน</option>
@@ -44,7 +44,7 @@ const lecturecorrect = () => {
                     <option value="809">809</option>
                     <option value="810">810</option>
                     </select>
-                    <div class="cs-form ">
+                    <div className="cs-form ">
                     <div className='row'>
                         <div className='col'>
                         <h7>เรื่มสอน</h7>
@@ -112,9 +112,9 @@ const lecturecorrect = () => {
                     </div>
                     </div>
                 </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">ตกลง</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary">ตกลง</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
                     </div>
                     </div>
                 </div>

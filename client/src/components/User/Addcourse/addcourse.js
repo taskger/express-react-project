@@ -6,34 +6,36 @@ import Practice from './practice';
 import Axios from 'axios';
 
 
-// เรียกข้อมูลปฏิบัติมา modal ยื่นยัน  เรียกชั้นปีที่เรียน
-// แก้ข้อมูลที่ต้องเพิ่มรายวิชาปฏิบัติ มีเฉพาะวิชาหลัก หมู่เรียน
-// ทดสอบเรียกวิชาจากดาต้าเบส
+// เรียกข้อมูลปฏิบัติมา modal ยื่นยัน  เรียกชั้นปีที่เรียน 
+// แก้ข้อมูลที่ต้องเพิ่มรายวิชาปฏิบัติ มีเฉพาะวิชาหลัก หมู่เรียน /
+// ทดสอบเรียกวิชาจากดาต้าเบส 100% ยังเหลือเปลี่ยนเป็น table หลักสูตร /
 // หลังกดปุ่มยืนยันจะโหลดหน้าเว็บใหม่ ทำแล้วแต่ต้องแก้ให้เกิดถ้าข้อมูลกรอกไม่ครบ
-// ล้างข้อมูล
-// เลือกรายวิชาสามารถกรอกเพื่อหาได้
-// แยกช่องอันใหนวิชาหลักวิชาสาย
+// ล้างข้อมูล /
+// เลือกรายวิชาสามารถกรอกเพื่อหาได้ x
+// แยกช่องอันใหนวิชาหลักวิชาสาย /
+// เวลาเริ่มต้นต้องน้อยกว่าเวลาสิ้นสุด
 const Schedule = () => {
   const [selectedLecture, setSelectedLecture] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState(false); 
 
-  //ปีหลักสูตรใช้ดึงข้อมูลมาโชว์ของปีหลักสูตรนั้นมาโชว์
-  const [courseyear, setCourseYear] = useState(null);
 
-  const [year, setYear] = useState(null);
+
 
   //ทำให้รู้ว่าบรรยาย ปฏิบัติขึ้น database หลังภาคการศึกษา true false
   const [lecture, setLecture] = useState(false); 
   const [practice, setPractice] = useState(false); 
 
-  const [semester, setSemester] = useState("");
+  const [semester, setSemester] = useState(null);
   const [professor] = useState("test");
 
 
   //ทำแสดงชั้นปี
-  const [test, setTest] = useState();
+  const [test] = useState('2564');
+
 
   //ดึงปีปัจจุบัน
+  const [year, setYear] = useState(null);
+
   useEffect(() => {
     const currYear = new Date().getFullYear();
     setYear(currYear+543);
@@ -74,6 +76,33 @@ const Schedule = () => {
   const [thirdyear_lecture, setThirdyear_lecture] = useState();
   const [fourthyear_lecture, setFourthyear_lecture] = useState();
   const [otheryear_lecture, setOtheryear_lecture] = useState();
+
+  //ปีหลักสูตรใช้ดึงข้อมูลมาโชว์ของปีหลักสูตรนั้นมาโชว์
+  const uniqueYears = new Set();
+  const [courseyear, setCourseYear] = useState(null); //เก็บหลักสูตรทั้งหมดที่ดึงมา
+  const [selectcourseyear, setselectCourseYear] = useState(null); //เก็บปีหลักสูตรที่ select
+  const [listcourse, setListcourse] = useState(null); //เก็บข้อมูลในปีหลักสูตรที่ดึงมา
+
+  useEffect(() => { //ดึงหลักสูตรทั้งหมดใน table
+    Axios.get(`http://localhost:3000/readcourse`).then(response => 
+      {
+        setCourseYear(response.data.results)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },[]);
+
+  useEffect(() => { //ดีงข้อมูลจากปีที่เลือก
+    Axios.get(`http://localhost:3000/readcourse/single/${selectcourseyear}`).then(response => 
+    {
+      setListcourse(response.data.results)
+
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  },[selectcourseyear]);
 
   const reciverdatafromlecture = (data) => {
     console.log('ข้อมูลจากวิชาบรรยาย', data);
@@ -136,6 +165,7 @@ const Schedule = () => {
         day_lecture: day_lecture,
         start_time_lecture: start_time_lecture,
         end_time_lecture: end_time_lecture,
+        catagory_lecture:catagory_lecture,
         lecture: lecture,
         firstyear_lecture: firstyear_lecture,
         secondyear_lecture: secondyear_lecture,
@@ -155,6 +185,7 @@ const Schedule = () => {
         day_practice: day_practice,
         start_time_practice: start_time_practice,
         end_time_practice: end_time_practice,
+        catagory_practice:catagory_practice,
         practice: practice,
         firstyear_practice: firstyear_practice,
         secondyear_practice: secondyear_practice,
@@ -163,9 +194,8 @@ const Schedule = () => {
         otheryear_practice: otheryear_practice,
       });
     }
-    //window.location.reload();
+    window.location.reload();
   }
-  console.log(selectedPractice)
 
   return (
     <div>
@@ -178,14 +208,25 @@ const Schedule = () => {
             <select 
               id="course-year" 
               className="form-select form-select-sm mb-3" 
-              aria-label=".form-select-sm example"                
+              aria-label=".form-select-sm example"    
               onChange={(event) =>{
-                setCourseYear(event.target.value)
-              }}>
-              <option selected defaultValue={null}>Open this select menu</option>
-              <option value="te">One</option>
-              <option value="qw">Two</option>
-              <option value="we">Three</option>
+                setselectCourseYear(event.target.value)
+              }}
+              
+              >
+              <option selected disabled>กรุณาเลือกปีหลักสูตร</option>
+              
+              {Array.isArray(courseyear) && courseyear.map(course => {
+              if (!uniqueYears.has(course.year)) {
+                uniqueYears.add(course.year);
+                return (
+                  <option key={course.id} value={course.year}>
+                    {course.year}
+                  </option>
+                );
+              }
+              return null;
+            })}
 
             </select>
             <div className="col">
@@ -228,6 +269,7 @@ const Schedule = () => {
             <label htmlFor="year" className="form-label">ปีการศึกษา<span className="form-required" title="This field is required.">*</span></label>
             <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
               <option selected value={year} key={year}>{year}</option>
+
             </select>
             <label htmlFor="semester" className="form-label">ภาคการศึกษา<span className="form-required" title="This field is required.">*</span></label>
               <select id="semester"                
@@ -251,7 +293,7 @@ const Schedule = () => {
             {selectedLecture && (
               <div className='col'>
                 <form>
-              {selectedLecture &&   <Lecture sendData={reciverdatafromlecture} />}
+              {selectedLecture &&   <Lecture listcourse={listcourse} sendData={reciverdatafromlecture} />}
                 </form>
 
               </div>
@@ -259,7 +301,7 @@ const Schedule = () => {
               {selectedPractice && (
                 <div className='col'>
                   <form>
-                  {selectedPractice && <Practice sendData={reciverdatafrompractice}/>}
+                  {selectedPractice && <Practice listcourse={listcourse} sendData={reciverdatafrompractice}/>}
                   </form>
 
                 </div>
@@ -295,7 +337,7 @@ const Schedule = () => {
                     </div>
                     <div className="modal-footer">
                       <button type="button" className="btn btn-secondary"  data-bs-dismiss="modal">ยกเลิก</button>
-                      <button type="button" className="btn btn-primary" onClick={addLecture} >ตกลง</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={addLecture} >ตกลง</button>
                     </div>
                   </div>
                 </div>

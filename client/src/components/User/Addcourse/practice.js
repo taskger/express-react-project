@@ -1,6 +1,6 @@
 import React , {useState,useEffect } from 'react';
 
-const Practice = ({sendData}) => {
+const Practice = ({listcourse,sendData}) => {
   const [subject_practice, setSubject] = useState(null);
   const [num_students_practice, setNum_students] = useState(null);
   const [sec_practice, setSec] = useState(null);
@@ -30,6 +30,7 @@ const Practice = ({sendData}) => {
       otheryear_practice,
     });
   }, [subject_practice, num_students_practice, sec_practice, day_practice, start_time_practice, end_time_practice, catagory_practice,firstyear_practice,secondyear_practice,thirdyear_practice,fourthyear_practice,otheryear_practice,sendData]);
+  console.log(subject_practice)
   return (
       <div>
         
@@ -39,7 +40,7 @@ const Practice = ({sendData}) => {
             
           </div>
           <div className="col center">
-            <label htmlFor="subject" className="form-label">ชื่อวิชา<span className="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="subject" className="form-label">ชื่อวิชาปฏิบัติ<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="subject" 
               className="form-select form-select-sm mb-3" 
@@ -47,10 +48,10 @@ const Practice = ({sendData}) => {
               onChange={(event) =>{
                 setSubject(event.target.value)
               }}>
-              <option selected>Open this select menu</option>
-              <option value="วิชาที่ 1">One</option>
-              <option value="วิชาที่ 4 ">Two</option>
-              <option value="วิชาที่ 3 ">Three</option>
+              <option selected>กรุณาเลือกรายวิชาปฏิบัติ</option>
+              {Array.isArray(listcourse) && listcourse.map(listcourse =>
+                <option key={listcourse.id} value={listcourse.subject}>{listcourse.subject}</option>
+              )}
             </select>
             <label htmlFor="num_students" className="form-label" >รับจำนวน<span className="form-required" title="This field is required.">*</span></label>
             <input 
@@ -61,7 +62,7 @@ const Practice = ({sendData}) => {
                   setNum_students(event.target.value)
                 }}
               />
-            <label htmlFor="sec" className="form-label">หมู่เรียน<span className="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="sec" className="form-label">หมู่เรียนปฏิบัติ<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="sec" 
               className="form-select form-select-sm mb-3" 
@@ -70,17 +71,16 @@ const Practice = ({sendData}) => {
                 setSec(event.target.value)
               }}
               >
-              <option selected>กรุณาเลือกหมู่เรียน</option>
-              <option value="801">801</option>
-              <option value="802">802</option>
-              <option value="803">803</option>
-              <option value="804">804</option>
-              <option value="805">805</option>
-              <option value="806">806</option>
-              <option value="807">807</option>
-              <option value="808">808</option>
-              <option value="809">809</option>
-              <option value="810">810</option>
+              <option selected>กรุณาเลือกหมู่เรียนปฏิบัติ</option>
+              <option>831</option>
+              <option>832</option>
+              <option>833</option>
+              <option>834</option>
+              <option>835</option>
+              <option>836</option>
+              <option>837</option>
+              <option>838</option>
+              <option>839</option>
 
             </select>
             <label htmlFor="year" className="form-label">วัน<span className="form-required" title="This field is required.">*</span></label>
@@ -91,7 +91,7 @@ const Practice = ({sendData}) => {
                 onChange={(event) =>{
                   setDay(event.target.value)
                 }}>
-              <option selected Disabled>กรุณาเลือกวัน</option>
+              <option selected>กรุณาเลือกวัน</option>
               <option value="วันจัทนร์">วันจัทนร์</option>
               <option value="วันอังคาร">วันอังคาร</option>
               <option value="วันพุธ">วันพุธ</option>
@@ -104,7 +104,7 @@ const Practice = ({sendData}) => {
             <div className="cs-form ">
               <div className='row'>
                 <div className='col'>
-                  <h7>เรื่มสอน<span className="form-required" title="This field is required.">*</span></h7>
+                  <h7>เริ่มสอน<span className="form-required" title="This field is required.">*</span></h7>
                   <select 
                     id="starttime" 
                     className="form-select form-select-sm mb-3" 
@@ -184,7 +184,7 @@ const Practice = ({sendData}) => {
                 
               </div>
             </div>
-            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา<span className="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชาปฏิบัติ<span className="form-required" title="This field is required.">*</span></label>
 
             <div>
               <div className='form-check form-check-inline'>
@@ -238,7 +238,6 @@ const Practice = ({sendData}) => {
                 name="inlineRadioOptionspractice" 
                 id="optionmainpractice" 
                 value="วิชาหลัก" 
-                checked
                 onChange={(event) =>{
                   setCatagory(event.target.value)
                 }}/>

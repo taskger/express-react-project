@@ -23,14 +23,14 @@ const Overlapping = () => {
   return (      
 
         <div className='overlapping'>
-            <button type="button" class="btn editoverlapping" onClick={() => setShowoverlapping(true)}>
+            <button type="button" className="btn editoverlapping" onClick={() => setShowoverlapping(true)}>
                 มีวิชาซ้อนกัน
             </button>
             <Modal show={overlapping} onHide={() => setShowoverlapping(false)}>
-                    <div class="modal-body">
+                    <div className="modal-body">
                     <div className='row inoverlapping'>
-                    <div class="btn-group" role="group" aria-label="Basic example">        
-                      <button type="button" class="btn btn-outline-secondary" onClick={openSecondModal}>
+                    <div className="btn-group" role="group" aria-label="Basic example">        
+                      <button type="button" className="btn btn-outline-secondary" onClick={openSecondModal}>
                         <div className='subject'>
                             LAB Software Enginering
                         </div>
@@ -41,14 +41,14 @@ const Overlapping = () => {
                             13.00 - 16.00
                         </div>
                       </button>
-                        <button type="button" class="btn btn-danger bitrash" >
-                          <span class="bi bi-trash"></span></button>
+                        <button type="button" className="btn btn-danger bitrash" >
+                          <span className="bi bi-trash overlapping"></span></button>
                     </div>
 
                     </div>
                     <div className='row inoverlapping'>
-                    <div class="btn-group" role="group" aria-label="Basic example">        
-                      <button type="button" class="btn btn-outline-secondary" onClick={openSecondModal}>
+                    <div className="btn-group" role="group" aria-label="Basic example">        
+                      <button type="button" className="btn btn-outline-secondary" onClick={openSecondModal}>
                         <div className='subject'>
                             LAB Software Enginering
                         </div>
@@ -59,19 +59,19 @@ const Overlapping = () => {
                             13.00 - 16.00
                         </div>
                       </button>
-                      <button type="button" class="btn btn-danger bitrash" >
-                          <span class="bi bi-trash"></span></button>
+                      <button type="button" className="btn btn-danger bitrash" >
+                          <span className="bi bi-trash"></span></button>
                     </div>
                     </div>
 
                 </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">ตกลง</button>
-                        <button type="button" class="btn btn-secondary" onClick={closeCurrentModal}>ยกเลิก</button>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary">ตกลง</button>
+                        <button type="button" className="btn btn-secondary" onClick={closeCurrentModal}>ยกเลิก</button>
                     </div>
                 </Modal>
                 <Modal show={editoverlapping} onHide={() => setShoweditoverlapping(false)}>
-                    <div class="modal-body">
+                    <div className="modal-body">
                     <label htmlFor="semester" className="form-label">ชื่อวิชา</label>
                         <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                         <option selected>Open this select menu</option>
@@ -80,7 +80,7 @@ const Overlapping = () => {
                         <option value="3">Three</option>
                         </select>                   
                     <label   label htmlFor="year" className="form-label" >รับจำนวน</label>
-                    <input type="text" class="form-control" id="InputStudents" /> 
+                    <input type="text" className="form-control" id="InputStudents" /> 
                     <label htmlFor="semester" className="form-label">หมู่เรียน</label>
                     <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
                     <option selected>กรุณาเลือกหมู่เรียน</option>
@@ -95,7 +95,7 @@ const Overlapping = () => {
                     <option value="809">809</option>
                     <option value="810">810</option>
                     </select>
-                    <div class="cs-form ">
+                    <div className="cs-form ">
                     <div className='row'>
                         <div className='col'>
                         <h7>เรื่มสอน</h7>
@@ -163,9 +163,9 @@ const Overlapping = () => {
                     </div>
                     </div>
                 </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">ตกลง</button>
-                        <button type="button" class="btn btn-secondary" onClick={backToFirstModal}>ย้อนกลับ</button>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary">ตกลง</button>
+                        <button type="button" className="btn btn-secondary" onClick={backToFirstModal}>ย้อนกลับ</button>
                     </div>
                 </Modal>
         </div>
