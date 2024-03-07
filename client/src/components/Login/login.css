@@ -14,7 +14,7 @@ div .empty h1{
 }
 
 .img-kaset {
-  max-width: 1100px;
+  max-width: fit-content;
 }
 
 .logo {

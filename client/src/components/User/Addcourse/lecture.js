@@ -1,15 +1,20 @@
 import React , {useState,useEffect } from 'react';
-const Lecture = ({handleLectureData }) => {
-  const [subject, setSubject] = useState("");
-  const [num_students, setNum_students] = useState("0");
-  const [sec, setSec] = useState("0");
-  const [day, setDay] = useState("");
-  const [start_time, setStart_time] = useState("");
-  const [end_time, setEnd_time] = useState("");
-  const [catagory, setCatagory] = useState(null);
+const Lecture = ({ listcourse,sendData}) => {
+  const [subject, setSubject] = useState(null);
+  const [num_students, setNum_students] = useState(null);
+  const [sec, setSec] = useState(null);
+  const [day, setDay] = useState(null);
+  const [start_time, setStart_time] = useState(null);
+  const [end_time, setEnd_time] = useState(null);
+  const [catagory, setCatagory] = useState();
+  const [firstyear, setFirstyear] = useState(false);
+  const [secondyear, setSecondyear] = useState(false);
+  const [thirdyear, setThirdyear] = useState(false);
+  const [fourthyear, setFourthyear] = useState(false);
+  const [otheryear, setOtheryear] = useState(false);
 
   useEffect(() => {
-    handleLectureData({
+    sendData({
       subject,
       num_students,
       sec,
@@ -17,8 +22,16 @@ const Lecture = ({handleLectureData }) => {
       start_time,
       end_time,
       catagory,
+      firstyear,
+      secondyear,
+      thirdyear,
+      fourthyear,
+      otheryear,
     });
-  }, [subject, num_students, sec, day, start_time, end_time, catagory, handleLectureData]);
+  }, [subject, num_students, sec, day, start_time, end_time, catagory,firstyear,secondyear,thirdyear,fourthyear,otheryear,sendData]);
+
+
+
   return (
       <div>
         
@@ -28,7 +41,7 @@ const Lecture = ({handleLectureData }) => {
             
           </div>
           <div className="col center">
-            <label htmlFor="subject" className="form-label">ชื่อวิชา<span class="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="subject" className="form-label">ชื่อวิชาบรรยาย<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="subject" 
               className="form-select form-select-sm mb-3" 
@@ -36,21 +49,21 @@ const Lecture = ({handleLectureData }) => {
               onChange={(event) =>{
                 setSubject(event.target.value)
               }}>
-              <option selected>Open this select menu</option>
-              <option value="วิชาที่ 1">One</option>
-              <option value="วิชาที่ 4 ">Two</option>
-              <option value="วิชาที่ 3 ">Three</option>
+              <option selected>กรุณาเลือกรายวิชาบรรยาย</option>
+              {Array.isArray(listcourse) && listcourse.map(listcourse =>
+                <option key={listcourse.id} value={listcourse.subject}>{listcourse.subject}</option>
+              )}
             </select>
-            <label htmlFor="num_students" className="form-label" >รับจำนวน<span class="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="num_students" className="form-label" >รับจำนวน<span className="form-required" title="This field is required.">*</span></label>
             <input 
               type="number" 
-              class="form-control" 
+              className="form-control" 
               id="num_students" 
                 onChange={(event) =>{
                   setNum_students(event.target.value)
                 }}
               />
-            <label htmlFor="sec" className="form-label">หมู่เรียน<span class="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="sec" className="form-label">หมู่เรียนบรรยาย<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="sec" 
               className="form-select form-select-sm mb-3" 
@@ -59,7 +72,7 @@ const Lecture = ({handleLectureData }) => {
                 setSec(event.target.value)
               }}
               >
-              <option selected>กรุณาเลือกหมู่เรียน</option>
+              <option selected>กรุณาเลือกหมู่เรียนบรรยาย</option>
               <option value="801">801</option>
               <option value="802">802</option>
               <option value="803">803</option>
@@ -69,10 +82,9 @@ const Lecture = ({handleLectureData }) => {
               <option value="807">807</option>
               <option value="808">808</option>
               <option value="809">809</option>
-              <option value="810">810</option>
 
             </select>
-            <label htmlFor="year" className="form-label">วัน<span class="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="year" className="form-label">วัน<span className="form-required" title="This field is required.">*</span></label>
             <select 
               id="days" 
               className="form-select form-select-sm mb-3" 
@@ -80,7 +92,7 @@ const Lecture = ({handleLectureData }) => {
                 onChange={(event) =>{
                   setDay(event.target.value)
                 }}>
-              <option selected Disabled>กรุณาเลือกวัน</option>
+              <option selected>กรุณาเลือกวัน</option>
               <option value="วันจัทนร์">วันจัทนร์</option>
               <option value="วันอังคาร">วันอังคาร</option>
               <option value="วันพุธ">วันพุธ</option>
@@ -90,10 +102,10 @@ const Lecture = ({handleLectureData }) => {
               <option value="วันอาทิตย์">วันอาทิตย์</option>
 
             </select>
-            <div class="cs-form ">
+            <div className="cs-form ">
               <div className='row'>
                 <div className='col'>
-                  <h7>เรื่มสอน<span class="form-required" title="This field is required.">*</span></h7>
+                  <h7>เริ่มสอน<span className="form-required" title="This field is required.">*</span></h7>
                   <select 
                     id="starttime" 
                     className="form-select form-select-sm mb-3" 
@@ -132,7 +144,7 @@ const Lecture = ({handleLectureData }) => {
 
                 </div>                
                 <div className='col'>
-                  <h7>สิ้นสุดการสอน<span class="form-required" title="This field is required.">*</span></h7>
+                  <h7>สิ้นสุดการสอน<span className="form-required" title="This field is required.">*</span></h7>
                     <select 
                       id="end_time" 
                       className="form-select form-select-sm mb-3" 
@@ -173,75 +185,84 @@ const Lecture = ({handleLectureData }) => {
                 
               </div>
             </div>
-            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชา<span class="form-required" title="This field is required.">*</span></label>
+            <label htmlFor="year" className="StudentYear">ข้อจำกัดรายวิชาบรรยาย<span className="form-required" title="This field is required.">*</span></label>
 
             <div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="first-year" id="check1lecture" name='check1lecture' onChange={(event) =>{
-                  setCatagory(event.target.value)
-                }}/>
-                <label class="form-check-label" htmlFor="check1lecture"> ชั้นปี 1 </label>
+                <input className="form-check-input" type="checkbox" value="ชั้นปี 1" id="check1lecture" 
+                  name='check1lecture' 
+                  onChange={(event) =>{
+                    setFirstyear(event.target.checked)
+                  }}/>
+                <label className="form-check-label" htmlFor="check1lecture"> ชั้นปี 1 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="second-year" id="check2lecture" name='check2lecture' onChange={(event) =>{
-                  setCatagory(event.target.value)
+                <input className="form-check-input" type="checkbox" value="ชั้นปี 2" id="check2lecture" 
+                name='check2lecture' 
+                onChange={(event) =>{
+                  setSecondyear(event.target.checked)
                 }}/>
-                <label class="form-check-label" htmlFor="check2lecture"> ชั้นปี 2 </label>
+                <label className="form-check-label" htmlFor="check2lecture"> ชั้นปี 2 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="third-year" id="check3lecture"                onChange={(event) =>{
-                  setCatagory(event.target.value)
+                <input className="form-check-input" type="checkbox" value="ชั้นปี 3" id="check3lecture" 
+                name='check3lecture'  
+                onChange={(event) =>{
+                  setThirdyear(event.target.checked)
                 }}/>
-                <label class="form-check-label" htmlFor="check3lecture"> ชั้นปี 3 </label>
+                <label className="form-check-label" htmlFor="check3lecture"> ชั้นปี 3 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="four-year" id="check4lecture"                 onChange={(event) =>{
-                  setCatagory(event.target.value)
+                <input className="form-check-input" type="checkbox" value="ชั้นปี 4" id="check4lecture" 
+                name='check4lecture'  
+                onChange={(event) =>{
+                  setFourthyear(event.target.checked)
                 }}/>
-                <label class="form-check-label" htmlFor="check4lecture"> ชั้นปี 4 </label>
+                <label className="form-check-label" htmlFor="check4lecture"> ชั้นปี 4 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input class="form-check-input" type="checkbox" value="other-year" id="checkotherlecture"                 onChange={(event) =>{
-                  setCatagory(event.target.value)
+                <input className="form-check-input" type="checkbox" value="ชั้นปีอื่นๆ" id="checkotherlecture"  
+                name='checkotherlecture' 
+                onChange={(event) =>{
+                  setOtheryear(event.target.checked)
                 }}/>
-                <label class="form-check-label" htmlFor="checkohterlecture"> ชั้นปีอื่นๆ </label>
+                <label className="form-check-label" htmlFor="checkotherlecture"> ชั้นปีอื่นๆ </label>
               </div>
             </div>
 
 
             <div>
-            <div class="form-check form-check-inline">
+            <div className="form-check form-check-inline">
               <input 
-                class="form-check-input" 
+                className="form-check-input" 
                 type="radio" 
-                name="inlineRadioOptions" 
+                name="inlineRadioOptionslecture" 
                 id="optionmainlecture" 
-                value="option1" 
+                value="วิชาหลัก" 
                 onChange={(event) =>{
                   setCatagory(event.target.value)
                 }}/>
-              <label class="form-check-label" for="optionmainlecture">วิชาหลัก</label>
+              <label className="form-check-label" for="optionmainlecture">วิชาหลัก</label>
             </div>
 
-            <div class="form-check form-check-inline">
+            <div className="form-check form-check-inline">
               <input 
-                class="form-check-input" 
+                className="form-check-input" 
                 type="radio" 
-                name="inlineRadioOptions" 
+                name="inlineRadioOptionslecture" 
                 id="optioncchoicelecture" 
-                value="option2" 
+                value="วิชาเลือก" 
                 onChange={(event) =>{
                   setCatagory(event.target.value)
                 }}/>
-              <label class="form-check-label" htmlFor="optioncchoicelecture">วิชาเลือก</label>
+              <label className="form-check-label" htmlFor="optioncchoicelecture">วิชาเลือก</label>
             </div>
 
             <div className='row'>
             <div className="col ">
             </div>
             <div className="col ">
-            <button type="submit" class="addlecture btn">เพิ่มหมู่บรรยาย</button>
-
+            <button type="reset" class="resetaddcourse btn">ล้างข้อมูล</button>
             </div>
             <div className="col ">
             </div>

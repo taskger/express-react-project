@@ -15,7 +15,7 @@ div .form-label{
     background-color: rgb(255, 255, 255);
 }
 button.btn.addcourse.submit{
-    width: 500px;
+    width: 100%;
     margin-bottom: 25px;
     border: 3px solid #96BB7C;
     background-color: rgb(255, 255, 255);
@@ -73,20 +73,21 @@ div label.StudentYear{
   .lecture-container.expanded .content {
     display: block;
   }
-button.addlecture{
+button.resetaddcourse{
 
     width: 150px;
     margin-top: 30px;
-    border: 3px solid #22bae4;
-    background-color: #22bae4;
+    border: 3px solid #FF4B4B;
+    background-color: #FF4B4B;
     color: #ffffff;
     transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
 }
-button.addlecture:hover{
-    border: 3px solid #20a8cd;
-    background-color: #20a8cd;
+button.resetaddcourse:hover{
+    border: 3px solid #ee2323;
+    background-color: #ee2323;
     color: #ffffff;
 }
+
 div .form-check-input.addcourse{
     margin-left: 10px;
     margin-right: 10px;
@@ -98,6 +99,14 @@ span.form-required{
     margin-left: 3px;
 }
 #InputStudents{
+    margin-left: 8px;
+    height: 30.6px;
+}
+#sec{
+    margin-left: 8px;
+    height: 30.6px;
+}
+#subject{
     margin-left: 8px;
     height: 30.6px;
 }

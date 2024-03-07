@@ -206,6 +206,25 @@ thead.theadtable .time{
     color: rgb(255, 255, 255);
     background-color: #FF4B4B;
 }
+
+.bi-trash.table {
+    color: #FF4B4B;
+    font-size: 30px;
+    background-color: #ffffff;
+    border-bottom: 1px #ffffff solid ;
+    border-top: 1px #ffffff solid ;
+    border-right: 1px #ffffff solid ;
+    border-left: 1px #ffffff solid ;
+    width: 18%;
+    border-radius:7px ;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+
+}
+.bi-trash.table:hover {
+    color: #c60e0e;
+}
 @media only screen and (max-width: 1000px) {
     div.col-auto.filter {
       display: none;
