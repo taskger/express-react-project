@@ -227,6 +227,36 @@ app.get("/readschedule/:year.:semester", async (req,res) => {
         return res.status(500).send();
     }
 });
+app.get("/readcourse/single/:year", async (req, res) => {
+    const { year } = req.params;  
+    try {
+        connection.query("SELECT * FROM courses WHERE year = ?", [year], (err, results, fields) => {
+            if (err) {
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({ results });
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+});
+app.delete("/deleteschedule/single/:id", async (req, res) => {
+    const { id } = req.params;  
+    try {
+        connection.query(`DELETE FROM schedules WHERE id = ?`, id, (err, results, fields) => {
+            if (err) {
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({ results });
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+});
 app.patch("/updateschedule", async (req,res) => {
     const { 
         id,
