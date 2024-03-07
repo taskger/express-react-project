@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 import './Accept.css'
+import { useState } from 'react';
+import { gapi } from "gapi-script";
 
-const Accept = () => {
+function Accept () {
+    const {profile,setProfile} = useState(0)
     return(
         <div className='box-accept'>
             <div className='in-accept'>
                 <div className='img-accept'>
-                    <img src="img/kaset.jpg" className='logo-accept' alt='sdsd'/>
+                    <img className='logo-accept'  alt='sdsd'/>
                 </div>
                 <div className='kit-accept'/>
                 <div className='name-accept'>
-                    <h1 className='first-font-accept'> Name</h1>
-                    <h1 className='sec-font-accept'> Surname</h1>
+                    <h1 className='first-font-accept'>  </h1>
+                    <h1 className='sec-font-accept'> </h1>
                 </div>
                 <div className='kit-accept'/>
                 <div className='email-accept'>
-                    <h1 className='three-font-accept'> asdasdas@gmai.com</h1>
+                    <h1 className='three-font-accept'> </h1>
                 </div>
                 <div className='kit-accept'/>
                 <div className='button-accept'>

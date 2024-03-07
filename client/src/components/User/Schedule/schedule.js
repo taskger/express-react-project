@@ -8,10 +8,37 @@ const Schedule = () => {
   const [allyear, setAllyear] = useState([]);
   const [year, setYear] = useState(null);
   const [semester, setSemester] = useState(null);
-  const [firstyear, setFirstYear] = useState(null);
+  const [firstyear, setFirstYear] = useState(false);
+  const [secondyear, setSecondYear] = useState(false);
+  const [thirdyear, setThirdYear] = useState(false);
+  const [fourthyear, setFourYear] = useState(false);
+  const [otheryear, setOtheryear] = useState(false);
+  const [main, setMain] = useState(null);
+  const [sai, setSai] = useState(null);
+
   const updateFirstYear = (newFirstYear) => {
     setFirstYear(newFirstYear);
   };
+  const updateSecondYear = (newSecondYear) => {
+    setSecondYear(newSecondYear);
+  };
+  const updateThirdYear = (newThirdYear) => {
+    setThirdYear(newThirdYear);
+  };
+  const updateFourYear = (newFourYear) => {
+    setFourYear(newFourYear);
+  };
+  const updateOtherYear = (newOtherYear) => {
+    setOtheryear(newOtherYear);
+  };
+  const updateMain = (newMainValue) => {
+    setMain(newMainValue);
+  };
+  const updateSai = (newSaiValue) => {
+    setSai(newSaiValue);
+  };
+
+
   useEffect(() => {
     const currYear = new Date().getFullYear();
     const years = [];
@@ -60,10 +87,24 @@ const Schedule = () => {
         <div className='row all com'>
           
           <div className='col-auto filter'>
-           <Filter updateFirstYear={updateFirstYear}/>
+           <Filter updateFirstYear={updateFirstYear}
+            updateSecondYear={updateSecondYear} 
+            updateThirdYear={updateThirdYear}
+            updateFourYear={updateFourYear}
+            updateOtherYear={updateOtherYear}
+            updateMain={updateMain}
+            updateSai={updateSai}/>
            </div>
            <div className='col table'>
-           <Table year={year} semester={semester} firstyear={firstyear}/>
+           <Table year={year} 
+           semester={semester} 
+           firstyear={firstyear} 
+           secondyear={secondyear} 
+           thirdyear={thirdyear} 
+           fourthyear={fourthyear}
+           otheryear={otheryear}
+           main={main}
+           sai={sai}/>
     
             </div>
 

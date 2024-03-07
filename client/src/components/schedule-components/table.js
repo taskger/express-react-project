@@ -9,7 +9,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 //ตาราง
 //ถ้าวิชาซ้อนกัน
 // export อาจต้องใส่หน่วยกิตใน table ของวิชา
-const Schedule = ({year,semester,firstyear}) => {
+const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryear,main,sai}) => {
   const [courseyear, setCourseYear] = useState(null); //เก็บหลักสูตรทั้งหมดที่ดึงมา
   const [id, setID] = useState(null);
   const [subject, setSubject] = useState(null);
@@ -18,6 +18,14 @@ const Schedule = ({year,semester,firstyear}) => {
   const [start_time, setStart_time] = useState(null);
   const [end_time, setEnd_time] = useState(null);
 
+  console.log(firstyear)
+  console.log(secondyear)
+  console.log(thirdyear)
+  console.log(fourthyear)
+  console.log(otheryear)
+  console.log(main)
+  console.log(sai)
+  
   let arrayDataItems;
   const stackdata = (event) => {
     setID(event.currentTarget.getAttribute("data-id"));
@@ -39,6 +47,7 @@ const Schedule = ({year,semester,firstyear}) => {
       end_time_edit: end_time,
     })
 
+    
     Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`).then(response => 
     {
       setCourseYear(response.data.results)
@@ -49,16 +58,17 @@ const Schedule = ({year,semester,firstyear}) => {
 
   };
 
-  useEffect(() => { //ดีงข้อมูลจากปีที่เลือก
-    Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`).then(response => 
-    {
-      setCourseYear(response.data.results)
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  },[year,semester]);
-
+    useEffect(() => { //ดีงข้อมูลจากปีที่เลือก
+      if (year && semester){
+      Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`).then(response => 
+      {
+        setCourseYear(response.data.results)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+       }
+    },[year,semester]);
   const deleteschedule = () => {
     Axios.delete(`http://localhost:3000/deleteschedule/single/${id}`).then(response =>
       {
@@ -93,8 +103,8 @@ const Schedule = ({year,semester,firstyear}) => {
     });
   };
 
-
   if (courseyear) {
+
     arrayDataItems = courseyear.map(course => (
       <div key={course.id}>
         <div className='lecturecorrect' >
