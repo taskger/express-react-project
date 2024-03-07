@@ -1,0 +1,72 @@
+if (courseyear) {
+    arrayDataItems = courseyear.map((course) => (
+
+      <div key={course.id}>
+        <div className='lecturecorrect'>
+          <button
+            type="button"
+            className="btn editlecturecorrect"
+            data-bs-toggle="modal"
+            data-bs-target={`#staticBackdropTest-${course.id}`}>
+                {course.id}
+
+              <div className='subject'>
+                {course.subject}
+              </div>
+              <div className='name'>
+                {course.professor}
+              </div>
+              <div className='time'>
+                {course.start_time}-{course.end_time}
+              </div>          
+          </button>
+          <div
+            className="modal fade"
+            id={`staticBackdropTest-${course.id}`}
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex="-1"
+            aria-labelledby={`staticBackdropLabel-${course.id}`}
+            aria-hidden="true">
+          <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-body">
+                    <label htmlFor="semester" className="form-label">ชื่อวิชา</label>
+                        <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                        <option selected>{course.subject}</option>
+                        </select>                   
+                    <label   label htmlFor="year" className="form-label" >รับจำนวน</label>
+                    <input type="text" class="form-control" id="InputStudents" value={course.num_students}/> 
+                    <label htmlFor="semester" className="form-label">หมู่เรียน</label>
+                    <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                    <option selected>{course.sec}</option> 
+                    </select>
+                    <div class="cs-form ">
+                    <div className='row'>
+                        <div className='col'>
+                        <h7>เรื่มสอน</h7>
+                        <select id="starttime" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                            <option selected>{course.start_time}</option>
+                        </select>
+                        </div>                
+                        <div className='col'>
+                        <h7>สิ้นสุดการสอน</h7>
+                            <select id="endttime" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+                            <option selected>{course.end_time}</option>
+                            </select>                
+                        </div>
+                        
+                    </div>
+                    </div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">ตกลง</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    </div>
+                    </div>
+                </div>          
+              </div>
+        </div>
+      </div>
+    ));
+  }
