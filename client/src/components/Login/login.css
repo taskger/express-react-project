@@ -24,18 +24,20 @@ div .empty h1{
 .container-input {
   display: flex;
   flex-direction: column;
-  width: 820px;
+  width: 920px;
+  position: relative;
+  left: -45px;
 }
 .empty {
   height: 200px;
 }
 
 .input-all {
-  height: 650px;
+  height: 600px;
 }
 
 .input-User {
-  width: 589px;
+  width: 80%;
   height: 86px;
   border-radius: 10px;
   background-color: #D8D8D8;
@@ -52,11 +54,11 @@ div .empty h1{
 }
 
 .sec-font{
-  margin-left: 120px;
+  margin-left: 70px;
 }
 
 .three-font{
-  margin-left: 120px;
+  margin-left: 70px;
   margin-top: 25px;
 }
 
@@ -82,6 +84,7 @@ button.button-login:hover{
 }
 
 .Rabop-font {
+  
   font-size: 64px;
   color: #007E70;
   font-family: Roboto;
@@ -107,7 +110,8 @@ button.button-login:hover{
 }
 
 .login-google{
-  width: 589px;
+  padding-left:10px; 
+  width: 80%;
   height: 86px;
   border-radius: 10px;
   background-color: #D8D8D8;
