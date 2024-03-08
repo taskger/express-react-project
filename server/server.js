@@ -45,16 +45,21 @@ app.post('/auth', async (request, response) => {
     if (username && password) {
         try {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
-            connection.query("SELECT * FROM idAdmin WHERE username = ?", [username], async (err, results, fields) => {
+            connection.query("SELECT * FROM idadmin WHERE BINARY username = ?", [username], async (err, results, fields) => {
+                console.log("Stored hashed password:", results[0].password);
+                console.log("Entered hashed password:", hashedPassword);
                 if (err) {
                     console.log("Error executing query:", err);
                     return response.status(500).send('Internal Server Error');
                 }
                 if (results.length > 0) {
                     const match = await bcrypt.compare(password, results[0].password);
+                    console.log("bcrypt.compare result:", match);
                     if (match) {
                         request.session.loggedin = true;
                         request.session.username = username;
+                        response.redirect("/admin")
+
                     } else {
                         return response.status(403).send('Invalid username or password');
                     }
