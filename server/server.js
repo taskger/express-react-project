@@ -268,14 +268,16 @@ app.patch("/updateschedule", async (req,res) => {
         subject_edit ,
         num_students_edit , 
         sec_edit , 
+        day_edit , 
         start_time_edit , 
         end_time_edit , 
         } = req.body;
     try {
-        connection.query("UPDATE schedules SET subject = ?, num_students = ?, sec = ?, start_time = ?, end_time = ? WHERE id = ?",
+        connection.query("UPDATE schedules SET subject = ?, num_students = ?, sec = ?, day = ?, start_time = ?, end_time = ? WHERE id = ?",
         [ subject_edit ,
           num_students_edit , 
           sec_edit , 
+          day_edit , 
           start_time_edit , 
           end_time_edit ,
           id, ]

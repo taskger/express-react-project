@@ -15,6 +15,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
   const [subject, setSubject] = useState(null);
   const [num_students, setNum_students] = useState(null);
   const [sec, setSec] = useState(null);
+  const [day, setDay] = useState(null);
   const [start_time, setStart_time] = useState(null);
   const [end_time, setEnd_time] = useState(null);
 
@@ -32,6 +33,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
     setSubject(event.currentTarget.getAttribute("data-subject"));
     setNum_students(event.currentTarget.getAttribute("data-num_students"));
     setSec(event.currentTarget.getAttribute("data-sec"));
+    setDay(event.currentTarget.getAttribute("data-day"));
     setStart_time(event.currentTarget.getAttribute("data-start_time"));
     setEnd_time(event.currentTarget.getAttribute("data-end_time"));
   }
@@ -43,6 +45,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
       subject_edit: subject,
       num_students_edit: num_students,
       sec_edit: sec,
+      day_edit: day,
       start_time_edit: start_time,
       end_time_edit: end_time,
     })
@@ -102,32 +105,57 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
       ]
     });
   };
+    let overlappingCourses = [];
 
   if (courseyear) {
-
-    arrayDataItems = courseyear.map(course => (
-      <div key={course.id}>
-        <div className='lecturecorrect' >
-          <button type="button" className="btn editlecturecorrect" data-bs-toggle="modal" 
-            data-bs-target={`#staticBackdropTest-${course.id}`}
-            data-id={course.id}
-            data-subject={course.subject}
-            data-num_students={course.num_students}
-            data-sec={course.sec}
-            data-start_time={course.start_time}
-            data-end_time={course.end_time}
-            onClick = { (event) => { stackdata(event)}}>
-              {course.id}
-              <div className='subject'>
-                {course.subject}
-              </div>
-              <div className='name'>
-                อ.{course.professor}
-              </div>
-              <div className='time'>
-                {course.start_time} - {course.end_time}
-              </div>
-          </button>
+    arrayDataItems = courseyear.map(course => {
+      const hasOverlap = courseyear.some(otherCourse => {
+        return (
+          otherCourse.id !== course.id &&
+          otherCourse.day === course.day &&
+          otherCourse.start_time < course.end_time &&
+          otherCourse.end_time > course.start_time
+        );
+      });
+  
+      return (
+        <div key={course.id}>
+          {hasOverlap ? (
+            <div className='overlapping'>
+              <button
+                type="button"
+                className="btn editoverlapping"
+              >{course.id}
+                มีวิชาซ้อนกัน
+              </button>
+            </div>
+          ) : (
+            <div className='lecturecorrect'>
+              <button
+                type="button"
+                className="btn editlecturecorrect"
+                data-bs-toggle="modal"
+                data-bs-target={`#staticBackdropTest-${course.id}`}
+                data-id={course.id}
+                data-subject={course.subject}
+                data-num_students={course.num_students}
+                data-sec={course.sec}
+                data-start_time={course.start_time}
+                data-end_time={course.end_time}
+                onClick={(event) => { stackdata(event)}}>
+                {course.id}
+                <div className='subject'>
+                  {course.subject}
+                </div>
+                <div className='name'>
+                  อ.{course.professor}
+                </div>
+                <div className='time'>
+                  {course.start_time} - {course.end_time}
+                </div>
+              </button>
+            </div>
+          )}
           
           
           <div className="modal fade" id={`staticBackdropTest-${course.id}`} data-bs-backdrop="test" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -147,7 +175,8 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
                       <select 
                         id="days" 
                         className="form-select form-select-sm mb-3" 
-                        aria-label=".form-select-sm example">
+                        aria-label=".form-select-sm example"
+                        onChange={(event) =>{setDay(event.target.value);}}>
                         <option selected >{course.day}</option>
                         <option value="วันจัทนร์">วันจัทนร์</option>
                         <option value="วันอังคาร">วันอังคาร</option>
@@ -248,8 +277,8 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
                 </div>
             </div>
         </div>
-      </div>
-    ));
+      );
+    });
   }
 
   return (      
