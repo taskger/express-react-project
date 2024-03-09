@@ -172,22 +172,6 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
     // Adjust the start time to match the table structure
     return startTime - 8; // Assuming the table starts at 8:00 AM
   };
-  const getTotalColSpan = (currentIndex, courseyear, thaiDay) => {
-    let totalColSpan = 1;
-  
-    courseyear.forEach(course => {
-      if (course.day === thaiDay) {
-        const startColumnIndex = getStartColumnIndex(course.start_time);
-        const colSpan = getColSpan(course.start_time, course.end_time);
-  
-        if (currentIndex >= startColumnIndex && currentIndex < startColumnIndex + colSpan) {
-          totalColSpan = colSpan;
-        }
-      }
-    });
-  
-    return totalColSpan;
-  };
   const getColSpan = (start, end) => {
     // Calculate the number of columns a lecture should span based on start and end times
     const startTime = parseInt(start.split(':')[0]);
