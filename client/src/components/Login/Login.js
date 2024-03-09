@@ -5,6 +5,7 @@ import "./login.css";
 import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
 import { useState, useEffect } from "react";
+import { Axios } from "axios";
 
 function LoginForm(){
     const clientId = "1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com";
@@ -25,6 +26,9 @@ function LoginForm(){
 
     const onSuccess = (res) => {
         setProfile(res.profileObj.email)
+        Axios.post("http://localhost:3001/login",{
+            
+        }) 
         console.log('success',res)
         console.log(profile)
     }
@@ -49,7 +53,7 @@ function LoginForm(){
             <div className='empty'>
                 <h1 className='Rabop-font'>ระบบจัดตารางสอน</h1>
             </div>
-            <form action="auth" method="post">
+            <form action="http://localhost:8000/check" method="post">
                 <div className='input-all'>
                     <h2 className='sec-font'>บัญชีผู้ใช้ </h2>
                     <input 
