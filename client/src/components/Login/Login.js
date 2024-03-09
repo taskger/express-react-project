@@ -26,9 +26,7 @@ function LoginForm(){
 
     const onSuccess = (res) => {
         setProfile(res.profileObj.email)
-        Axios.post("http://localhost:3001/login",{
-            
-        }) 
+
         console.log('success',res)
         console.log(profile)
     }
@@ -53,7 +51,7 @@ function LoginForm(){
             <div className='empty'>
                 <h1 className='Rabop-font'>ระบบจัดตารางสอน</h1>
             </div>
-            <form action="http://localhost:8000/check" method="post">
+            <form action="http://localhost:5000/check" method="post">
                 <div className='input-all'>
                     <h2 className='sec-font'>บัญชีผู้ใช้ </h2>
                     <input 

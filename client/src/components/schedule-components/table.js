@@ -105,31 +105,12 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
       ]
     });
   };
-    let overlappingCourses = [];
 
   if (courseyear) {
     arrayDataItems = courseyear.map(course => {
-      const hasOverlap = courseyear.some(otherCourse => {
-        return (
-          otherCourse.id !== course.id &&
-          otherCourse.day === course.day &&
-          otherCourse.start_time < course.end_time &&
-          otherCourse.end_time > course.start_time
-        );
-      });
   
       return (
         <div key={course.id}>
-          {hasOverlap ? (
-            <div className='overlapping'>
-              <button
-                type="button"
-                className="btn editoverlapping"
-              >{course.id}
-                มีวิชาซ้อนกัน
-              </button>
-            </div>
-          ) : (
             <div className='lecturecorrect'>
               <button
                 type="button"
@@ -155,7 +136,6 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
                 </div>
               </button>
             </div>
-          )}
           
           
           <div className="modal fade" id={`staticBackdropTest-${course.id}`} data-bs-backdrop="test" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

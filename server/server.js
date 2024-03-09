@@ -24,9 +24,8 @@ app.use(express.static(path.join(__dirname, 'client' , 'src' , 'components' , 'A
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'register',
-    port: '8889'
+    password: '',
+    database: 'se'
 })
 
 app.post('/check', async (request, response) => {
@@ -286,6 +285,4 @@ app.patch("/updateschedule", async (req,res) => {
     }
 })
 
-app.listen(8000, () => { 
-    console.log("Server started on port 5000");
-});
+app.listen(5000, () => { console.log("Server started on port 5000")})
