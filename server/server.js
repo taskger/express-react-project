@@ -67,6 +67,34 @@ app.post('/check', async (request, response) => {
     }
 });
 
+app.post("/google", async (req, res) =>{
+    const {Name , Surname , e_mail , Img , Role ,Status} = req.body;
+    console.log(Name , Surname , e_mail , Img , Role ,Status);
+    try{
+        connection.query(
+            "INSERT INTO idUser(name, surname , email , img , role, status) VALUES(?,?,?,?,?,?)",
+            [ 
+                Name , 
+                Surname , 
+                e_mail , 
+                Img , 
+                Role ,
+                Status
+            ],
+            (err, results, fields) => {
+                if (err) {
+                    console.log("Error while inserting a user into the database", err);
+                    return res.status(400).send();
+                }
+                return res.status(201).json({ message: "New course successfully created!"});
+            }
+        )
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+})
+
 app.post("/user/addcourse/createlecture", async (req, res) => {
     const { 
          year_lecture,
