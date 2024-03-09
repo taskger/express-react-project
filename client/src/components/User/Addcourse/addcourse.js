@@ -195,6 +195,7 @@ const Schedule = () => {
       });
     }
     window.location.reload();
+    
   }
 
   return (
