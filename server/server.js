@@ -69,7 +69,6 @@ app.post('/check', async (request, response) => {
 
 app.post("/google", async (req, res) =>{
     const {Name , Surname , e_mail , Img , Role ,Status} = req.body;
-    console.log(Name , Surname , e_mail , Img , Role ,Status);
     try{
         connection.query(
             "INSERT INTO idUser(name, surname , email , img , role, status) VALUES(?,?,?,?,?,?)",
