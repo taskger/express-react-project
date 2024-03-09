@@ -3,8 +3,9 @@ var mysql = require('mysql');
 var session = require('express-session');
 var bodyParser = require ('body-parser');
 var path = require('path');
-var app = express();
+const app = express();
 const bcrypt = require('bcrypt');
+const { request } = require('http');
 const saltRounds = 10; // จำนวนรอบในการผสม
 
 
@@ -17,35 +18,40 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'client' , 'src' , 'components' , 'Admin' , 'Home')));
 
-app.use(express.json());
 
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'register'
+    database: 'register',
+    port: '8889'
 })
 
-
-
-app.post('/auth', async (request, response) => {
+app.post('/check', async (request, response) => {
     const { username, password } = request.body;
     console.log("Received username:", username);
     console.log("Received password:", password);
     if (username && password) {
         try {
             const hashedPassword = await bcrypt.hash(password, saltRounds);
-            connection.query("SELECT * FROM idAdmin WHERE username = ?", [username], async (err, results, fields) => {
+            connection.query("SELECT * FROM idadmin WHERE BINARY username = ?", [username], async (err, results, fields) => {
+                console.log("Stored hashed password:", results[0].password);
+                console.log("Entered hashed password:", hashedPassword);
                 if (err) {
                     console.log("Error executing query:", err);
                     return response.status(500).send('Internal Server Error');
                 }
                 if (results.length > 0) {
                     const match = await bcrypt.compare(password, results[0].password);
+                    console.log("bcrypt.compare result:", match);
                     if (match) {
                         request.session.loggedin = true;
                         request.session.username = username;
+                        response.redirect("http://localhost:3000/admin")
+                        
+
                     } else {
                         return response.status(403).send('Invalid username or password');
                     }
@@ -61,6 +67,9 @@ app.post('/auth', async (request, response) => {
         return response.status(400).send('Please enter username and password');
     }
 });
+
+
+
 
 connection.connect((err) => {
     if (err) {
@@ -120,6 +129,6 @@ app.get("/readcourse/single/:catagory", async (req,res) => {
     }
 })
 
-app.listen(3036, () => { 
-    console.log("Server started on port 3306");
+app.listen(8000, () => { 
+    console.log("Server started on port 5000");
 });
