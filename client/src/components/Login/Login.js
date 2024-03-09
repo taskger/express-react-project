@@ -5,14 +5,13 @@ import "./login.css";
 import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
 import { useState, useEffect } from "react";
-import { Axios } from "axios";
+import Axios from 'axios';
 
 function LoginForm(){
     const clientId = "1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com";
 
     const [username,setUser] = useState("");
     const [password,setPassword] = useState("");
-    const [profile,setProfile] = useState("");
 
     useEffect(() => {
         const initClient = () => {
@@ -24,13 +23,21 @@ function LoginForm(){
         gapi.load("client:auth2", initClient)
     }, [])
 
+
     const onSuccess = (res) => {
-        setProfile(res.profileObj.email)
-        Axios.post("http://localhost:3001/login",{
-            
+        const { email, familyName, givenName, imageUrl } = res.profileObj;
+        console.log(email)
+        console.log(givenName)
+        console.log(familyName)
+        console.log(imageUrl)
+        Axios.post('http://localhost:3000/google',{
+            Name : givenName ,
+            Surname : familyName,
+            e_mail : email ,
+            Img : imageUrl,
+            Role : "user" ,
+            Status: false
         }) 
-        console.log('success',res)
-        console.log(profile)
     }
 
     const onFailure = (res) => {
