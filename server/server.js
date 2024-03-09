@@ -3,8 +3,9 @@ var mysql = require('mysql');
 var session = require('express-session');
 var bodyParser = require ('body-parser');
 var path = require('path');
-var app = express();
+const app = express();
 const bcrypt = require('bcrypt');
+const { request } = require('http');
 const saltRounds = 10; // จำนวนรอบในการผสม
 
 
@@ -17,28 +18,18 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'client' , 'src' , 'components' , 'Admin' , 'Home')));
 
-app.use(express.json());
 
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'se'
+    password: 'root',
+    database: 'register',
+    port: '8889'
 })
 
-
-
-
-connection.connect((err) => {
-    if (err) {
-        console.log('Error connecting to Mysql database = ', err)
-        return;
-    }
-    console.log('MySQL successfully connected!');
-})
-
-app.post('/auth', async (request, response) => {
+app.post('/check', async (request, response) => {
     const { username, password } = request.body;
     console.log("Received username:", username);
     console.log("Received password:", password);
@@ -58,7 +49,8 @@ app.post('/auth', async (request, response) => {
                     if (match) {
                         request.session.loggedin = true;
                         request.session.username = username;
-                        response.redirect("/admin")
+                        response.redirect("http://localhost:3000/admin")
+                        
 
                     } else {
                         return response.status(403).send('Invalid username or password');
@@ -293,4 +285,7 @@ app.patch("/updateschedule", async (req,res) => {
         return res.status(500).send();
     }
 })
-app.listen(5000, () => { console.log("Server started on port 5000")})
+
+app.listen(8000, () => { 
+    console.log("Server started on port 5000");
+});
