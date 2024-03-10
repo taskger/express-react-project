@@ -11,6 +11,7 @@ div .nav-link {
     justify-content: center; /* Center the text horizontally */
     align-items: center; /* Center the text vertically */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+    
 }       
 
 div .nav-link:hover {

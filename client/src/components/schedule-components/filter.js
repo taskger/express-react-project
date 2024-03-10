@@ -1,8 +1,8 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 import "./filter.css";
 
-const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear,updateOtherYear,updateMain,updateSai }) => {
+const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear,updateOtherYear,updateMain,updateSai,updateProfesser }) => {
   const Checkbox1 = (event) => {
     const newFirstYearValue = event.target.checked;
     updateFirstYear(newFirstYearValue);
@@ -41,6 +41,27 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
       updateSai(null);
     }
   };
+  const Checkboxprofesser = (event) => {
+    const newProfesserValue = event.target.value;
+    const newProfessercheck = event.target.checked;
+
+    if (newProfessercheck) {
+      updateProfesser(prevProfessors => [...prevProfessors, newProfesserValue]);
+    } else {
+      updateProfesser(prevProfessors => prevProfessors.filter(prof => prof !== newProfesserValue));
+    }
+  };
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+      Axios.get(`http://localhost:3000/accept/${1}`)
+          .then(response => {
+              setData(response.data.results);
+          })
+          .catch(error => {
+              console.error(error);
+          });
+  }, []);
 
   return (
     <div className='container'>
@@ -57,25 +78,25 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
             <div className = "row">
               <div className = "col">
                 <input className="boxcheck" type="checkbox" value="1" id="check2" onChange={Checkbox2}/>
-                <label className="subject_main" htmlFor="check1"> ชั้นปี 2 </label>
+                <label className="subject_main" htmlFor="check2"> ชั้นปี 2 </label>
               </div>
             </div>
             <div className = "row">
               <div className = "col">
                 <input className="boxcheck" type="checkbox" value="1" id="check3" onChange={Checkbox3}/>
-                <label className="subject_main" htmlFor="check1"> ชั้นปี 3 </label>
+                <label className="subject_main" htmlFor="check3"> ชั้นปี 3 </label>
               </div>
             </div>
             <div className = "row">
               <div className = "col">
                 <input className="boxcheck" type="checkbox" value="1" id="check4" onChange={Checkbox4}/>
-                <label className="subject_main" htmlFor="check1"> ชั้นปี 4 </label>
+                <label className="subject_main" htmlFor="check4"> ชั้นปี 4 </label>
               </div>
             </div>
             <div className = "row">
               <div className = "col">
-                <input className="boxcheck" type="checkbox" value="1" id="check4" onChange={Checkbox5}/>
-                <label className="subject_main" htmlFor="check1"> ชั้นปีอื่นๆ </label>
+                <input className="boxcheck" type="checkbox" value="1" id="check5" onChange={Checkbox5}/>
+                <label className="subject_main" htmlFor="check5"> ชั้นปีอื่นๆ </label>
               </div>
             </div>
           </div>
@@ -83,34 +104,30 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
           <div className='form-check-main'>
             <div className = "row">
               <div className = "col"> 
-                <input className="boxcheck" type="checkbox" value="วิชาหลัก" id="check1" onChange={Checkboxmain}/>
-                <label className="subject_main" htmlFor="check1"> วิชาหลัก </label>
+                <input className="boxcheck" type="checkbox" value="วิชาหลัก" id="checkmain" onChange={Checkboxmain}/>
+                <label className="subject_main" htmlFor="checkmain"> วิชาหลัก </label>
               </div>
             </div> 
             <div className = "row">
               <div className = "col">
-                <input className="boxcheck" type="checkbox" value="วิชาเลือก" id="check1" onChange={Checkboxsai}/>
-                <label className="subject_sai" htmlFor="check1"> วิชาเลือก </label>
+                <input className="boxcheck" type="checkbox" value="วิชาเลือก" id="checksai" onChange={Checkboxsai}/>
+                <label className="subject_sai" htmlFor="checksai"> วิชาเลือก </label>
               </div>
             </div>
           </div>
           <div className='liner' ></div>
           
-
-          <div className='form-check-main'>
+          {data?.map(item => (
+          <div className='form-check-main' key={item.id}>
             <div className = "row">
               <div className = "col"> 
-                <input className="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label className="subject_main" htmlFor="check1"> อาจารย์1 </label>
+                <input className="boxcheck" type="checkbox" value={item.name + ' ' + item.surname} id={item.id} onChange={Checkboxprofesser}/>
+                <label className="subject_main" htmlFor={item.id}> {item.name} {item.surname} </label>
               </div>
             </div> 
-            <div className = "row">
-              <div className = "col">
-                <input className="boxcheck" type="checkbox" value="1" id="check1"/>
-                <label className="subject_sai" htmlFor="check1"> อาจารย์2 </label>
-              </div>
-            </div>
           </div>
+          ))}
+
           <div className='liner' ></div>
 
           

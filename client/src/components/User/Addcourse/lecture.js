@@ -30,7 +30,47 @@ const Lecture = ({ listcourse,sendData}) => {
     });
   }, [subject, num_students, sec, day, start_time, end_time, catagory,firstyear,secondyear,thirdyear,fourthyear,otheryear,sendData]);
 
-
+  const handleCheckboxChange = (year) => {
+    let firstYearState = firstyear;
+    let secondYearState = secondyear;
+    let thirdYearState = thirdyear;
+    let fourthYearState = fourthyear;
+    let otherYearState = otheryear;
+  
+    switch (year) {
+      case '1':
+        firstYearState = !firstYearState;
+        secondYearState = firstYearState;
+        thirdYearState = firstYearState;
+        fourthYearState = firstYearState;
+        otherYearState = firstYearState;
+        break;
+      case '2':
+        secondYearState = !secondYearState;
+        thirdYearState = secondYearState;
+        fourthYearState = secondYearState;
+        otherYearState = secondYearState;
+        break;
+      case '3':
+        thirdYearState = !thirdYearState;
+        fourthYearState = thirdYearState;
+        otherYearState = thirdYearState;
+        break;
+      case '4':
+        fourthYearState = !fourthYearState;
+        otherYearState = fourthYearState;
+        break;
+      default:
+        otherYearState = !otherYearState;
+        break;
+    }
+  
+    setFirstyear(firstYearState);
+    setSecondyear(secondYearState);
+    setThirdyear(thirdYearState);
+    setFourthyear(fourthYearState);
+    setOtheryear(otherYearState);
+  };
 
   return (
       <div>
@@ -47,7 +87,8 @@ const Lecture = ({ listcourse,sendData}) => {
               className="form-select form-select-sm mb-3" 
               aria-label=".form-select-sm example"
               onChange={(event) =>{
-                setSubject(event.target.value)
+                setSubject(event.target.value);
+                
               }}>
               <option selected>กรุณาเลือกรายวิชาบรรยาย</option>
               {Array.isArray(listcourse) && listcourse.map(listcourse =>
@@ -192,40 +233,52 @@ const Lecture = ({ listcourse,sendData}) => {
                 <input className="form-check-input" type="checkbox" value="ชั้นปี 1" id="check1lecture" 
                   name='check1lecture' 
                   onChange={(event) =>{
-                    setFirstyear(event.target.checked)
-                  }}/>
+                    setFirstyear(event.target.checked);
+                    handleCheckboxChange('1');
+
+                  }}
+                  checked={firstyear}/>
                 <label className="form-check-label" htmlFor="check1lecture"> ชั้นปี 1 </label>
               </div>
               <div className='form-check form-check-inline'>
                 <input className="form-check-input" type="checkbox" value="ชั้นปี 2" id="check2lecture" 
                 name='check2lecture' 
                 onChange={(event) =>{
-                  setSecondyear(event.target.checked)
-                }}/>
+                  setSecondyear(event.target.checked);
+                  handleCheckboxChange('2');
+
+                }}
+                checked={secondyear}/>
                 <label className="form-check-label" htmlFor="check2lecture"> ชั้นปี 2 </label>
               </div>
               <div className='form-check form-check-inline'>
                 <input className="form-check-input" type="checkbox" value="ชั้นปี 3" id="check3lecture" 
                 name='check3lecture'  
                 onChange={(event) =>{
-                  setThirdyear(event.target.checked)
-                }}/>
+                  setThirdyear(event.target.checked);
+                  handleCheckboxChange('3');
+                }}
+                checked={thirdyear}/>
                 <label className="form-check-label" htmlFor="check3lecture"> ชั้นปี 3 </label>
               </div>
               <div className='form-check form-check-inline'>
                 <input className="form-check-input" type="checkbox" value="ชั้นปี 4" id="check4lecture" 
                 name='check4lecture'  
                 onChange={(event) =>{
-                  setFourthyear(event.target.checked)
-                }}/>
+                  setFourthyear(event.target.checked);
+                  handleCheckboxChange('4');
+                }}
+                checked={fourthyear}/>
                 <label className="form-check-label" htmlFor="check4lecture"> ชั้นปี 4 </label>
               </div>
               <div className='form-check form-check-inline'>
                 <input className="form-check-input" type="checkbox" value="ชั้นปีอื่นๆ" id="checkotherlecture"  
                 name='checkotherlecture' 
                 onChange={(event) =>{
-                  setOtheryear(event.target.checked)
-                }}/>
+                  setOtheryear(event.target.checked);
+                  handleCheckboxChange('default');
+                }}
+                checked={otheryear}/>
                 <label className="form-check-label" htmlFor="checkotherlecture"> ชั้นปีอื่นๆ </label>
               </div>
             </div>

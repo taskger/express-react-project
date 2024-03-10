@@ -6,6 +6,46 @@ import "../../schedule-components/filter.css";
 const Schedule = () => {
  //const [year, setYear] = useState(null);
   const [allyear, setAllyear] = useState([]);
+  const [year, setYear] = useState(null);
+  const [semester, setSemester] = useState(null);
+  const [firstyear, setFirstYear] = useState(false);
+  const [secondyear, setSecondYear] = useState(false);
+  const [thirdyear, setThirdYear] = useState(false);
+  const [fourthyear, setFourYear] = useState(false);
+  const [otheryear, setOtheryear] = useState(false);
+  const [main, setMain] = useState(null);
+  const [sai, setSai] = useState(null);
+  const [professer, setProfesser] = useState([]);
+
+  const updateFirstYear = (newFirstYear) => {
+    setFirstYear(newFirstYear);
+  };
+  const updateSecondYear = (newSecondYear) => {
+    setSecondYear(newSecondYear);
+  };
+  const updateThirdYear = (newThirdYear) => {
+    setThirdYear(newThirdYear);
+  };
+  const updateFourYear = (newFourYear) => {
+    setFourYear(newFourYear);
+  };
+  const updateOtherYear = (newOtherYear) => {
+    setOtheryear(newOtherYear);
+  };
+  const updateMain = (newMainValue) => {
+    setMain(newMainValue);
+  };
+  const updateSai = (newSaiValue) => {
+    setSai(newSaiValue);
+  };
+  const updateProfesser = (newProfesserValue) => {
+    setProfesser(newProfesserValue);
+  };
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
 
   useEffect(() => {
     const currYear = new Date().getFullYear();
@@ -19,17 +59,29 @@ const Schedule = () => {
     setAllyear(years);
 
   }, []);
+
+
   return (
     <div>
     <Navbar/>
 
       <div className="container schedule">
         <div className="row ">
+          <div className='col-auto left'>
+          <button
+            className="btn btn-primary"
+            onClick={toggleFilter}
+          >
+            {isFilterOpen ? "ปิดตัวกรอง" : "เปิดตัวกรอง"}
+          </button>
+          </div>
         <div className="col-1">
+          
             <label htmlFor="year" className="form-label">ปีการศึกษา</label>
           </div>
           <div className="col">
-            <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+            <select id="year" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+              onChange={(event) =>{setYear(event.target.value)}}>
               <option selected disabled>กรุณาเลือกปีการศึกษา</option>
               {allyear.map((e) => <option value={e} key={e}>{e}</option> )}
             </select>
@@ -39,7 +91,8 @@ const Schedule = () => {
           </div>
           
           <div className="col">
-            <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example">
+            <select id="semester" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+              onChange={(event) =>{setSemester(event.target.value)}}>
                 <option selected disabled>กรุณาเลือกภาคการศึกษา</option>
                 <option value="เทอมต้น">เทอมต้น</option>
                 <option value="เทอมปลาย">เทอมปลาย</option>
@@ -48,13 +101,38 @@ const Schedule = () => {
           </div>
         </div>
         </div>
-        <div className='row all com'> 
-          <div className='col-auto filter'>
-           <Filter />
-           </div>
+        <div className='row all com'>
+          
+        <div className="col-auto filter">
+         
+
+          {isFilterOpen && (
+            <Filter
+              updateFirstYear={updateFirstYear}
+              updateSecondYear={updateSecondYear}
+              updateThirdYear={updateThirdYear}
+              updateFourYear={updateFourYear}
+              updateOtherYear={updateOtherYear}
+              updateMain={updateMain}
+              updateSai={updateSai}
+              updateProfesser={updateProfesser}
+            />
+          )}
+        </div>
+
            <div className='col table'>
-           <Table />
-           </div>
+           <Table year={year} 
+           semester={semester} 
+           firstyear={firstyear} 
+           secondyear={secondyear} 
+           thirdyear={thirdyear} 
+           fourthyear={fourthyear}
+           otheryear={otheryear}
+           main={main}
+           sai={sai}
+           professer={professer}/>
+    
+            </div>
 
 
         </div>

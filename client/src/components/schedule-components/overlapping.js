@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import "./filter.css";
 
-const Overlapping = () => {
+const Overlapping = ({courseyear,overlappingLectures,stackdata,getYearLabel,setDay,setStart_time,setEnd_time,submit,edit}) => {
     const [overlapping, setShowoverlapping] = useState(false);
     const [editoverlapping, setShoweditoverlapping] = useState(false);
   
@@ -20,56 +20,57 @@ const Overlapping = () => {
       setShowoverlapping(false);
       setShoweditoverlapping(false);
     };
+
+
   return (      
 
         <div className='overlapping'>
             <button type="button" className="btn editoverlapping" onClick={() => setShowoverlapping(true)}>
                 มีวิชาซ้อนกัน
             </button>
-            <Modal show={overlapping} onHide={() => setShowoverlapping(false)}>
+            {courseyear.map((currentCourse) => (
+                
+                <React.Fragment key={currentCourse.id}>
+                    <Modal show={overlapping} onHide={() => setShowoverlapping(false)}>
                     <div className="modal-body">
+
                     <div className='row inoverlapping'>
-                    <div className="btn-group" role="group" aria-label="Basic example">        
-                      <button type="button" className="btn btn-outline-secondary" onClick={openSecondModal}>
-                        <div className='subject'>
-                            LAB Software Enginering
-                        </div>
-                        <div className='name'>
-                            อ.กาญจนา เอี่ยมสอาด
-                        </div>
-                        <div className='time'>
-                            13.00 - 16.00
-                        </div>
-                      </button>
+                     <div className="btn-group" role="group" aria-label="Basic example">        
+                            <button
+                                type="button"
+                                className="btn btn-outline-secondary"
+                                data-bs-toggle="modal"
+                                data-bs-target={`#staticBackdropTest-${currentCourse.id}`}
+                                data-id={currentCourse.id}
+                                data-subject={currentCourse.subject}
+                                data-num_students={currentCourse.num_students}
+                                data-sec={currentCourse.sec}
+                                data-day={currentCourse.day}
+                                data-start_time={currentCourse.start_time}
+                                data-end_time={currentCourse.end_time}
+                                onClick={(event) => {
+                                    stackdata(event);
+                                    openSecondModal();
+                                }}>
+                            <div className='subject'>{currentCourse.subject}</div>
+                            <div className='name'>{`อ.${currentCourse.professor}`}</div>
+                            <div className='time'>{`${currentCourse.start_time} - ${currentCourse.end_time}`}</div>
+                            </button>
                         <button type="button" className="btn btn-danger bitrash" >
-                          <span className="bi bi-trash overlapping"></span></button>
+                          <span className="bi bi-trash overlapping"></span>
+                        </button>
+                          
                     </div>
 
-                    </div>
-                    <div className='row inoverlapping'>
-                    <div className="btn-group" role="group" aria-label="Basic example">        
-                      <button type="button" className="btn btn-outline-secondary" onClick={openSecondModal}>
-                        <div className='subject'>
-                            LAB Software Enginering
-                        </div>
-                        <div className='name'>
-                            อ.กาญจนา เอี่ยมสอาด
-                        </div>
-                        <div className='time'>
-                            13.00 - 16.00
-                        </div>
-                      </button>
-                      <button type="button" className="btn btn-danger bitrash" >
-                          <span className="bi bi-trash"></span></button>
-                    </div>
                     </div>
 
                 </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary">ตกลง</button>
-                        <button type="button" className="btn btn-secondary" onClick={closeCurrentModal}>ยกเลิก</button>
+                        <button type="button" className="btn btn-secondary" onClick={closeCurrentModal}>ปิดหน้าต่าง</button>
                     </div>
+                    
                 </Modal>
+
                 <Modal show={editoverlapping} onHide={() => setShoweditoverlapping(false)}>
                     <div className="modal-body">
                     <label htmlFor="semester" className="form-label">ชื่อวิชา</label>
@@ -168,6 +169,10 @@ const Overlapping = () => {
                         <button type="button" className="btn btn-secondary" onClick={backToFirstModal}>ย้อนกลับ</button>
                     </div>
                 </Modal>
+                </React.Fragment>
+
+                ))}
+
         </div>
 
   

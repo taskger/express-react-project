@@ -15,6 +15,7 @@ const Schedule = () => {
   const [otheryear, setOtheryear] = useState(false);
   const [main, setMain] = useState(null);
   const [sai, setSai] = useState(null);
+  const [professer, setProfesser] = useState([]);
 
   const updateFirstYear = (newFirstYear) => {
     setFirstYear(newFirstYear);
@@ -37,7 +38,14 @@ const Schedule = () => {
   const updateSai = (newSaiValue) => {
     setSai(newSaiValue);
   };
+  const updateProfesser = (newProfesserValue) => {
+    setProfesser(newProfesserValue);
+  };
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
 
   useEffect(() => {
     const currYear = new Date().getFullYear();
@@ -59,7 +67,16 @@ const Schedule = () => {
 
       <div className="container schedule">
         <div className="row ">
+          <div className='col-auto left'>
+          <button
+            className="btn btn-primary"
+            onClick={toggleFilter}
+          >
+            {isFilterOpen ? "ปิดตัวกรอง" : "เปิดตัวกรอง"}
+          </button>
+          </div>
         <div className="col-1">
+          
             <label htmlFor="year" className="form-label">ปีการศึกษา</label>
           </div>
           <div className="col">
@@ -86,15 +103,23 @@ const Schedule = () => {
         </div>
         <div className='row all com'>
           
-          <div className='col-auto filter'>
-           <Filter updateFirstYear={updateFirstYear}
-            updateSecondYear={updateSecondYear} 
-            updateThirdYear={updateThirdYear}
-            updateFourYear={updateFourYear}
-            updateOtherYear={updateOtherYear}
-            updateMain={updateMain}
-            updateSai={updateSai}/>
-           </div>
+        <div className="col-auto filter">
+         
+
+          {isFilterOpen && (
+            <Filter
+              updateFirstYear={updateFirstYear}
+              updateSecondYear={updateSecondYear}
+              updateThirdYear={updateThirdYear}
+              updateFourYear={updateFourYear}
+              updateOtherYear={updateOtherYear}
+              updateMain={updateMain}
+              updateSai={updateSai}
+              updateProfesser={updateProfesser}
+            />
+          )}
+        </div>
+
            <div className='col table'>
            <Table year={year} 
            semester={semester} 
@@ -104,7 +129,8 @@ const Schedule = () => {
            fourthyear={fourthyear}
            otheryear={otheryear}
            main={main}
-           sai={sai}/>
+           sai={sai}
+           professer={professer}/>
     
             </div>
 

@@ -11,15 +11,43 @@ input.boxcheck {
     cursor: pointer;
     
 } 
-
+div.catagory {
+    display: flex;
+    width: 150%;
+    height: 150%;
+    align-items: center;
+    justify-content: center;
+    background-color: #820000;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 300;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25); /* Adjust the values based on your preference */
+    
+}
+div.yearstudents {
+    display: flex;
+    width: 150%;
+    height: 150%;
+    align-items: center;
+    justify-content: center;
+    background-color: #008AA9;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 300;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25); /* Adjust the values based on your preference */
+    margin-left: 10px;
+}
 
 .container-fluid.border {
     margin-left: 10px;
-    width: 267px;
+    width: auto;
     height: auto;
     border:1px ;
     border-radius: 5px;
-    box-shadow: 0 0 px rgba(0, 0, 0, 0.251);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.251);
+
 
 }
 div.col input.boxcheck{
@@ -48,7 +76,7 @@ div.col input.boxcheck{
 
 .liner {
     border:1px solid #D6D6D6;
-    width:240px;
+    width:auto;
     height: 1px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -95,14 +123,19 @@ tr.rowday .day {
 
   }
   tr.rowday td{
-    border: 1px solid #C4C4C4;
+    border-bottom: 1px solid #C4C4C4;
+    border-top: 1px solid #C4C4C4;
+    border-left: 0px solid #C4C4C4;
+    border-right: 0px solid #C4C4C4;
     padding: 0px;
   }
 
 tr.rowday:hover .day,tr.rowday:hover td {
   background-color: #E9E7E7;
   transition: background-color 0.5s, color 0.5s; /* Smooth transition effect */
-  border: 1px solid #C4C4C4;
+  border-bottom: 1px solid #C4C4C4;
+  border-top: 1px solid #C4C4C4;
+  border-left: 0px solid #C4C4C4;
   color: #535353;
 
 }
@@ -141,15 +174,18 @@ div.lecturecorrect:hover{
     background-color: #A0F948;
 }
 div.lecturecorrect .subject{
-    font-size:90%;
-    font-weight: 500;
+    font-size:80%;
+    font-weight: 400;
 }
 div.lecturecorrect .name{
     font-size: 75%;
+    font-weight: 300;
+
 
 }
 div.lecturecorrect .time{
     font-size: 75%;
+    font-weight: 300;
 
 }
 .btn.editlecturecorrect{
@@ -225,8 +261,4 @@ thead.theadtable .time{
 .bi-trash.table:hover {
     color: #c60e0e;
 }
-@media only screen and (max-width: 1000px) {
-    div.col-auto.filter {
-      display: none;
-    }
-  }
+
