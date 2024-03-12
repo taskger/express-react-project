@@ -87,8 +87,13 @@ app.post("/google", async (req, res) =>{
                 }
                 // ถ้ามีอีเมล์ที่ซ้ำกันในฐานข้อมูล
                 if (results.length > 0) {
-                    console.log("Email already exists in the database");
-                    return res.status(409).json({ message: "Email already exists" });
+                    console.log(results,"Email already exists in the database");
+                    if(results[0].status === 0 ) {
+                        res.redirect("http://localhost:3000/user")
+                        console.log("เข้าสู้ระบบสำเร็จ")
+                    }else if (results[0].status === 1 ) {
+                        res.redirect("http://localhost:3000/user")
+                    }
                 } else {
                     // ถ้าไม่มีอีเมล์ที่ซ้ำกันในฐานข้อมูล ให้ทำการเพิ่มข้อมูลเข้าฐานข้อมูล
                     connection.query(
@@ -100,7 +105,7 @@ app.post("/google", async (req, res) =>{
                                 return res.status(400).send();
                             }
                             // เมื่อเพิ่มข้อมูลสำเร็จ ให้ตั้งค่าการล็อกเอาต์อัตโนมัติ
-                            setAutoLogout();
+                            
                             return res.status(201).json({ message: "New user successfully created!" });
                         }
                     );
