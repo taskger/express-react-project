@@ -89,10 +89,13 @@ app.post("/google", async (req, res) =>{
                 if (results.length > 0) {
                     console.log(results,"Email already exists in the database");
                     if(results[0].status === 0 ) {
-                        res.redirect("http://localhost:3000/user")
-                        console.log("เข้าสู้ระบบสำเร็จ")
+                        console.log("กรุณาการยืนยัน")
+
+                        return res.status(200).json({ results });
                     }else if (results[0].status === 1 ) {
-                        res.redirect("http://localhost:3000/user")
+                        console.log("เข้าสู้ระบบสำเร็จ")
+
+                        return res.status(200).json({ results });
                     }
                 } else {
                     // ถ้าไม่มีอีเมล์ที่ซ้ำกันในฐานข้อมูล ให้ทำการเพิ่มข้อมูลเข้าฐานข้อมูล

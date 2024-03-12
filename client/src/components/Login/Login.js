@@ -37,7 +37,17 @@ function LoginForm(){
             Img : imageUrl,
             Role : "user" ,
             Status: false
-        }) 
+        })  .then(response => {
+            if (response.status === 200) { // Assuming successful login response has status 200
+              window.location.href = 'http://localhost:3000/user'; // Redirect to '/user' page
+            } else {
+              // Handle login failure (e.g., display error message)
+            }
+          })
+          .catch(error => {
+            console.error('Error logging in:', error);
+            // Handle login errors (e.g., network issues, server errors)
+          });
     }
 
     const onFailure = (res) => {
