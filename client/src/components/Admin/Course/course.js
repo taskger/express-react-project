@@ -1,12 +1,13 @@
 import React from 'react';
 import Navbar from '../Navbar';
+import Axios from 'axios';
 import "./course.css";
 import { useState } from "react";
 import * as XLSX from "xlsx";
 
 const Course = () => {
   const [data, setData] = useState([]);
-  const handleFileUpload = (e) => {
+  const handleFileUpload = (e) => { 
   const reader = new FileReader();
   reader.readAsBinaryString(e.target.files[0]);
   reader.onload = (e) => {
@@ -16,8 +17,49 @@ const Course = () => {
       const sheet = workbook.Sheets[sheetName];
       const parsedData = XLSX.utils.sheet_to_json(sheet);
       setData(parsedData);
+      console.log(workbook)
+      console.log(sheetName)
+      console.log(sheet)
+      console.log(parsedData)
     };
   }
+console.log(data)
+const addDatacourse = () => {
+  const selectElement = document.querySelector('.PeLhagSu');
+  const selectedValue = selectElement.options[selectElement.selectedIndex].value;
+  if (data.length === 0) {
+    alert('  กรุณาเลือกไฟล์ !!!  ');
+    return; // Prevent further processing if no data is available
+  }
+  else {Axios.post('http://localhost:3000/create',{
+    dataserver : data,
+    year: selectedValue,
+  }).then((response) => {
+    if (response.status === 201) {
+      alert(response.data.message); // Display success message
+      window.location.reload();
+    } else {
+      console.error('Unexpected response status:', response.status);
+      // Handle unexpected response codes (optional)
+    }
+  })
+  .catch((error) => {
+    // Handle error response (data not saved due to duplication)
+    if (error.response && error.response.status === 400) {
+      // Check for specific error code and message structure as defined in the server-side response
+      if (error.response.data && error.response.data.error && error.response.data.error.message) {
+        const errorMessage = error.response.data.error.message;
+        alert(errorMessage); // Display the error message to the user
+      } else {
+        alert('An error occurred while saving data. Please try again.'); // Generic error message if specific message structure not found
+      }
+    } else {
+      // Handle other types of errors (e.g., network issues)
+      console.error('An unexpected error occurred:', error);
+      alert('An unexpected error occurred. Please try again later.'); // Inform user about the generic error
+    }
+  });
+}};
 
 return (
     <div>
@@ -26,10 +68,10 @@ return (
           <div className="choose-PeLhagSu">
             <p> ปีหลักสูตร </p>
             <select className="PeLhagSu">
-              <option value="2566">2567</option>
-              <option value="2565">2566</option>
-              <option value="2564">2565</option>
-              <option value="2563">2564</option>
+              <option value="67">2567</option>
+              <option value="66">2566</option>
+              <option value="65">2565</option>
+              <option value="64">2564</option>
             </select>
           </div>
 
@@ -44,7 +86,7 @@ return (
               <div className='scrollwrapper'>
                 <table className="table table-bordered course ">
                 <thead>
-                  <tr >
+                  <tr >                   
                     {Object.keys(data[0]).map((key) => (
                       <th key={key}>{key} </th>
                     ))}
@@ -59,10 +101,11 @@ return (
                       </tr>
                     ))}
                   </tbody>
+                  
                 </table>
                 </div>
           )}
-          <button type="submit" class="btn registration submit btn-primary btn-block">ยืนยัน</button>
+          <button type="submit" class="btn registration submit btn-primary btn-block" onClick={addDatacourse}>ยืนยัน</button>
 
         </div>              
     </div>

@@ -7,6 +7,8 @@ const app = express();
 const bcrypt = require('bcrypt');
 const { request } = require('http');
 const saltRounds = 10; // จำนวนรอบในการผสม
+const xlsx = require("xlsx");
+app.use(express.json());
 
 
 app.use(session({
@@ -22,11 +24,11 @@ app.use(express.static(path.join(__dirname, 'client' , 'src' , 'components' , 'A
 
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'se',
-    port: 3307
+    host: "localhost",
+    user: "root",
+    password: "",
+    port: "3306",
+    database: "exceltomysql"
 })
 
 app.post('/check', async (request, response) => {
@@ -367,5 +369,70 @@ app.patch("/updateschedule", async (req,res) => {
         return res.status(500).send();
     }
 })
+
+connection.connect((err) => {
+    if (err) {
+      console.error("Error:", err);
+      return;
+    }
+    console.log("mysql connected");
+  });
+  
+  app.post("/create", async (req, res) => {
+    const year = req.body.year;
+    console.log("Selected year:", year);
+    const dataserver = req.body.dataserver;
+  
+    connection.query(
+      "SELECT COUNT(*) AS count FROM course WHERE year = ?",
+      [year],
+      (err, results) => {
+        if (err) {
+          return console.error(err.message);
+        }
+  
+        const { count } = results[0];
+  
+        if (count > 0) {
+          console.error(`ปี ${year} ซ้ำในฐานข้อมูล กรุณาเลือกปีอื่น`);
+          return res.status(400).json({
+            error: {
+              message: `ปี ${year} ซ้ำในฐานข้อมูล กรุณาเลือกปีอื่น`,
+            },
+          });
+        }
+  
+        if (!Array.isArray(dataserver)) {
+          return res.status(400).json({ message: "รูปแบบข้อมูลไม่ถูกต้อง: dataserver ต้องเป็น array" });
+        }
+  
+        const extractedList = [];
+        for (const course of dataserver) {
+          extractedList.push(course.courseid, course.subject, course.credit, course.unit);
+        }
+  
+        const list = [];
+        for (let i = 0; i < extractedList.length; i += 4) {
+          list.push([extractedList[i], extractedList[i + 1], extractedList[i + 2], extractedList[i + 3], year]);
+        }
+  
+        // Insert all courses in a single query using `db.query` with multiple values
+        connection.query(
+          "INSERT INTO course (courseid, subject, credit, unit, year) VALUES ?",
+          [list],
+          (err, results, fields) => {
+            if (err) {
+              return console.error(err.message);
+            }
+  
+            res.status(201).json({ message: "   อัพโหลดไฟล์เสร็จสิ้น   " });
+            console.log("User", results.insertId);
+            console.log(list[list.length - 1][4]); // Access the last inserted year
+          }
+        );
+      }
+    );
+  });
+
 
 app.listen(5000, () => { console.log("Server started on port 5000")})
