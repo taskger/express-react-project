@@ -9,11 +9,17 @@
     margin-top: 100px;
 }
 
+.img-accept {
+    padding-left:70px;
+    padding-top: 30px ;
+}
 .logo-accept {
-    
+    border-radius: 100px;
+    width:130px;
 }
 
-.in-accept {
+
+.item-accept {
     display: flex;
 }
 

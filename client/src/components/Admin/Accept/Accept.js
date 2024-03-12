@@ -16,36 +16,58 @@ function Accept() {
             });
     }, []);
 
+    const handleConfirmation = (id) => {
+        // ทำการอัปเดตค่าในข้อมูลเมื่อมีการคลิกปุ่ม "ยืนยัน"
+        const updatedData = data.map(item => {
+            if (item.id === id) {
+                return { ...item, status: true }; // ทำการเปลี่ยนค่า status เป็น true
+            }
+            return item;
+        });
+        setData(updatedData); // อัปเดตข้อมูลใหม่ใน state
+
+        // ส่งคำขอ POST เพื่อบันทึกการเปลี่ยนแปลงลงในฐานข้อมูล
+        Axios.post(`http://localhost:3000/confirm/${id}`, { status: true })
+            .then(response => {
+                console.log("Confirmation successful:", response.data);
+            })
+            .catch(error => {
+                console.error("Error confirming:", error);
+            });
+    };
+
     return (
-        <div className='box-accept'>
+        <div>
             {data ? (
-                <div className='in-accept'>
-                    {data.map(item => (
-                        <div key={item.id} className='item-accept'>
-                            <div className='img-accept'>
-                                <img className='logo-accept' src={item.img} alt='sdsd' />
-                            </div>
-                            <div className='kit-accept'/>
-                            <div className='name-accept'>
-                                <h1 className='first-font-accept'>{item.name}</h1>
-                                <h1 className='sec-font-accept'>{item.surname}</h1>
-                            </div>
-                            <div className='kit-accept'/>
-                            <div className='email-accept'>
-                                <h1 className='three-font-accept'>{item.email}</h1>
-                            </div>
-                            <div className='kit-accept'/>
-                            <div className='button-accept'>
-                                <div>
-                                    <button className='yan-accpet'>ยืนยัน</button>
+                data.map(item => (
+                    <div className='box-accept' key={item.id}>
+                        <div className='in-accept'>
+                            <div className='item-accept'>
+                                <div className='img-accept'>
+                                    <img className='logo-accept' src={item.img} alt='sdsd' />
                                 </div>
-                                <div>
-                                    <button className='yox-accpet'>ยกเลิก</button>
+                                <div className='kit-accept'/>
+                                <div className='name-accept'>
+                                    <h1 className='first-font-accept'>{item.name}</h1>
+                                    <h1 className='sec-font-accept'>{item.surname}</h1>
+                                </div>
+                                <div className='kit-accept'/>
+                                <div className='email-accept'>
+                                    <h1 className='three-font-accept'>{item.email}</h1>
+                                </div>
+                                <div className='kit-accept'/>
+                                <div className='button-accept'>
+                                    <div>
+                                        <button className='yan-accpet' onClick={() => handleConfirmation(item.id)}>ยืนยัน</button>
+                                    </div>
+                                    <div>
+                                        <button className='yox-accpet'>ยกเลิก</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))
             ) : (
                 <p>Loading...</p>
             )}

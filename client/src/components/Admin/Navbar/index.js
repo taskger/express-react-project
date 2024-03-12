@@ -35,7 +35,7 @@ const Navbar = () => {
               <img className='imgprofiledefault' src="/img/profile_default.png" alt="profile" width="85" height="85"/>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/admin/schedule">Logout</a></li>
+              <li><a class="dropdown-item" href="/">Logout</a></li>
             </ul>
             
           </div>

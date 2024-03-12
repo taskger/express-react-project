@@ -68,32 +68,51 @@ app.post('/check', async (request, response) => {
     }
 });
 
+function setAutoLogout() {
+    // ตั้งค่าเวลาหมดอายุของเซสชันเป็น 10 นาที (10 * 60 * 1000 milliseconds)
+    req.session.cookie.expires = new Date(Date.now() + 5 * 60 * 1000);
+}
+
 app.post("/google", async (req, res) =>{
-    const {Name , Surname , e_mail , Img , Role ,Status} = req.body;
-    try{
+    const {Name, Surname, e_mail, Img, Role, Status} = req.body;
+    try {
+        // ตรวจสอบว่าอีเมล์ที่เข้ามาซ้ำกับข้อมูลที่มีอยู่แล้วหรือไม่
         connection.query(
-            "INSERT INTO idUser(name, surname , email , img , role, status) VALUES(?,?,?,?,?,?)",
-            [ 
-                Name , 
-                Surname , 
-                e_mail , 
-                Img , 
-                Role ,
-                Status
-            ],
-            (err, results, fields) => {
+            "SELECT * FROM idUser WHERE email = ?",
+            [e_mail],
+            async (err, results, fields) => {
                 if (err) {
-                    console.log("Error while inserting a user into the database", err);
+                    console.log("Error while checking for duplicate email:", err);
                     return res.status(400).send();
                 }
-                return res.status(201).json({ message: "New course successfully created!"});
+                // ถ้ามีอีเมล์ที่ซ้ำกันในฐานข้อมูล
+                if (results.length > 0) {
+                    console.log("Email already exists in the database");
+                    return res.status(409).json({ message: "Email already exists" });
+                } else {
+                    // ถ้าไม่มีอีเมล์ที่ซ้ำกันในฐานข้อมูล ให้ทำการเพิ่มข้อมูลเข้าฐานข้อมูล
+                    connection.query(
+                        "INSERT INTO idUser(name, surname , email , img , role, status) VALUES(?,?,?,?,?,?)",
+                        [Name, Surname, e_mail, Img, Role, Status],
+                        (err, results, fields) => {
+                            if (err) {
+                                console.log("Error while inserting a user into the database", err);
+                                return res.status(400).send();
+                            }
+                            // เมื่อเพิ่มข้อมูลสำเร็จ ให้ตั้งค่าการล็อกเอาต์อัตโนมัติ
+                            setAutoLogout();
+                            return res.status(201).json({ message: "New user successfully created!" });
+                        }
+                    );
+                }
             }
-        )
-    } catch(err) {
+        );
+    } catch (err) {
         console.log(err);
         return res.status(500).send();
     }
-})
+});
+
 
 app.get("/accept/:status", async (req,res) => {
     const { status } = req.params;   
@@ -110,6 +129,17 @@ app.get("/accept/:status", async (req,res) => {
         console.log(err);
         return res.status(500).send();
     }
+});
+
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('เกิดข้อผิดพลาดในการทำลายเซสชัน:', err);
+            res.status(500).send('ข้อผิดพลาดของเซิร์ฟเวอร์');
+        } else {
+            res.redirect('/'); // ให้เรียกหน้าล็อกอินหลังจากการออกจากระบบ
+        }
+    });
 });
 
 app.post("/user/addcourse/createlecture", async (req, res) => {
