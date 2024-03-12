@@ -49,7 +49,7 @@ app.post('/check', async (request, response) => {
                     if (match) {
                         request.session.loggedin = true;
                         request.session.username = username;
-                        response.redirect("http://localhost:3000/admin")
+                        return response.status(200).json({ results });
                         
 
                     } else {
@@ -90,8 +90,8 @@ app.post("/google", async (req, res) =>{
                     console.log(results,"Email already exists in the database");
                     if(results[0].status === 0 ) {
                         console.log("กรุณาการยืนยัน")
-
-                        return res.status(200).json({ results });
+                        
+                        return res.status(204).json({ results });
                     }else if (results[0].status === 1 ) {
                         console.log("เข้าสู้ระบบสำเร็จ")
 

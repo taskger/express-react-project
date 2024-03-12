@@ -23,7 +23,22 @@ function LoginForm(){
         gapi.load("client:auth2", initClient)
     }, [])
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
+        try {
+            const response = await Axios.post('http://localhost:3000/check', { username, password });
+
+            if (response.status === 200) {
+                // Redirect to http://localhost:3000/admin
+                window.location.href = 'http://localhost:3000/admin';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error if needed
+        }
+    };
+    
     const onSuccess = (res) => {
         const { email, familyName, givenName, imageUrl } = res.profileObj;
         console.log(email)
@@ -39,9 +54,9 @@ function LoginForm(){
             Status: false
         })  .then(response => {
             if (response.status === 200) { // Assuming successful login response has status 200
-              window.location.href = 'http://localhost:3000/user'; // Redirect to '/user' page
-            } else {
-              // Handle login failure (e.g., display error message)
+                window.location.href = 'http://localhost:3000/user'; // Redirect to '/user' page
+            } else if (response.status === 204) {
+                alert("โปรดรอการยืนยัน");  // Handle login failure (e.g., display error message)
             }
           })
           .catch(error => {
@@ -70,39 +85,31 @@ function LoginForm(){
             <div className='empty'>
                 <h1 className='Rabop-font'>ระบบจัดตารางสอน</h1>
             </div>
-            <form action="http://localhost:5000/check" method="post">
-                <div className='input-all'>
-                    <h2 className='sec-font'>บัญชีผู้ใช้ </h2>
+            <form onSubmit={handleSubmit}>
+            <div className='input-all'>
+                <h2 className='sec-font'>บัญชีผู้ใช้ </h2>
+                <input 
+                    name="username"
+                    className='input-User'
+                    placeholder="ชื่อบัญชี"
+                    value={username}
+                    type="text"
+                    onChange={(e) => setUser(e.target.value)}
+                    required
+                />
+                <div className='password-container'>
+                    <h2 className='three-font'>รหัสผ่าน</h2>
                     <input 
-                        name="username"
+                        name="password"
                         className='input-User'
-                        placeholder="ชื่อบัญชี"
-                        value={username}
-                        type="text"
-                        onChange={(e) => setUser(e.target.value)}
+                        placeholder='รหัสผ่าน'
+                        value={password}
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <div className='password-container'>
-                        <h2 className='three-font'>รหัสผ่าน</h2>
-                        <input 
-                            name="password"
-                            className='input-User'
-                            placeholder='รหัสผ่าน'
-                            value={password}
-                            type="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        {password.length > 0 && (
-                            <button
-                                className='show-password-button'
-                                onClick={togglePasswordVisibility}
-                            >
-                                {showPassword ? <i className='material-icons'></i> : <i className='material-icons'>visibility_off</i>}
-                            </button>
-                        )}
-                    </div>
-                    <h1 className="four-font">หรือ</h1>
+                </div>
+                <h1 className="four-font">หรือ</h1>
                     <div className="outline-login-google">
                         <GoogleLogin
                             className="login-google"
