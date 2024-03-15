@@ -8,12 +8,7 @@ const Practice = ({listcourse,sendData}) => {
   const [start_time_practice, setStart_time] = useState(null);
   const [end_time_practice, setEnd_time] = useState(null);
   const [catagory_practice, setCatagory] = useState(null);
-  const [firstyear_practice, setFirstyear] = useState(false);
-  const [secondyear_practice, setSecondyear] = useState(false);
-  const [thirdyear_practice, setThirdyear] = useState(false);
-  const [fourthyear_practice, setFourthyear] = useState(false);
-  const [otheryear_practice, setOtheryear] = useState(false);
-
+  const [studentyear, setStudentyear] = useState(null);
   useEffect(() => {
     sendData({
       subject_practice,
@@ -23,54 +18,10 @@ const Practice = ({listcourse,sendData}) => {
       start_time_practice,
       end_time_practice,
       catagory_practice,
-      firstyear_practice,
-      secondyear_practice,
-      thirdyear_practice,
-      fourthyear_practice,
-      otheryear_practice,
+      studentyear
     });
-  }, [subject_practice, num_students_practice, sec_practice, day_practice, start_time_practice, end_time_practice, catagory_practice,firstyear_practice,secondyear_practice,thirdyear_practice,fourthyear_practice,otheryear_practice,sendData]);
-  const handleCheckboxChange = (year) => {
-    let firstYearState = firstyear_practice;
-    let secondYearState = secondyear_practice;
-    let thirdYearState = thirdyear_practice;
-    let fourthYearState = fourthyear_practice;
-    let otherYearState = otheryear_practice;
-  
-    switch (year) {
-      case '1':
-        firstYearState = !firstYearState;
-        secondYearState = firstYearState;
-        thirdYearState = firstYearState;
-        fourthYearState = firstYearState;
-        otherYearState = firstYearState;
-        break;
-      case '2':
-        secondYearState = !secondYearState;
-        thirdYearState = secondYearState;
-        fourthYearState = secondYearState;
-        otherYearState = secondYearState;
-        break;
-      case '3':
-        thirdYearState = !thirdYearState;
-        fourthYearState = thirdYearState;
-        otherYearState = thirdYearState;
-        break;
-      case '4':
-        fourthYearState = !fourthYearState;
-        otherYearState = fourthYearState;
-        break;
-      default:
-        otherYearState = !otherYearState;
-        break;
-    }
-  
-    setFirstyear(firstYearState);
-    setSecondyear(secondYearState);
-    setThirdyear(thirdYearState);
-    setFourthyear(fourthYearState);
-    setOtheryear(otherYearState);
-  };  return (
+  }, [subject_practice, num_students_practice, sec_practice, day_practice, start_time_practice, end_time_practice, catagory_practice,studentyear,sendData]);
+    return (
       <div>
         
       <div className="container">
@@ -227,56 +178,37 @@ const Practice = ({listcourse,sendData}) => {
 
             <div>
               <div className='form-check form-check-inline'>
-                <input className="form-check-input" type="checkbox" value="ชั้นปี 1" id="check1practice" 
-                  name='check1practice' 
+                <input className="form-check-input" type="radio" value="ชั้นปี 1" id="check1practice" 
+                  name='checkpractice' 
                   onChange={(event) =>{
-                    setFirstyear(event.target.checked);
-                    handleCheckboxChange('1');
-                  }}
-                  checked={firstyear_practice}/>
+                    setStudentyear(event.target.value);
+                  }}/>
                 <label className="form-check-label" htmlFor="check1practice"> ชั้นปี 1 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input className="form-check-input" type="checkbox" value="ชั้นปี 2" id="check2practice" 
-                name='check2practice' 
+                <input className="form-check-input" type="radio" value="ชั้นปี 2" id="check2practice" 
+                name='checkpractice' 
                 onChange={(event) =>{
-                  setSecondyear(event.target.checked);
-                  handleCheckboxChange('2');
-                }}
-                checked={secondyear_practice}/>
+                  setStudentyear(event.target.value);
+                }}/>
                 <label className="form-check-label" htmlFor="check2practice"> ชั้นปี 2 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input className="form-check-input" type="checkbox" value="ชั้นปี 3" id="check3practice" 
-                name='check3practice'  
+                <input className="form-check-input" type="radio" value="ชั้นปี 3" id="check3practice" 
+                name='checkpractice'  
                 onChange={(event) =>{
-                  setThirdyear(event.target.checked)
-                  handleCheckboxChange('3');
-                }}
-                checked={thirdyear_practice}/>
+                  setStudentyear(event.target.value);
+                }}/>
                 <label className="form-check-label" htmlFor="check3practice"> ชั้นปี 3 </label>
               </div>
               <div className='form-check form-check-inline'>
-                <input className="form-check-input" type="checkbox" value="ชั้นปี 4" id="check4practice" 
-                name='check4practice'  
+                <input className="form-check-input" type="radio" value="ชั้นปี 4" id="check4practice" 
+                name='checkpractice'  
                 onChange={(event) =>{
-                  setFourthyear(event.target.checked);
-                  handleCheckboxChange('4');
-                }}
-                checked={fourthyear_practice}/>
+                  setStudentyear(event.target.value);
+                }}/>
 
                 <label className="form-check-label" htmlFor="check4practice"> ชั้นปี 4 </label>
-              </div>
-              <div className='form-check form-check-inline'>
-                <input className="form-check-input" type="checkbox" value="ชั้นปีอื่นๆ" id="checkotherpractice"  
-                name='checkotherpractice' 
-                onChange={(event) =>{
-                  setOtheryear(event.target.checked);
-                  handleCheckboxChange('default');
-                }}
-                checked={otheryear_practice}/>
-
-                <label className="form-check-label" htmlFor="checkotherpractice"> ชั้นปีอื่นๆ </label>
               </div>
             </div>
 

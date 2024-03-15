@@ -71,11 +71,7 @@ const Schedule = () => {
   const [start_time_lecture, setStart_time_lecture] = useState("");
   const [end_time_lecture, setEnd_time_lecture] = useState("");
   const [catagory_lecture, setCatagory_lecture] = useState("");
-  const [firstyear_lecture, setFirstyear_lecture] = useState();
-  const [secondyear_lecture, setSecondyear_lecture] = useState();
-  const [thirdyear_lecture, setThirdyear_lecture] = useState();
-  const [fourthyear_lecture, setFourthyear_lecture] = useState();
-  const [otheryear_lecture, setOtheryear_lecture] = useState();
+  const [studentyear_lecture, setStudentyear_lecture] = useState();
 
   //ปีหลักสูตรใช้ดึงข้อมูลมาโชว์ของปีหลักสูตรนั้นมาโชว์
   const uniqueYears = new Set();
@@ -113,12 +109,7 @@ const Schedule = () => {
     setStart_time_lecture(data.start_time);
     setEnd_time_lecture(data.end_time);
     setCatagory_lecture(data.catagory);
-    setFirstyear_lecture(data.firstyear);
-    setSecondyear_lecture(data.secondyear);
-    setThirdyear_lecture(data.thirdyear);
-    setFourthyear_lecture(data.fourthyear);
-    setOtheryear_lecture(data.otheryear);
-  
+    setStudentyear_lecture(data.studentyear);
   };
 
 
@@ -129,11 +120,8 @@ const Schedule = () => {
   const [start_time_practice, setStart_time_practice] = useState("");
   const [end_time_practice, setEnd_time_practice] = useState("");
   const [catagory_practice, setCatagory_practice] = useState("");
-  const [firstyear_practice, setFirstyear_practice] = useState();
-  const [secondyear_practice, setSecondyear_practice] = useState();
-  const [thirdyear_practice, setThirdyear_practice] = useState();
-  const [fourthyear_practice, setFourthyear_practice] = useState();
-  const [otheryear_practice, setOtheryear_practice] = useState();
+  const [studentyear_practice, setStudentyear_practice] = useState();
+
   
 
   const reciverdatafrompractice = (data) => {
@@ -145,11 +133,7 @@ const Schedule = () => {
     setStart_time_practice(data.start_time_practice);
     setEnd_time_practice(data.end_time_practice);
     setCatagory_practice(data.catagory_practice);
-    setFirstyear_practice(data.firstyear_practice);
-    setSecondyear_practice(data.secondyear_practice);
-    setThirdyear_practice(data.thirdyear_practice);
-    setFourthyear_practice(data.fourthyear_practice);
-    setOtheryear_practice(data.otheryear_practice);
+    setStudentyear_practice(data.studentyear);
   
   
   };
@@ -167,11 +151,7 @@ const Schedule = () => {
         end_time_lecture: end_time_lecture,
         catagory_lecture:catagory_lecture,
         lecture: lecture,
-        firstyear_lecture: firstyear_lecture,
-        secondyear_lecture: secondyear_lecture,
-        thirdyear_lecture: thirdyear_lecture,
-        fourthyear_lecture: fourthyear_lecture,
-        otheryear_lecture: otheryear_lecture,
+        studentyear_lecture: studentyear_lecture,
       });
     }
     if (selectedPractice === true){
@@ -187,11 +167,7 @@ const Schedule = () => {
         end_time_practice: end_time_practice,
         catagory_practice:catagory_practice,
         practice: practice,
-        firstyear_practice: firstyear_practice,
-        secondyear_practice: secondyear_practice,
-        thirdyear_practice: thirdyear_practice,
-        fourthyear_practice: fourthyear_practice,
-        otheryear_practice: otheryear_practice,
+        studentyear_practice:studentyear_practice,
       });
     }
     window.location.reload();
