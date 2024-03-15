@@ -165,16 +165,12 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
          end_time_lecture ,
          catagory_lecture,
          lecture,
-         firstyear_lecture , 
-         secondyear_lecture ,
-         thirdyear_lecture , 
-         fourthyear_lecture,
-         otheryear_lecture
+         studentyear_lecture , 
          } = req.body;
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,lecture,firstyear , secondyear ,thirdyear , fourthyear, otheryear) VALUES(?,?,?,?,?,?,?, ?,?,?, ?, ?, ?,?,?,?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,lecture,studentyear) VALUES(?,?,?,?,?,?,?, ?,?,?, ?, ?)",
             [ 
                 year_lecture,
                 semester_lecture ,
@@ -187,11 +183,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
                 end_time_lecture ,
                 catagory_lecture,
                 lecture,
-                firstyear_lecture , 
-                secondyear_lecture ,
-                thirdyear_lecture , 
-                fourthyear_lecture,
-                otheryear_lecture
+                studentyear_lecture
             ],
             (err, results, fields) => {
                 if (err) {
@@ -219,16 +211,12 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
          end_time_practice ,
          catagory_practice,
          practice ,
-         firstyear_practice , 
-         secondyear_practice ,
-         thirdyear_practice , 
-         fourthyear_practice,
-         otheryear_practice
+         studentyear_practice
          } = req.body;
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,practice,firstyear , secondyear ,thirdyear , fourthyear, otheryear) VALUES(?,?,?,?,?,?,?, ?,?, ?, ?, ?, ?,?,?,?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,practice,studentyear) VALUES(?,?,?,?,?,?,?, ?,?, ?, ?, ?)",
             [ 
                 year_practice,
                 semester_practice ,
@@ -241,11 +229,7 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
                 end_time_practice ,
                 catagory_practice,
                 practice ,
-                firstyear_practice , 
-                secondyear_practice ,
-                thirdyear_practice , 
-                fourthyear_practice,
-                otheryear_practice
+                studentyear_practice
             ],
             (err, results, fields) => {
                 if (err) {
