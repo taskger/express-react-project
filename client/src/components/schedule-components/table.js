@@ -230,75 +230,82 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
                 </tr>
             </thead>
             <tbody>
-              {['วันจัทนร์', 'วันอังคาร', 'วันพุธ', 'วันพฤหัสบดี', 'วันศุกร์', 'วันเสาร์', 'วันอาทิตย์'].map(thaiDay => (
-                <tr key={thaiDay} className='rowday'>
-                  <th scope="row" className='day lecture-cell'>{thaiToEnglishDay(thaiDay)}</th>
-                  {[...Array(13)].map((_, index) => (
-                    <td
-                      key={index}
-                      colSpan={1}
-                    >
-                      {courseyear && courseyear.map(course => {
-                        if (course.day === thaiDay) {
-                          const startColumnIndex = getStartColumnIndex(course.start_time);
-                          const endColumnIndex = startColumnIndex + getColSpan(course.start_time, course.end_time);
-                          const currentIndex = index;
-  
-                          if (currentIndex >= startColumnIndex && currentIndex < endColumnIndex) {
-                            // Check for overlapping lectures based on the same day and start time
-                            const overlappingLectures = courseyear.filter(otherCourse => {
-                              const otherStartIndex = getStartColumnIndex(otherCourse.start_time);
-                              const otherEndIndex = otherStartIndex + getColSpan(otherCourse.start_time, otherCourse.end_time);
-  
-                              return (
-                                otherCourse.id !== course.id &&
-                                otherCourse.day === thaiDay &&
-                                startColumnIndex === otherStartIndex
-                              );
-                            });
-  
-                            if (overlappingLectures.length > 0) {
-                              return (
-                                <Overlapping
-                                  key={course.id}
-                                  course={course}
-                                  overlappingLectures={overlappingLectures}
-                                  stackdata={stackdata}
-                                  setDay={setDay}
-                                  setStart_time={setStart_time}
-                                  setEnd_time={setEnd_time}
-                                  submit={submit}
-                                  edit={edit}
-                                  getYearLabel={getYearLabel}
-                                  courseyear={courseyear}
-                                  
-                                />
-                              );
-                            } else {
-                              return (
-                                <Lecturecorrect
-                                  key={course.id}
-                                  course={course}
-                                  stackdata={stackdata}
-                                  setDay={setDay}
-                                  setStart_time={setStart_time}
-                                  setEnd_time={setEnd_time}
-                                  submit={submit}
-                                  edit={edit}
-                                  getYearLabel={getYearLabel}
-                                />
-                              );
-                            }
-  
-                      }
-                    }
-                    return null;
-                  })}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
+            {['วันจัทนร์', 'วันอังคาร', 'วันพุธ', 'วันพฤหัสบดี', 'วันศุกร์', 'วันเสาร์', 'วันอาทิตย์'].map(thaiDay => (
+  <tr key={thaiDay} className='rowday'>
+    <th scope="row" className='day lecture-cell'>{thaiToEnglishDay(thaiDay)}</th>
+    {[...Array(13)].map((_, index) => {
+      // ค้นหาวิชาที่ตรงกับวันที่กำหนดและซ้อนทับกับช่องเวลาปัจจุบัน
+      const coursesInSlot = courseyear && courseyear.filter(course => {
+        const startColumnIndex = getStartColumnIndex(course.start_time);
+        const endColumnIndex = startColumnIndex + getColSpan(course.start_time, course.end_time);
+        return course.day === thaiDay && index >= startColumnIndex && index < endColumnIndex;
+      });
+
+      // แสดงปุ่มเฉพาะเมื่อมีการเรียนทับซ้อนในช่องเวลานี้อย่างน้อยหนึ่งคอร์ส
+      if (coursesInSlot && coursesInSlot.length > 0) {
+        // เรียงลำดับการเรียนทับซ้อนตามเวลาเริ่มต้นและเวลาสิ้นสุด
+        const sortedCourses = coursesInSlot.sort((a, b) => {
+          if (a.start_time !== b.start_time) {
+            return a.start_time.localeCompare(b.start_time);
+          } else {
+            return b.end_time.localeCompare(a.end_time);
+          }
+        });
+
+        // แสดงแต่ละการเรียนทับซ้อน
+        return sortedCourses.map((course, idx) => {
+          const startColumnIndex = getStartColumnIndex(course.start_time);
+          const endColumnIndex = startColumnIndex + getColSpan(course.start_time, course.end_time);
+          const colSpan = endColumnIndex - index;
+
+          return (
+            idx === 0 && index === startColumnIndex && (
+              <td key={index} colSpan={colSpan}>
+                {coursesInSlot.length === 1 ? (
+                  // แสดงคอมโพเนนท์ Lecturecorrect ถ้ามีเพียงคอร์สเดียว
+                  <div className='sadsa'>
+
+                  <Lecturecorrect
+                    key={course.id}
+                    course={course}
+                    stackdata={stackdata}
+                    setDay={setDay}
+                    setStart_time={setStart_time}
+                    setEnd_time={setEnd_time}
+                    submit={submit}
+                    edit={edit}
+                    getYearLabel={getYearLabel}
+                  />
+                  </div>
+
+                ) : (
+                  // แสดงคอมโพเนนท์ Overlapping ถ้ามีการเรียนทับซ้อนมากกว่า 1 คอร์ส
+                  <Overlapping
+                    key={course.id}
+                    course={course}
+                    overlappingLectures={sortedCourses}
+                    stackdata={stackdata}
+                    setDay={setDay}
+                    setStart_time={setStart_time}
+                    setEnd_time={setEnd_time}
+                    submit={submit}
+                    edit={edit}
+                    getYearLabel={getYearLabel}
+                    courseyear={courseyear}
+                  />
+                )}
+
+              </td>
+            )
+          );
+        });
+      } else {
+        return <td key={index} colSpan={1}></td>; // ช่องว่างหากไม่มีการเรียนในช่องเวลานี้
+      }
+    })}
+  </tr>
+))}
+          </tbody>
 
         </table>
       </table>

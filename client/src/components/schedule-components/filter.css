@@ -11,6 +11,9 @@ input.boxcheck {
     cursor: pointer;
     
 } 
+div.row.cat{
+    margin-bottom: 30px;
+}
 div.catagory {
     display: flex;
     width: 150%;
@@ -122,6 +125,11 @@ tr.rowday .day {
     padding: 20px;
 
   }
+div.sadsa{
+    color: rgb(33,37,41);
+    text-align: left;
+    font-weight: 400;
+  }
   tr.rowday td{
     border-bottom: 1px solid #C4C4C4;
     border-top: 1px solid #C4C4C4;
@@ -158,7 +166,7 @@ div.overlapping:hover{
 }
 div.lecturecorrect{
     width: 100%;
-    height: 100%;
+    height: 80px;
     background-color: #C9FE94;
     font-size: 24px; 
     font-weight: 400;

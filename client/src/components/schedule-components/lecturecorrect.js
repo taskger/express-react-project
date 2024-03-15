@@ -35,7 +35,7 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                 <div className="modal-dialog">
                                     <div className="modal-content">
                                     <div className="modal-body">
-                                      <div className='row'>
+                                      <div className='row cat'>
                                         <div className='col-auto left'>
                                           <div className='catagory'>
                                             {course.catagory}
