@@ -27,7 +27,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    port: "3307",
+    port: "3306",
     database: "se"
 })
 
@@ -368,7 +368,7 @@ connection.connect((err) => {
     const dataserver = req.body.dataserver;
   
     connection.query(
-      "SELECT COUNT(*) AS count FROM course WHERE year = ?",
+      "SELECT COUNT(*) AS count FROM courses WHERE year = ?",
       [year],
       (err, results) => {
         if (err) {
@@ -402,7 +402,7 @@ connection.connect((err) => {
   
         // Insert all courses in a single query using `db.query` with multiple values
         connection.query(
-          "INSERT INTO course (courseid, subject, credit, unit, year) VALUES ?",
+          "INSERT INTO courses (courseid, subject, credit, unit, year) VALUES ?",
           [list],
           (err, results, fields) => {
             if (err) {
