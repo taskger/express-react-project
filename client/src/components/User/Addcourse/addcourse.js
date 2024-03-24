@@ -137,7 +137,73 @@ const Schedule = () => {
   
   
   };
+
   const addLecture = () =>{
+    if (semester === null && selectedLecture === true){
+      alert("  กรุณาระบุภาคการศึกษา");
+      return;
+    }
+    if (year === null && selectedLecture === true){
+      alert("  กรุณาระบุปีการศึกษา");
+      return;
+    }
+    if (subject_lecture === null && selectedLecture === true){
+      alert("  กรุณาเลือกวิชา");
+      return;
+    }
+    if (num_students_lecture === null && selectedLecture === true){
+      alert("  กรุณาระบุจำนวนผู้เรียน");
+      return;
+    }
+    if (sec_lecture === null && selectedLecture === true){
+      alert("  กรุณาเลือก sec");
+      return;
+    }
+    if (day_lecture === null && selectedLecture === true){
+      alert("  กรุณาระบุวันที่");
+      return;
+    }
+    if (start_time_lecture === null && end_time_lecture === null && selectedLecture === true){
+      alert("  กรุณาระบุเวลาที่จะสอน");
+      return;
+    }
+    if (catagory_lecture === null && selectedLecture === true){
+      alert("  กรุณาเลือกประเภทวิชา");
+      return;
+    }
+    if (studentyear_lecture === null && selectedLecture === true){
+      alert("  กรุณาเลือกชั้นปีที่จะสอน");
+      return;
+    }
+
+    if (subject_practice === null && selectedPractice === true){
+      alert("  กรุณาเลือกวิชา");
+      return;
+    }
+    if (num_students_practice === null && selectedPractice === true){
+      alert("  กรุณาระบุจำนวนผู้เรียน");
+      return;
+    }
+    if (sec_practice === null && selectedPractice === true){
+      alert("  กรุณาเลือก sec");
+      return;
+    }
+    if (day_practice === null && selectedPractice === true){
+      alert("  กรุณาระบุวันที่");
+      return;
+    }
+    if (start_time_practice === null && end_time_practice === null && selectedPractice === true){
+      alert("  กรุณาระบุเวลาที่จะสอน");
+      return;
+    }
+    if (catagory_practice === null && selectedPractice === true){
+      alert("  กรุณาเลือกประเภทวิชา");
+      return;
+    }
+    if (studentyear_practice === null && selectedPractice === true){
+      alert("  กรุณาเลือกชั้นปีที่จะสอน");
+      return;
+    }
     if (selectedLecture === true){
       Axios.post('http://localhost:3000/user/addcourse/createlecture',{
         year_lecture: year,
@@ -170,6 +236,7 @@ const Schedule = () => {
         studentyear_practice:studentyear_practice,
       });
     }
+
     window.location.reload();
     
   }
@@ -286,40 +353,61 @@ const Schedule = () => {
             </div>
 
           </div>) : null}
-          <div className="row">
-            <div className='col'>
+          <div className="row LP">
+            <div className='col LP'>
             </div>
 
             {selectedLecture || selectedPractice ? (
-
             <div className='col'>
               <button type="button" className="btn addcourse submit btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">ยืนยัน</button>
+
               <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
-                  <div className="modal-content">
+                  <div className="modal-content show">
                     <div className="modal-header">
                       <h5 className="modal-title" id="exampleModalLabel">ยืนยันข้อมูล</h5>
                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div className="modal-body">
-                      <p>ภาคการศึกษา : {semester}</p>
-                      <p>ปีการศึกษา : {year}</p>
-                      <p>วิชา : {subject_lecture}</p>
-                      <p>จำนวนนักเรียน : {num_students_lecture}</p>
-                      <p>หมู่เรียน : {sec_lecture}</p>
-                      <p>วัน : {day_lecture}</p>
-                      <p>เวลา :{start_time_lecture} - {end_time_lecture}</p>
-                      <p>ประเภทวิชา : {catagory_lecture}</p>
-                      <p>ชั้นปีที่เรียน : {test}</p>
+                    <div className="modal-body selectLP">
+                      {selectedLecture && (
+                        <div className="lecture-info">
+                          <p>**วิชาบรรยาย:**</p>
+                          <p>ภาคการศึกษา : {semester}</p>
+                          <p>ปีการศึกษา : {year}</p>
+                          <p>วิชา : {subject_lecture}</p>
+                          <p>จำนวนนักเรียน : {num_students_lecture}</p>
+                          <p>หมู่เรียน : {sec_lecture}</p>
+                          <p>วัน : {day_lecture}</p>
+                          <p>เวลา :{start_time_lecture} - {end_time_lecture}</p>
+                          <p>ประเภทวิชา : {catagory_lecture}</p>
+                          <p>ชั้นปีที่เรียน : {studentyear_lecture}</p>
+                        </div>
+                      )}
+                      {selectedPractice && (
+                        <div className="practice-info">
+                          <p>**วิชาปฏิบัติ:**</p>
+                          <p>ภาคการศึกษา : {semester}</p>
+                          <p>ปีการศึกษา : {year}</p>
+                          <p>วิชา : {subject_practice}</p>
+                          <p>จำนวนนักเรียน : {num_students_practice}</p>
+                          <p>หมู่เรียน : {sec_practice}</p>
+                          <p>วัน : {day_practice}</p>
+                          <p>เวลา :{start_time_practice} - {end_time_practice}</p>
+                          <p>ประเภทวิชา : {catagory_practice}</p>
+                          <p>ชั้นปีที่เรียน : {studentyear_practice}</p>
+                        </div>
+                      )}
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-secondary"  data-bs-dismiss="modal">ยกเลิก</button>
-                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={addLecture} >ตกลง</button>
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={addLecture}>ตกลง</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>) : null}
+            </div>
+          ) : true}
+
             <div className='col'>
             </div>
           </div>
