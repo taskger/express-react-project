@@ -4,6 +4,7 @@ import Axios from 'axios';
 import "./course.css";
 import { useState } from "react";
 import * as XLSX from "xlsx";
+import Swal from 'sweetalert2';
 
 const Course = () => {
   const [data, setData] = useState([]);
@@ -28,7 +29,11 @@ const addDatacourse = () => {
   const selectElement = document.querySelector('.PeLhagSu');
   const selectedValue = selectElement.options[selectElement.selectedIndex].value;
   if (data.length === 0) {
-    alert('  กรุณาเลือกไฟล์ !!!  ');
+    Swal.fire({
+      title: "ข้อมูลไม่ครบ",
+      text: "กรุณาเลือกไฟล์ xlsx,xls",
+      icon: "warning"
+    });
     return; // Prevent further processing if no data is available
   }
   else {Axios.post('http://localhost:3000/create',{
@@ -36,8 +41,15 @@ const addDatacourse = () => {
     year: selectedValue,
   }).then((response) => {
     if (response.status === 201) {
-      alert(response.data.message); // Display success message
-      window.location.reload();
+      Swal.fire({
+        title: "SUCCESS",
+        text: response.data.message,
+        icon: "success",
+        timer: 2000
+      });
+      setTimeout(function(){
+        window.location.reload();
+     }, 2000);
     } else {
       console.error('Unexpected response status:', response.status);
       // Handle unexpected response codes (optional)
@@ -49,7 +61,11 @@ const addDatacourse = () => {
       // Check for specific error code and message structure as defined in the server-side response
       if (error.response.data && error.response.data.error && error.response.data.error.message) {
         const errorMessage = error.response.data.error.message;
-        alert(errorMessage); // Display the error message to the user
+        Swal.fire({
+          title: "หลักสูตรซ้ำ",
+          text: errorMessage,
+          icon: "warning"
+        });
       } else {
         alert('An error occurred while saving data. Please try again.'); // Generic error message if specific message structure not found
       }

@@ -4,6 +4,7 @@ import "./addcourse.css";
 import Lecture from './lecture';
 import Practice from './practice';
 import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 // เรียกข้อมูลปฏิบัติมา modal ยื่นยัน  เรียกชั้นปีที่เรียน 
@@ -140,68 +141,132 @@ const Schedule = () => {
 
   const addLecture = () =>{
     if (semester === null && selectedLecture === true){
-      alert("  กรุณาระบุภาคการศึกษา");
+      Swal.fire({
+        title: "ข้อมูลไม่ครบ",
+        text: "กรุณาระบุภาคการศึกษา",
+        icon: "warning"
+      });
       return;
     }
     if (year === null && selectedLecture === true){
-      alert("  กรุณาระบุปีการศึกษา");
+      Swal.fire({
+        title: "ข้อมูลไม่ครบ",
+        text: "กรุณาระบุปีการศึกษา",
+        icon: "warning"
+      });
       return;
     }
     if (subject_lecture === null && selectedLecture === true){
-      alert("  กรุณาเลือกวิชา");
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "กรุณาเลือกวิชา",
+        icon: "warning"
+      });
       return;
     }
     if (num_students_lecture === null && selectedLecture === true){
-      alert("  กรุณาระบุจำนวนผู้เรียน");
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "กรุณาระบุจำนวนผู้เรียน",
+        icon: "warning"
+      });
       return;
     }
     if (sec_lecture === null && selectedLecture === true){
-      alert("  กรุณาเลือก sec");
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "กรุณาเลือก sec",
+        icon: "warning"
+      });
       return;
     }
     if (day_lecture === null && selectedLecture === true){
-      alert("  กรุณาระบุวันที่");
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "กรุณาระบุวันที่",
+        icon: "warning"
+      });
       return;
     }
     if (start_time_lecture === null && end_time_lecture === null && selectedLecture === true){
-      alert("  กรุณาระบุเวลาที่จะสอน");
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "กรุณาระบุเวลาที่จะสอน",
+        icon: "warning"
+      });
       return;
     }
     if (catagory_lecture === null && selectedLecture === true){
-      alert("  กรุณาเลือกประเภทวิชา");
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "กรุณาเลือกประเภทวิชา",
+        icon: "warning"
+      });
       return;
     }
     if (studentyear_lecture === null && selectedLecture === true){
-      alert("  กรุณาเลือกชั้นปีที่จะสอน");
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "กรุณาเลือกชั้นปีที่จะสอน",
+        icon: "warning"
+      });
       return;
     }
 
     if (subject_practice === null && selectedPractice === true){
-      alert("  กรุณาเลือกวิชา");
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "กรุณาเลือกวิชา",
+        icon: "warning"
+      });
       return;
     }
     if (num_students_practice === null && selectedPractice === true){
-      alert("  กรุณาระบุจำนวนผู้เรียน");
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "กรุณาระบุจำนวนผู้เรียน",
+        icon: "warning"
+      });
       return;
     }
     if (sec_practice === null && selectedPractice === true){
-      alert("  กรุณาเลือก sec");
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "กรุณาเลือก sec",
+        icon: "warning"
+      });
       return;
     }
     if (day_practice === null && selectedPractice === true){
-      alert("  กรุณาระบุวันที่");
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "กรุณาระบุวันที่",
+        icon: "warning"
+      });
       return;
     }
     if (start_time_practice === null && end_time_practice === null && selectedPractice === true){
-      alert("  กรุณาระบุเวลาที่จะสอน");
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "กรุณาระบุเวลาที่จะสอน",
+        icon: "warning"
+      });
       return;
     }
     if (catagory_practice === null && selectedPractice === true){
-      alert("  กรุณาเลือกประเภทวิชา");
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "กรุณาเลือกประเภทวิชา",
+        icon: "warning"
+      });
       return;
     }
     if (studentyear_practice === null && selectedPractice === true){
-      alert("  กรุณาเลือกชั้นปีที่จะสอน");
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "กรุณาเลือกชั้นปีที่จะสอน",
+        icon: "warning"
+      });
       return;
     }
     if (selectedLecture === true){
