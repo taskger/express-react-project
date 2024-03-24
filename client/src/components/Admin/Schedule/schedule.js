@@ -8,11 +8,10 @@ const Schedule = () => {
   const [allyear, setAllyear] = useState([]);
   const [year, setYear] = useState(null);
   const [semester, setSemester] = useState(null);
-  const [firstyear, setFirstYear] = useState(false);
-  const [secondyear, setSecondYear] = useState(false);
-  const [thirdyear, setThirdYear] = useState(false);
-  const [fourthyear, setFourYear] = useState(false);
-  const [otheryear, setOtheryear] = useState(false);
+  const [firstyear, setFirstYear] = useState(null);
+  const [secondyear, setSecondYear] = useState(null);
+  const [thirdyear, setThirdYear] = useState(null);
+  const [fourthyear, setFourYear] = useState(null);
   const [main, setMain] = useState(null);
   const [sai, setSai] = useState(null);
   const [professer, setProfesser] = useState([]);
@@ -28,9 +27,6 @@ const Schedule = () => {
   };
   const updateFourYear = (newFourYear) => {
     setFourYear(newFourYear);
-  };
-  const updateOtherYear = (newOtherYear) => {
-    setOtheryear(newOtherYear);
   };
   const updateMain = (newMainValue) => {
     setMain(newMainValue);
@@ -112,7 +108,6 @@ const Schedule = () => {
               updateSecondYear={updateSecondYear}
               updateThirdYear={updateThirdYear}
               updateFourYear={updateFourYear}
-              updateOtherYear={updateOtherYear}
               updateMain={updateMain}
               updateSai={updateSai}
               updateProfesser={updateProfesser}
@@ -127,7 +122,6 @@ const Schedule = () => {
            secondyear={secondyear} 
            thirdyear={thirdyear} 
            fourthyear={fourthyear}
-           otheryear={otheryear}
            main={main}
            sai={sai}
            professer={professer}/>
