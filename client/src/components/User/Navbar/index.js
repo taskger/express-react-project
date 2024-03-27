@@ -1,8 +1,15 @@
 import React from 'react';
 import "./index.css"; // Import the external CSS file
 import { Link } from 'react-router-dom'; // Import Link from React Router
+import { GoogleLogout } from 'react-google-login';
 
 const Navbar = () => {
+  const clientId = "1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com";
+  const logout = (res) => {
+    console.log("Logging out...");
+    window.location.href = 'http://localhost:3000/';
+  }
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg  navbar-light" style={{ backgroundColor: '#245953' }}>
@@ -28,9 +35,12 @@ const Navbar = () => {
                 <img className='imgprofiledefault' src="/img/profile_default.png" alt="profile" width="85" height="85"/>
               </button>
               <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/admin/schedule">Logout</a></li>
+                <GoogleLogout
+                  clientId={clientId}
+                  buttonText="Logout"
+                  onLogoutSuccess={logout}
+                />
               </ul>
-              
             </div>
             </ul>
         </div>

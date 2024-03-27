@@ -13,19 +13,91 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 function App() {
+  const role = localStorage.getItem('role');
   return (
-
     <BrowserRouter>
-    <Routes >
-      <Route path='/' element={<Login/>}></Route>
-      <Route path='/admin/' element={<Home/>}></Route>
-      <Route path='/admin/schedule' element={<Schedule/>}></Route>
-      <Route path='/admin/course' element={<Course/>}></Route>
-      <Route path='/admin/registration' element={<Registration/>}></Route>
-      <Route path='/admin/confirm' element={<Confirm/>}></Route>
-      <Route path='/user/' element={<Userhome/>}></Route>
-      <Route path='/user/schedule' element={<Userschedule/>}></Route>
-      <Route path='/user/addcourse' element={<Useraddcourse/>}></Route>
+    <Routes>
+      <Route path='/' element={<Login/>}/>
+      
+      <Route 
+        path='/admin/' 
+        element={
+        <>
+        {role === "admin"}
+        <Home/>
+        </>
+        }
+      />
+
+      <Route 
+        path='/admin/schedule' 
+        element={
+        <>
+        {role === "admin"}
+        <Schedule/>
+        </>
+        }
+      />
+
+      <Route 
+        path='/admin/course' 
+        element={
+        <>
+        {role === "admin"}
+        <Course/>
+        </>
+        }
+      />
+
+      <Route 
+        path='/admin/registration' 
+        element={
+        <>
+        {role === "admin"}
+        <Registration/>
+        </>
+        }
+      />
+
+      <Route 
+        path='/admin/confirm' 
+        element={
+        <>
+        {role === "admin"}
+        <Confirm/>
+        </>
+        }
+      />
+
+      <Route 
+        path='/user/' 
+        element={
+        <>
+        {role === "user"}
+        <Userhome/>
+        </>
+        }
+      />
+
+      <Route 
+        path='/user/schedule' 
+        element={
+        <>
+        {role === "user"}
+        <Userschedule/>
+        </>
+        }
+      />
+
+      <Route 
+        path='/user/addcourse' 
+        element={
+        <>
+        {role === "user"}
+        <Useraddcourse/>
+        </>
+        }
+      />
       
     </Routes>
 

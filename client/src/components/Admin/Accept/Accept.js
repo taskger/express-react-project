@@ -16,23 +16,40 @@ function Accept() {
             });
     }, []);
 
-    const handleConfirmation = (id) => {
+    const handleConfirmation = (email) => {
         // ทำการอัปเดตค่าในข้อมูลเมื่อมีการคลิกปุ่ม "ยืนยัน"
         const updatedData = data.map(item => {
-            if (item.id === id) {
+            if (item.email === email) {
                 return { ...item, status: true }; // ทำการเปลี่ยนค่า status เป็น true
             }
             return item;
         });
         setData(updatedData); // อัปเดตข้อมูลใหม่ใน state
-
+    
         // ส่งคำขอ POST เพื่อบันทึกการเปลี่ยนแปลงลงในฐานข้อมูล
-        Axios.post(`http://localhost:3000/confirm/${id}`, { status: true })
+        Axios.post(`http://localhost:3000/confirm/${email}`, { status: true })
             .then(response => {
                 console.log("Confirmation successful:", response.data);
+                window.location.reload(); // รีโหลดหน้าหลังจากการยืนยันเสร็จสิ้น
             })
             .catch(error => {
                 console.error("Error confirming:", error);
+            });
+    };
+
+    const handleDeleted = (email) => {
+        // ทำการลบข้อมูลที่ต้องการออกจาก state
+        const updatedData = data.filter(item => item.email !== email);
+        setData(updatedData); // อัปเดตข้อมูลใหม่ใน state
+    
+        // ส่งคำขอ DELETE เพื่อลบข้อมูลออกจากฐานข้อมูล
+        Axios.delete(`http://localhost:3000/delete/${email}`)
+            .then(response => {
+                console.log("Deletion successful:", response.data);
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error("Error deleting:", error);
             });
     };
 
@@ -58,10 +75,10 @@ function Accept() {
                                 <div className='kit-accept'/>
                                 <div className='button-accept'>
                                     <div>
-                                        <button className='yan-accpet' onClick={() => handleConfirmation(item.id)}>ยืนยัน</button>
+                                        <button className='yan-accpet' onClick={() => handleConfirmation(item.email)}>ยืนยัน</button>
                                     </div>
                                     <div>
-                                        <button className='yox-accpet'>ยกเลิก</button>
+                                        <button className='yox-accpet' onClick={() => handleDeleted(item.email)}>ยกเลิก</button>
                                     </div>
                                 </div>
                             </div>
