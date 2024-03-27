@@ -4,24 +4,40 @@ import "./filter.css";
 
 const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear,updateOtherYear,updateMain,updateSai,updateProfesser }) => {
   const Checkbox1 = (event) => {
-    const newFirstYearValue = event.target.checked;
-    updateFirstYear(newFirstYearValue);
+    const newFirstYearValue = event.target.value;
+    const newFirstYearcheck = event.target.checked;
+    if (newFirstYearcheck){
+      updateFirstYear(newFirstYearValue);
+    }else{
+      updateFirstYear(null);
+    }
   };
   const Checkbox2 = (event) => {
-    const newSecondYearValue = event.target.checked;
-    updateSecondYear(newSecondYearValue);
+    const newSecondYearValue = event.target.value;
+    const newSecondYearcheck = event.target.checked;
+    if (newSecondYearcheck){
+      updateSecondYear(newSecondYearValue);
+    }else{
+      updateSecondYear(null);
+    }
   };
   const Checkbox3 = (event) => {
-    const newThirdYearValue = event.target.checked;
-    updateThirdYear(newThirdYearValue);
+    const newThirdYearValue = event.target.value;
+    const newThirdYearcheck = event.target.checked;
+    if (newThirdYearcheck){
+      updateThirdYear(newThirdYearValue);
+    }else{
+      updateThirdYear(null);
+    }
   };
   const Checkbox4 = (event) => {
-    const newFourYearValue = event.target.checked;
-    updateFourYear(newFourYearValue);
-  };
-  const Checkbox5 = (event) => {
-    const newOtherYearValue = event.target.checked;
-    updateOtherYear(newOtherYearValue);
+    const newFourYearValue = event.target.value;
+    const newFourYearcheck = event.target.checked;
+    if (newFourYearcheck){
+      updateFourYear(newFourYearValue);
+    }else{
+      updateFourYear(null);
+    }
   };
   const Checkboxmain = (event) => {
     const newMainValue = event.target.value;
@@ -71,32 +87,26 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
           <div className='form-check-main'>
             <div className = "row">
               <div className = "col"> 
-                <input className="boxcheck" type="checkbox" value="1" id="check1" onChange={Checkbox1}/>
+                <input className="boxcheck" type="checkbox" value="ชั้นปี 1" id="check1" onChange={Checkbox1}/>
                 <label className="subject_main" htmlFor="check1"> ชั้นปี 1 </label>
               </div>
             </div> 
             <div className = "row">
               <div className = "col">
-                <input className="boxcheck" type="checkbox" value="1" id="check2" onChange={Checkbox2}/>
+                <input className="boxcheck" type="checkbox" value="ชั้นปี 2" id="check2" onChange={Checkbox2}/>
                 <label className="subject_main" htmlFor="check2"> ชั้นปี 2 </label>
               </div>
             </div>
             <div className = "row">
               <div className = "col">
-                <input className="boxcheck" type="checkbox" value="1" id="check3" onChange={Checkbox3}/>
+                <input className="boxcheck" type="checkbox" value="ชั้นปี 3" id="check3" onChange={Checkbox3}/>
                 <label className="subject_main" htmlFor="check3"> ชั้นปี 3 </label>
               </div>
             </div>
             <div className = "row">
               <div className = "col">
-                <input className="boxcheck" type="checkbox" value="1" id="check4" onChange={Checkbox4}/>
+                <input className="boxcheck" type="checkbox" value="ชั้นปี 4" id="check4" onChange={Checkbox4}/>
                 <label className="subject_main" htmlFor="check4"> ชั้นปี 4 </label>
-              </div>
-            </div>
-            <div className = "row">
-              <div className = "col">
-                <input className="boxcheck" type="checkbox" value="1" id="check5" onChange={Checkbox5}/>
-                <label className="subject_main" htmlFor="check5"> ชั้นปีอื่นๆ </label>
               </div>
             </div>
           </div>

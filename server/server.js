@@ -7,6 +7,8 @@ const app = express();
 const bcrypt = require('bcrypt');
 const { request } = require('http');
 const saltRounds = 10; // จำนวนรอบในการผสม
+const xlsx = require("xlsx");
+app.use(express.json());
 
 app.use(session({
     secret: 'secret',
@@ -198,16 +200,12 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
          end_time_lecture ,
          catagory_lecture,
          lecture,
-         firstyear_lecture , 
-         secondyear_lecture ,
-         thirdyear_lecture , 
-         fourthyear_lecture,
-         otheryear_lecture
+         studentyear_lecture , 
          } = req.body;
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,lecture,firstyear , secondyear ,thirdyear , fourthyear, otheryear) VALUES(?,?,?,?,?,?,?, ?,?,?, ?, ?, ?,?,?,?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,lecture,studentyear) VALUES(?,?,?,?,?,?,?, ?,?,?, ?, ?)",
             [ 
                 year_lecture,
                 semester_lecture ,
@@ -220,11 +218,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
                 end_time_lecture ,
                 catagory_lecture,
                 lecture,
-                firstyear_lecture , 
-                secondyear_lecture ,
-                thirdyear_lecture , 
-                fourthyear_lecture,
-                otheryear_lecture
+                studentyear_lecture
             ],
             (err, results, fields) => {
                 if (err) {
@@ -252,16 +246,12 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
          end_time_practice ,
          catagory_practice,
          practice ,
-         firstyear_practice , 
-         secondyear_practice ,
-         thirdyear_practice , 
-         fourthyear_practice,
-         otheryear_practice
+         studentyear_practice
          } = req.body;
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,practice,firstyear , secondyear ,thirdyear , fourthyear, otheryear) VALUES(?,?,?,?,?,?,?, ?,?, ?, ?, ?, ?,?,?,?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,practice,studentyear) VALUES(?,?,?,?,?,?,?, ?,?, ?, ?, ?)",
             [ 
                 year_practice,
                 semester_practice ,
@@ -274,11 +264,7 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
                 end_time_practice ,
                 catagory_practice,
                 practice ,
-                firstyear_practice , 
-                secondyear_practice ,
-                thirdyear_practice , 
-                fourthyear_practice,
-                otheryear_practice
+                studentyear_practice
             ],
             (err, results, fields) => {
                 if (err) {
@@ -406,5 +392,70 @@ app.patch("/updateschedule", async (req,res) => {
         return res.status(500).send();
     }
 })
+
+connection.connect((err) => {
+    if (err) {
+      console.error("Error:", err);
+      return;
+    }
+    console.log("mysql connected");
+  });
+  
+  app.post("/create", async (req, res) => {
+    const year = req.body.year;
+    console.log("Selected year:", year);
+    const dataserver = req.body.dataserver;
+  
+    connection.query(
+      "SELECT COUNT(*) AS count FROM courses WHERE year = ?",
+      [year],
+      (err, results) => {
+        if (err) {
+          return console.error(err.message);
+        }
+  
+        const { count } = results[0];
+  
+        if (count > 0) {
+          console.error(`ปี ${year} ซ้ำในฐานข้อมูล กรุณาเลือกปีอื่น`);
+          return res.status(400).json({
+            error: {
+              message: `ปี ${year} ซ้ำในฐานข้อมูล กรุณาเลือกปีอื่น`,
+            },
+          });
+        }
+  
+        if (!Array.isArray(dataserver)) {
+          return res.status(400).json({ message: "รูปแบบข้อมูลไม่ถูกต้อง: dataserver ต้องเป็น array" });
+        }
+  
+        const extractedList = [];
+        for (const course of dataserver) {
+          extractedList.push(course.courseid, course.subject, course.credit, course.unit);
+        }
+  
+        const list = [];
+        for (let i = 0; i < extractedList.length; i += 4) {
+          list.push([extractedList[i], extractedList[i + 1], extractedList[i + 2], extractedList[i + 3], year]);
+        }
+  
+        // Insert all courses in a single query using `db.query` with multiple values
+        connection.query(
+          "INSERT INTO courses (courseid, subject, credit, unit, year) VALUES ?",
+          [list],
+          (err, results, fields) => {
+            if (err) {
+              return console.error(err.message);
+            }
+  
+            res.status(201).json({ message: "   อัพโหลดไฟล์เสร็จสิ้น   " });
+            console.log("User", results.insertId);
+            console.log(list[list.length - 1][4]); // Access the last inserted year
+          }
+        );
+      }
+    );
+  });
+
 
 app.listen(5000, () => { console.log("Server started on port 5000")})

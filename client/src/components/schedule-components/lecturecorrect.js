@@ -7,6 +7,7 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                             <div className='lecturecorrect'>
                               <button
                                 type="button"
+                                id={`editlecturecorrect-${course.id}`}
                                 className="btn editlecturecorrect"
                                 data-bs-toggle="modal"
                                 data-bs-target={`#staticBackdropTest-${course.id}`}
@@ -17,6 +18,7 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                 data-day={course.day}
                                 data-start_time={course.start_time}
                                 data-end_time={course.end_time}
+                                data-professor={course.professor}
                                 onClick={(event) => { stackdata(event)}}>
                                 <div className='subject'>
                                   {course.subject}
@@ -35,7 +37,13 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                 <div className="modal-dialog">
                                     <div className="modal-content">
                                     <div className="modal-body">
-                                      <div className='row'>
+                                      <div className='row cat'>
+                                        <div className='col-auto left'>
+                                            <div className='checklecorpra'>
+                                              {course.lecture === 1 && course.practice === 0 ? 'บรรยาย' 
+                                              : course.lecture === 0 && course.practice === 1 ? 'ปฏิบัติ' : ''}
+                                            </div>
+                                        </div>
                                         <div className='col-auto left'>
                                           <div className='catagory'>
                                             {course.catagory}
@@ -43,9 +51,10 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                         </div>
                                         <div className='col-auto left'>
                                           <div className='yearstudents'>
-                                            {getYearLabel(course)}
+                                            {course.studentyear}
                                           </div>
                                         </div>
+
                                       </div>
                                     <label htmlFor="subject" className="form-label">ชื่อวิชา</label>
                                     <input id="subject" class="form-control" type="text" placeholder={course.subject} aria-label="Disabled input example" disabled/>
@@ -62,7 +71,7 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                         aria-label=".form-select-sm example"
                                         onChange={(event) =>{setDay(event.target.value);}}>
                                         <option selected >{course.day}</option>
-                                        <option value="วันจัทนร์">วันจัทนร์</option>
+                                        <option value="วันจันทร์">วันจัทนร์</option>
                                         <option value="วันอังคาร">วันอังคาร</option>
                                         <option value="วันพุธ">วันพุธ</option>
                                         <option value="วันพฤหัสบดี">วันพฤหัสบดี</option>
