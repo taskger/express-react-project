@@ -13,11 +13,10 @@
   import Axios from 'axios';
   import Swal from 'sweetalert2';
 
-
-  import {BrowserRouter, Routes, Route,Navigate} from 'react-router-dom'
-
-  const App = () => {
-    const [startDate, setStartDate] = useState('');
+import {BrowserRouter, Routes, Route,Navigate} from 'react-router-dom'
+function App() {
+  const role = localStorage.getItem('role');
+     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [regisDate, setRegisDate] = useState('');
 
@@ -61,19 +60,89 @@
 
   
     return (
-      <BrowserRouter>
+        <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/admin/" element={<Home />} />
-          <Route path="/admin/schedule" element={<Schedule />} />
-          <Route path="/admin/course" element={<Course />} />
-          <Route path="/admin/registration" element={<Registration />} />
-          <Route path="/admin/confirm" element={<Confirm />} />
-          <Route path="/user/" element={<Userhome />} />
-          <Route path="/user/schedule" element={<Userschedule />} />
+          <Route path='/' element={<Login/>}/>
           
+          <Route 
+            path='/admin/' 
+            element={
+            <>
+            {role === "admin"}
+            <Home/>
+            </>
+            }
+          />
+    
+          <Route 
+            path='/admin/schedule' 
+            element={
+            <>
+            {role === "admin"}
+            <Schedule/>
+            </>
+            }
+          />
+    
+          <Route 
+            path='/admin/course' 
+            element={
+            <>
+            {role === "admin"}
+            <Course/>
+            </>
+            }
+          />
+    
+          <Route 
+            path='/admin/registration' 
+            element={
+            <>
+            {role === "admin"}
+            <Registration/>
+            </>
+            }
+          />
+    
+          <Route 
+            path='/admin/confirm' 
+            element={
+            <>
+            {role === "admin"}
+            <Confirm/>
+            </>
+            }
+          />
+    
+          <Route 
+            path='/user/' 
+            element={
+            <>
+            {role === "user"}
+            <Userhome/>
+            </>
+            }
+          />
+    
+          <Route 
+            path='/user/schedule' 
+            element={
+            <>
+            {role === "user"}
+            <Userschedule/>
+            </>
+            }
+          />
+                    
           {regisDate >= startDate && regisDate <= endDate ? (
-            <Route path="/user/addcourse" element={<Useraddcourse />} />
+            <Route path="/user/addcourse" element={
+            <>           
+            {role === "user"}
+            {role === "admin"}
+            <Useraddcourse/>
+            </>
+            } 
+          />
           ) : ( 
             <Route path="*" element={
               <>

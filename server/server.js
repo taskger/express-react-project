@@ -10,11 +10,13 @@ const saltRounds = 10; // จำนวนรอบในการผสม
 const xlsx = require("xlsx");
 app.use(express.json());
 
-
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true 
+    saveUninitialized: true,
+    cookie : {
+        maxAge : 600000
+    }
 }));
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -24,11 +26,12 @@ app.use(express.static(path.join(__dirname, 'client' , 'src' , 'components' , 'A
 
 
 const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    port: "3307",
-    database: "se"
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'se',
+    port: 3307
+    
 })
 
 app.post('/check', async (request, response) => {
@@ -123,10 +126,8 @@ app.post("/google", async (req, res) =>{
     }
 });
 
-
 app.get("/accept/:status", async (req,res) => {
     const { status } = req.params;   
-
     try {
         connection.query("SELECT * FROM idUser WHERE status = ? ", [status], (err, results, fields) => {
             if (err) {
@@ -164,6 +165,12 @@ app.patch("/user/regis", async (req,res) => {
             enddate
         ]
         , (err, results,fields) =>{
+app.post('/confirm/:email', (req, res) => {
+    const email = req.params.email;
+    const status = req.body.status;
+    try {
+        // สมมติว่าตาราง idUser มีฟิลด์ email เป็น primary key
+        connection.query("UPDATE idUser SET status = ? WHERE email = ? ", [status, email], (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
@@ -179,6 +186,18 @@ app.patch("/user/regis", async (req,res) => {
 app.get("/user/readregis", async (req,res) => {
     try {
         connection.query("SELECT * FROM registration", (err, results,fields) =>{
+            return res.status(200).json({ results });
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+});
+
+app.delete('/delete/:email', async (req, res) => {
+    const { email } = req.params;  
+    try {
+        connection.query(`DELETE FROM idUser WHERE email = ?`, email, (err, results, fields) => {
             if (err) {
                 console.log(err);
                 return res.status(400).send();
@@ -190,6 +209,14 @@ app.get("/user/readregis", async (req,res) => {
         return res.status(500).send();
     }
 })
+            return res.status(200).json({ results });
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+});
+
 app.post("/user/addcourse/createlecture", async (req, res) => {
     const { 
          year_lecture,
@@ -312,6 +339,7 @@ app.get("/readschedule", async (req,res) => {
         return res.status(500).send();
     }
 })
+
 app.get("/readschedule/:year.:semester", async (req,res) => {
     const { year } = req.params;  
     const { semester } = req.params;  
@@ -330,6 +358,7 @@ app.get("/readschedule/:year.:semester", async (req,res) => {
         return res.status(500).send();
     }
 });
+
 app.get("/readcourse/single/:year", async (req, res) => {
     const { year } = req.params;  
     try {
@@ -345,6 +374,7 @@ app.get("/readcourse/single/:year", async (req, res) => {
         return res.status(500).send();
     }
 });
+
 app.delete("/deleteschedule/single/:id", async (req, res) => {
     const { id } = req.params;  
     try {
@@ -360,6 +390,7 @@ app.delete("/deleteschedule/single/:id", async (req, res) => {
         return res.status(500).send();
     }
 });
+
 app.patch("/updateschedule", async (req,res) => {
     const { 
         id,

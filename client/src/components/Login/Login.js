@@ -65,10 +65,6 @@ function LoginForm(){
           });
     }
 
-    const onFailure = (res) => {
-        console.log('failed',res)
-    }
-
     const [showPassword,setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -116,10 +112,9 @@ function LoginForm(){
                             clientId={clientId}
                             buttonText = "เข้าสู่ระบบผ่าน Google"
                             onSuccess={onSuccess}
-                            onFailure={onFailure}
                             cookiePolicy={"single_host_origin"}
                             isSignedIn={true}
-                            
+                            prompt="login"
                         />
                     </div>
                 </div>

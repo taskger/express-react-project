@@ -110,3 +110,15 @@ span.form-required{
     margin-left: 8px;
     height: 30.6px;
 }
+
+.modal-content.show{
+    width: flex;
+}
+.lecture-info, .practice-info{
+    width: 600px;
+}
+
+.modal-body.selectLP{
+    display : flex;
+    margin-right: 60px;
+}

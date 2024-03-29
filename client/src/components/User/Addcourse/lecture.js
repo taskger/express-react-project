@@ -65,6 +65,7 @@ const Lecture = ({ listcourse,sendData}) => {
               }}
               >
               <option selected>กรุณาเลือกหมู่เรียนบรรยาย</option>
+              <option value="800">800</option>
               <option value="801">801</option>
               <option value="802">802</option>
               <option value="803">803</option>
@@ -74,6 +75,7 @@ const Lecture = ({ listcourse,sendData}) => {
               <option value="807">807</option>
               <option value="808">808</option>
               <option value="809">809</option>
+              <option value="810">810</option>
 
             </select>
             <label htmlFor="year" className="form-label">วัน<span className="form-required" title="This field is required.">*</span></label>
@@ -85,7 +87,7 @@ const Lecture = ({ listcourse,sendData}) => {
                   setDay(event.target.value)
                 }}>
               <option selected>กรุณาเลือกวัน</option>
-              <option value="วันจัทนร์">วันจัทนร์</option>
+              <option value="วันจันทร์">วันจันทร์</option>
               <option value="วันอังคาร">วันอังคาร</option>
               <option value="วันพุธ">วันพุธ</option>
               <option value="วันพฤหัสบดี">วันพฤหัสบดี</option>
