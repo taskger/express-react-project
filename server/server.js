@@ -165,12 +165,21 @@ app.patch("/user/regis", async (req,res) => {
             enddate
         ]
         , (err, results,fields) =>{
-app.post('/confirm/:email', (req, res) => {
-    const email = req.params.email;
-    const status = req.body.status;
+            if (err) {
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({results});
+        })
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+})
+
+app.get("/user/readregis", async (req,res) => {
     try {
-        // สมมติว่าตาราง idUser มีฟิลด์ email เป็น primary key
-        connection.query("UPDATE idUser SET status = ? WHERE email = ? ", [status, email], (err, results, fields) => {
+        connection.query("SELECT * FROM registration", (err, results,fields) =>{
             if (err) {
                 console.log(err);
                 return res.status(400).send();
@@ -183,16 +192,25 @@ app.post('/confirm/:email', (req, res) => {
     }
 
 })
-app.get("/user/readregis", async (req,res) => {
+
+app.post('/confirm/:email', (req, res) => {
+    const email = req.params.email;
+    const status = req.body.status;
     try {
-        connection.query("SELECT * FROM registration", (err, results,fields) =>{
-            return res.status(200).json({ results });
-        });
-    } catch (err) {
+        // สมมติว่าตาราง idUser มีฟิลด์ email เป็น primary key
+        connection.query("UPDATE idUser SET status = ? WHERE email = ? ", [status, email], (err, results, fields) => {
+            if (err) { 
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({results});
+        })
+    } catch(err) {
         console.log(err);
         return res.status(500).send();
     }
-});
+
+})
 
 app.delete('/delete/:email', async (req, res) => {
     const { email } = req.params;  
@@ -209,13 +227,10 @@ app.delete('/delete/:email', async (req, res) => {
         return res.status(500).send();
     }
 })
-            return res.status(200).json({ results });
-        });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send();
-    }
-});
+
+
+
+
 
 app.post("/user/addcourse/createlecture", async (req, res) => {
     const { 

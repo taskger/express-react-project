@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Navbar from '../Navbar';
 import "./registration.css"; // Import the external CSS file
+import Swal from 'sweetalert2'
 
 const Registration = () => {
   const [startDate, setStartDate] = useState('');
@@ -46,8 +47,6 @@ const Registration = () => {
   }, [startDate, endDate]);
 
   const update = () => {
-    console.log(startDate)
-    console.log(endDate)
     Axios.patch(`http://localhost:3000/user/regis`, {
       startdate: startDate,
       enddate: endDate
@@ -55,9 +54,10 @@ const Registration = () => {
     .catch(error => {
       console.error(error);
     });
+    
   }
   useEffect(() => {
-    Axios.get(`http://localhost:3000/user/readregis`)
+    Axios.get('http://localhost:3000/user/readregis')
       .then(response => {
         const startDate = new Date(response.data.results[0].startdate);
         const endDate = new Date(response.data.results[0].enddate);

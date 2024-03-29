@@ -35,7 +35,7 @@
           cancelButtonText: `ยกเลิก`
         }).then((result) => {
           if (result.isConfirmed) {
-            deleteschedule(lecture.id)
+            deleteschedule(lecture.id,lecture.professor)
           }else if(result.isDismissed){
             setShowoverlapping(true)
           } 
@@ -62,6 +62,7 @@
                           data-day={lecture.day}
                           data-start_time={lecture.start_time}
                           data-end_time={lecture.end_time}
+                          data-professor={lecture.professor}
                           onClick={(event) => {
                               stackdata(event);
                               openSecondModal(lecture);

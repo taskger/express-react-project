@@ -27,7 +27,7 @@ const Schedule = () => {
   const [practice, setPractice] = useState(false); 
 
   const [semester, setSemester] = useState(null);
-  const [professor] = useState("test");
+  const [professor, setProfessor] = useState(null);
 
 
   //ทำแสดงชั้นปี
@@ -36,6 +36,14 @@ const Schedule = () => {
 
   //ดึงปีปัจจุบัน
   const [year, setYear] = useState(null);
+
+  useEffect(() => {
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const { name, surname } = userData;
+  setProfessor(name+ ' '+surname)
+  },[setProfessor]);
+  
+  console.log(professor)
 
   useEffect(() => {
     const currYear = new Date().getFullYear();
@@ -175,7 +183,7 @@ const Schedule = () => {
     if (sec_lecture === null && selectedLecture === true){
       Swal.fire({
         title: "ข้อมูลภาคบรรยาย",
-        text: "กรุณาเลือก sec",
+        text: "กรุณาเลือกหมู่เรียน",
         icon: "warning"
       });
       return;
@@ -188,7 +196,7 @@ const Schedule = () => {
       });
       return;
     }
-    if (start_time_lecture === null && end_time_lecture === null && selectedLecture === true){
+    if ((start_time_practice === null || end_time_practice === null) && selectedLecture === true){
       Swal.fire({
         title: "ข้อมูลภาคบรรยาย",
         text: "กรุณาระบุเวลาที่จะสอน",
@@ -232,7 +240,7 @@ const Schedule = () => {
     if (sec_practice === null && selectedPractice === true){
       Swal.fire({
         title: "ข้อมูลภาคปฏิบัติ",
-        text: "กรุณาเลือก sec",
+        text: "กรุณาเลือกหมู่เรียน",
         icon: "warning"
       });
       return;
@@ -245,7 +253,7 @@ const Schedule = () => {
       });
       return;
     }
-    if (start_time_practice === null && end_time_practice === null && selectedPractice === true){
+    if ((start_time_practice === null || end_time_practice === null) && selectedPractice === true){
       Swal.fire({
         title: "ข้อมูลภาคปฏิบัติ",
         text: "กรุณาระบุเวลาที่จะสอน",
@@ -269,6 +277,7 @@ const Schedule = () => {
       });
       return;
     }
+
     if (selectedLecture === true){
       Axios.post('http://localhost:3000/user/addcourse/createlecture',{
         year_lecture: year,
