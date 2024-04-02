@@ -107,7 +107,7 @@ function App() {
                         <Route path="/user/addcourse" element={<Useraddcourse/>} />
                     ) : (
                         <Route path="/user/addcourse" element={
-                            <>  
+                            <>
                                 <Navigate to="/user" />
                                 <Alertdate />
                             </>

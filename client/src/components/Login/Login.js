@@ -6,6 +6,8 @@ import { gapi } from "gapi-script";
 import { GoogleLogin } from "react-google-login";
 import { useState, useEffect } from "react";
 import Axios from 'axios';
+import Swal from 'sweetalert2'
+
 
 function LoginForm(){
     const clientId = "1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com";
@@ -25,12 +27,14 @@ function LoginForm(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        
         try {
             const response = await Axios.post('http://localhost:3000/check', { username, password });
-
+            
             if (response.status === 200) {
-                // Redirect to http://localhost:3000/admin
+                localStorage.setItem('user',JSON.stringify({
+                    role:"admin"
+                }))
                 window.location.href = 'http://localhost:3000/admin';
             }
         } catch (error) {
@@ -53,10 +57,21 @@ function LoginForm(){
             Role : "user" ,
             Status: false
         })  .then(response => {
-            if (response.status === 200) { // Assuming successful login response has status 200
+            if (response.status === 200) {
+                localStorage.setItem('user',JSON.stringify({
+                    name:givenName,
+                    surname:familyName,
+                    e_mail: email,
+                    img : imageUrl,
+                    role:"user"
+                })) // Assuming successful login response has status 200
                 window.location.href = 'http://localhost:3000/user'; // Redirect to '/user' page
             } else if (response.status === 204) {
-                alert("โปรดรอการยืนยัน");  // Handle login failure (e.g., display error message)
+                Swal.fire({
+                    color:"#000",
+                    width:500,
+                    html: "โปรดรอการยืนยัน"
+                  });  // Handle login failure (e.g., display error message)
             }
           })
           .catch(error => {
@@ -75,7 +90,7 @@ function LoginForm(){
   return (
     <div className="container-login">
         <div className='img-kaset'>
-            <img src ="img/kaset.jpg" className="logo" alt="logo"/>
+            <img src ="img/kaset.png" className="logo" alt="logo"/>
         </div>
         <div className='container-input'>
             <div className='empty'>
