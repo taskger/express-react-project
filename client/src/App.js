@@ -30,6 +30,12 @@ function App() {
       icon: "warning"
     });
   }
+  const Alertcant = () => {
+    Swal.fire({
+      text: "ขออภัย ผู้จัดตารางไม่สามารถเพิ่มรายวิชาได้",
+      icon: "warning"
+    });
+  }
 
   useEffect(() => {
     Axios.get(`http://localhost:3000/user/readregis`)
@@ -59,7 +65,7 @@ function App() {
     const regisData = JSON.parse(localStorage.getItem('regis'));
     const { date } = regisData;
     setRegisDate(date);
-  }, []);
+  }, [setRegisDate]);
 
 
   const userData = JSON.parse(localStorage.getItem('user'));
