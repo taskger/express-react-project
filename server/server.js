@@ -142,6 +142,22 @@ app.get("/accept/:status", async (req,res) => {
     }
 });
 
+app.get("/navbar/:status", async (req, res) => {
+    const { status } = req.params;
+    try {
+        connection.query("SELECT * FROM idUser WHERE status = ? ", [status], (err, results, fields) => {
+            if (err) {
+                console.error(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({ results });
+        });
+    } catch (err) {
+        console.error('Error handling request:', err);
+        return res.status(500).send();
+    }
+});
+
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {

@@ -23,3 +23,26 @@ div .nav-link:hover {
     height: 116px;
 
 }
+
+.img-navbar{
+    border-radius: 50px;
+}
+.dropdown-menu{
+    width: 500px;
+}
+
+.name-navbar {
+    margin-left: 20px;
+}
+
+
+
+
+.three-font-navbar {
+    margin-left: 20px;
+}
+
+.google-logout-navbar {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
