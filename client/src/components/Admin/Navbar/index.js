@@ -40,7 +40,10 @@ const Navbar = () => {
               <img className='imgprofiledefault' src="/img/profile_default.png" alt="profile" width="85" height="85"/>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item"  onClick={logout}>Logout</a></li>
+                <div className='name-navbar'>
+                    <h1 className='first-font-navbar'>Admin</h1>
+                </div>
+              <li><button class="dropdown-item2"  onClick={logout}>Logout</button></li>
             </ul>
             
           </div>
