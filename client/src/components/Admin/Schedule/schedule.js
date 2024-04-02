@@ -3,6 +3,7 @@ import Navbar from '../Navbar';
 import Filter from '../../schedule-components/filter';
 import Table from '../../schedule-components/table';
 import "../../schedule-components/filter.css";
+
 const Schedule = () => {
  //const [year, setYear] = useState(null);
   const [allyear, setAllyear] = useState([]);
@@ -15,6 +16,9 @@ const Schedule = () => {
   const [main, setMain] = useState(null);
   const [sai, setSai] = useState(null);
   const [professer, setProfesser] = useState([]);
+  const [lecture, setLecture] = useState(null);
+  const [practice, setPractice] = useState(null);
+
 
   const updateFirstYear = (newFirstYear) => {
     setFirstYear(newFirstYear);
@@ -36,6 +40,12 @@ const Schedule = () => {
   };
   const updateProfesser = (newProfesserValue) => {
     setProfesser(newProfesserValue);
+  };
+  const updateLecture = (newLectureValue) => {
+    setLecture(newLectureValue);
+  };
+  const updatePractice = (newPracticeValue) => {
+    setPractice(newPracticeValue);
   };
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -96,6 +106,7 @@ const Schedule = () => {
             </select>
           </div>
         </div>
+
         </div>
         <div className='row all com'>
           
@@ -111,6 +122,8 @@ const Schedule = () => {
               updateMain={updateMain}
               updateSai={updateSai}
               updateProfesser={updateProfesser}
+              updateLecture={updateLecture}
+              updatePractice={updatePractice}
             />
           )}
         </div>
@@ -124,7 +137,10 @@ const Schedule = () => {
            fourthyear={fourthyear}
            main={main}
            sai={sai}
-           professer={professer}/>
+           professer={professer}
+           lecturecheck={lecture}
+           practicecheck={practice}
+           />
     
             </div>
 

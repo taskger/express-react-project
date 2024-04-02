@@ -256,6 +256,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
          subject_lecture , 
          num_students_lecture , 
          sec_lecture , 
+         classroom_lecture ,
          day_lecture , 
          start_time_lecture , 
          end_time_lecture ,
@@ -266,7 +267,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,lecture,studentyear) VALUES(?,?,?,?,?,?,?, ?,?,?, ?, ?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec,room, day, start_time, end_time, catagory ,lecture,studentyear) VALUES(?,?,?,?,?,?,?,?, ?,?,?, ?, ?)",
             [ 
                 year_lecture,
                 semester_lecture ,
@@ -274,6 +275,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
                 subject_lecture , 
                 num_students_lecture , 
                 sec_lecture , 
+                classroom_lecture ,
                 day_lecture , 
                 start_time_lecture , 
                 end_time_lecture ,
@@ -302,17 +304,18 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
          subject_practice , 
          num_students_practice , 
          sec_practice , 
+         classroom_practice,
          day_practice , 
          start_time_practice , 
          end_time_practice ,
          catagory_practice,
          practice ,
-         studentyear_practice
+         studentyear_practice,
          } = req.body;
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,practice,studentyear) VALUES(?,?,?,?,?,?,?, ?,?, ?, ?, ?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec,room, day, start_time, end_time, catagory ,practice,studentyear) VALUES(?,?,?,?,?,?,?,?, ?,?, ?, ?, ?)",
             [ 
                 year_practice,
                 semester_practice ,
@@ -320,6 +323,7 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
                 subject_practice , 
                 num_students_practice , 
                 sec_practice , 
+                classroom_practice,
                 day_practice , 
                 start_time_practice , 
                 end_time_practice ,
@@ -428,15 +432,17 @@ app.patch("/updateschedule", async (req,res) => {
         subject_edit ,
         num_students_edit , 
         sec_edit , 
+        room_edit ,
         day_edit , 
         start_time_edit , 
         end_time_edit , 
         } = req.body;
     try {
-        connection.query("UPDATE schedules SET subject = ?, num_students = ?, sec = ?, day = ?, start_time = ?, end_time = ? WHERE id = ?",
+        connection.query("UPDATE schedules SET subject = ?, num_students = ?, sec = ? , room = ?, day = ?, start_time = ?, end_time = ? WHERE id = ?",
         [ subject_edit ,
           num_students_edit , 
           sec_edit , 
+          room_edit ,
           day_edit , 
           start_time_edit , 
           end_time_edit ,

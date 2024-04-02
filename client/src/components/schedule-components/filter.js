@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import "./filter.css";
 
-const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear,updateOtherYear,updateMain,updateSai,updateProfesser }) => {
+const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear,updateMain,updateSai,updateProfesser,updatePractice,updateLecture }) => {
   const Checkbox1 = (event) => {
     const newFirstYearValue = event.target.value;
     const newFirstYearcheck = event.target.checked;
@@ -55,6 +55,24 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
       updateSai(newSaiValue);
     }else{
       updateSai(null);
+    }
+  };
+  const Checkboxlecture = (event) => {
+    const newLectureValue = event.target.value;
+    const newLecturecheck = event.target.checked;
+    if (newLecturecheck){
+      updateLecture(newLectureValue);
+    }else{
+      updateLecture(null);
+    }
+  };
+  const Checkboxpractice = (event) => {
+    const newPracticeValue = event.target.value;
+    const newPracticecheck = event.target.checked;
+    if (newPracticecheck){
+      updatePractice(newPracticeValue);
+    }else{
+      updatePractice(null);
     }
   };
   const Checkboxprofesser = (event) => {
@@ -122,6 +140,21 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
               <div className = "col">
                 <input className="boxcheck" type="checkbox" value="วิชาเลือก" id="checksai" onChange={Checkboxsai}/>
                 <label className="subject_sai" htmlFor="checksai"> วิชาเลือก </label>
+              </div>
+            </div>
+          </div>
+          <div className='liner' ></div>
+          <div className='form-check-main'>
+            <div className = "row">
+              <div className = "col"> 
+                <input className="boxcheck" type="checkbox" value="บรรยาย" id="checkmain" onChange={Checkboxlecture}/>
+                <label className="subject_main" htmlFor="checkmain"> บรรยาย </label>
+              </div>
+            </div> 
+            <div className = "row">
+              <div className = "col">
+                <input className="boxcheck" type="checkbox" value="ปฏิบัติ" id="checksai" onChange={Checkboxpractice}/>
+                <label className="subject_sai" htmlFor="checksai"> ปฏิบัติ </label>
               </div>
             </div>
           </div>

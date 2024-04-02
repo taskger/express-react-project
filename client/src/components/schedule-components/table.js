@@ -11,12 +11,15 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 //ตาราง
 //ถ้าวิชาซ้อนกัน
 // export อาจต้องใส่หน่วยกิตใน table ของวิชา
-const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryear,main,sai,professer}) => {
+const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai,professer,lecturecheck,practicecheck}) => {
   const [courseyear, setCourseYear] = useState(null); //เก็บหลักสูตรทั้งหมดที่ดึงมา
   const [id, setID] = useState(null);
   const [subject, setSubject] = useState(null);
   const [num_students, setNum_students] = useState(null);
   const [sec, setSec] = useState(null);
+  const [room, setRoom] = useState(null);
+  const [lecture, setLecture] = useState(null);
+  const [practice, setPractice] = useState(null);
   const [day, setDay] = useState(null);
   const [start_time, setStart_time] = useState(null);
   const [end_time, setEnd_time] = useState(null);
@@ -30,6 +33,9 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
     setNum_students(event.currentTarget.getAttribute("data-num_students"));
     setProfessor(event.currentTarget.getAttribute("data-professor"));
     setSec(event.currentTarget.getAttribute("data-sec"));
+    setRoom(event.currentTarget.getAttribute("data-room"));
+    setLecture(event.currentTarget.getAttribute("data-lecture"));
+    setPractice(event.currentTarget.getAttribute("data-practice"));
     setDay(event.currentTarget.getAttribute("data-day"));
     setStart_time(event.currentTarget.getAttribute("data-start_time"));
     setEnd_time(event.currentTarget.getAttribute("data-end_time"));
@@ -66,8 +72,18 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
     const professorParts = professor.split(' ');
     const professorFirstName = professorParts[0];
     const professorLastName = professorParts[1];
-    console.log(date)
-    console.log(startdate)
+
+    const start_edit = start_time.split(':')[0]
+    const end_edit = end_time.split(':')[0]
+    
+    if ((start_edit >= end_edit)){
+      Swal.fire({
+        title: "เกิดข้อผิดพลาด",
+        text: "กรุณาระบุเวลาให้ถูกต้อง",
+        icon: "warning"
+      });
+      return;
+    }
     if ((date >= startdate && date <= enddate) || (role === 'admin')) {
       if ((name === professorFirstName && surname === professorLastName) || role === 'admin') {
         Axios.patch(`http://localhost:3000/updateschedule`, {
@@ -75,13 +91,33 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
           subject_edit: subject,
           num_students_edit: num_students,
           sec_edit: sec,
+          room_edit: room,
           day_edit: day,
           start_time_edit: start_time,
           end_time_edit: end_time,
         })
         .then(() => {
-          // Fetch updated data after the patch operation is successful
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            html: `แก้ไขข้อมูลรายวิชา: ${subject} <br>
+            หมู่เรียน: ${sec} <br>
+            ผู้สอน: ${professor} <br>
+            ${day} ${start_time} - ${end_time}<br>
+            ห้องเรียน: ${room}`
+         });       
           return Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`);
+          
         })
         .then(response => {
           // Filter the data based on the selected years and categories
@@ -111,6 +147,18 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
                   filterCondition = filterCondition && false;
               }
 
+
+              if (!lecturecheck && !practicecheck){
+                filterCondition = filterCondition && true;
+              }
+              else if (lecturecheck && course.lecture == 1){
+                filterCondition = filterCondition && true;
+              }else if (practicecheck && course.practice == 1 ){
+                filterCondition = filterCondition && true;
+              }else{
+                filterCondition = filterCondition && false;
+              }
+              
               if (!main && !sai) {
                   filterCondition = filterCondition && true; // Display all courses if both main and sai are not selected
               } else if (main && course.catagory === "วิชาหลัก") {
@@ -181,6 +229,17 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
                 filterCondition = filterCondition && false;
             }
 
+            if (!lecturecheck && !practicecheck){
+              filterCondition = filterCondition && true;
+            }
+            else if (lecturecheck && course.lecture == 1){
+              filterCondition = filterCondition && true;
+            }else if (practicecheck && course.practice == 1 ){
+              filterCondition = filterCondition && true;
+            }else{
+              filterCondition = filterCondition && false;
+            }
+
             if (!main && !sai) {
                 filterCondition = filterCondition && true; // Display all courses if both main and sai are not selected
             } else if (main && course.catagory === "วิชาหลัก") {
@@ -207,7 +266,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
         console.error(error);
       });
     }
-  }, [year, semester, firstyear, secondyear, thirdyear, fourthyear, main, sai,professer]);
+  }, [year, semester, firstyear, secondyear, thirdyear, fourthyear, main, sai,professer,lecturecheck,practicecheck]);
   
 
   const deleteschedule = (id,professor) => {
@@ -410,6 +469,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
                                 course={course}
                                 stackdata={stackdata}
                                 setDay={setDay}
+                                setRoom={setRoom}
                                 setStart_time={setStart_time}
                                 setEnd_time={setEnd_time}
                                 submit={submit}
@@ -425,6 +485,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
                                 overlappingLectures={sortedCourses}
                                 stackdata={stackdata}
                                 setDay={setDay}
+                                setRoom={setRoom}
                                 setStart_time={setStart_time}
                                 setEnd_time={setEnd_time}
                                 deleteschedule={deleteschedule}

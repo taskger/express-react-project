@@ -8,6 +8,7 @@ const Lecture = ({ listcourse,sendData}) => {
   const [end_time, setEnd_time] = useState(null);
   const [catagory, setCatagory] = useState();
   const [studentyear, setStudentyear] = useState(null);
+  const [allsec, setAllsec] = useState([]);
 
   useEffect(() => {
     sendData({
@@ -21,8 +22,16 @@ const Lecture = ({ listcourse,sendData}) => {
       studentyear
     });
   }, [subject, num_students, sec, day, start_time, end_time, catagory,studentyear,sendData]);
+  
 
+  useEffect(() => {
+    const sec = [];
+    for (let i = 800 ; i <= 840; i++) {
+      sec.push(i);
+    }
+    setAllsec(sec);
 
+  }, []);
   return (
       <div>
         
@@ -64,19 +73,10 @@ const Lecture = ({ listcourse,sendData}) => {
                 setSec(event.target.value)
               }}
               >
-              <option selected>กรุณาเลือกหมู่เรียนบรรยาย</option>
-              <option value="800">800</option>
-              <option value="801">801</option>
-              <option value="802">802</option>
-              <option value="803">803</option>
-              <option value="804">804</option>
-              <option value="805">805</option>
-              <option value="806">806</option>
-              <option value="807">807</option>
-              <option value="808">808</option>
-              <option value="809">809</option>
-              <option value="810">810</option>
+              <option selected disabled>กรุณาเลือกหมู่เรียนบรรยาย</option>
+              {allsec.map((e) => <option value={e} key={e}>{e}</option> )}
 
+            
             </select>
             <label htmlFor="year" className="form-label">วัน<span className="form-required" title="This field is required.">*</span></label>
             <select 
@@ -86,7 +86,7 @@ const Lecture = ({ listcourse,sendData}) => {
                 onChange={(event) =>{
                   setDay(event.target.value)
                 }}>
-              <option selected>กรุณาเลือกวัน</option>
+              <option selected disabled>กรุณาเลือกวัน</option>
               <option value="วันจันทร์">วันจันทร์</option>
               <option value="วันอังคาร">วันอังคาร</option>
               <option value="วันพุธ">วันพุธ</option>
@@ -107,7 +107,7 @@ const Lecture = ({ listcourse,sendData}) => {
                     onChange={(event) =>{
                       setStart_time(event.target.value)
                     }}    >
-                    <option selected>กรุณาเลือกเวลา</option>
+                    <option selected disabled>กรุณาเลือกเวลา</option>
                     <option value="08:00">08.00</option>
                     <option value="08:30">08.30</option>
                     <option value="09:00">09.00</option>
@@ -146,7 +146,7 @@ const Lecture = ({ listcourse,sendData}) => {
                       onChange={(event) =>{
                         setEnd_time(event.target.value)
                       }}>
-                      <option selected>กรุณาเลือกเวลา</option>
+                      <option selected disabled>กรุณาเลือกเวลา</option>
                       <option value="08:00">08.00</option>
                       <option value="08:30">08.30</option>
                       <option value="09:00">09.00</option>
