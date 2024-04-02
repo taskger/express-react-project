@@ -11,12 +11,12 @@ body {
     margin: auto;
     height: 310px;
   }
-  
-  
-  /* Variables */
-  /* No need to convert SCSS variables to CSS */
-  
-  /* Title */
+  .font-home {
+    margin-bottom: 60px;
+    text-align: center;
+    font: 300 2.25em 'Lato';
+    text-transform: uppercase;
+  }
   
   /* Countdown */
   .countdown {

@@ -17,17 +17,15 @@ const Countdown = () => {
     Axios.get(`http://localhost:3000/user/readregis`)
       .then(response => {
         const startDate = new Date(response.data.results[0].startdate);
-        const endDate = new Date(response.data.results[0].enddate);
   
-        startDate.setDate(startDate.getDate() + 1);
-        endDate.setDate(endDate.getDate() + 1);
+        startDate.setDate(startDate.getDate() );
   
         const currentDate = new Date();
         const diffMilliseconds = startDate.getTime() - currentDate.getTime();
         const totalSeconds = Math.floor(diffMilliseconds / 1000);
   
         setStartDate(startDate.toISOString().split('T')[0]);
-        setEndDate(endDate.toISOString().split('T')[0]);
+        console.log(startDate)
   
         // Set totalSeconds
         setTotalSeconds(totalSeconds);
@@ -57,15 +55,6 @@ const Countdown = () => {
     return () => clearInterval(countdownInterval);
   }, [totalSeconds]);
 
-  useEffect(() => {
-    const regisData = JSON.parse(localStorage.getItem('regis'));
-    const { date } = regisData;
-    const regisDate = new Date(date);
-    const currentDate = new Date();
-    const diffInSeconds = Math.floor((regisDate - currentDate) / 1000);
-    console.log(currentDate)
-    setTotalSeconds(diffInSeconds);
-  }, []);
 
   const animateFigure = ($el, value) => {
     if (!$el) return;
@@ -126,7 +115,7 @@ const Countdown = () => {
     <div>
       <Navbar/>
       <div className="wrap">
-        <h1>Draft <strong>Countdown</strong></h1>
+        <h1 className="font-home">เปิดลงทะเบียนภายใน</h1>
         <div className="countdown" ref={countdownRef}>
           <div className="bloc-time hours">
             <span className="count-title">Hours</span>
