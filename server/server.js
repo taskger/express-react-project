@@ -27,7 +27,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    port: "3307",
+    port: "3306",
     database: "se"
 })
 
@@ -366,7 +366,7 @@ connection.connect((err) => {
     const year = req.body.year;
     console.log("Selected year:", year);
     const dataserver = req.body.dataserver;
-  
+    
     connection.query(
       "SELECT COUNT(*) AS count FROM courses WHERE year = ?",
       [year],
@@ -385,20 +385,21 @@ connection.connect((err) => {
             },
           });
         }
-  
+        
         if (!Array.isArray(dataserver)) {
           return res.status(400).json({ message: "รูปแบบข้อมูลไม่ถูกต้อง: dataserver ต้องเป็น array" });
         }
   
         const extractedList = [];
         for (const course of dataserver) {
-          extractedList.push(course.courseid, course.subject, course.credit, course.unit);
+            extractedList.push(course.courseid, course.subject, course.credit, course.unit);
         }
   
         const list = [];
         for (let i = 0; i < extractedList.length; i += 4) {
-          list.push([extractedList[i], extractedList[i + 1], extractedList[i + 2], extractedList[i + 3], year]);
-        }
+            list.push([extractedList[i], extractedList[i + 1], extractedList[i + 2], extractedList[i + 3], year]);    
+        }       
+        console.log(list)
   
         // Insert all courses in a single query using `db.query` with multiple values
         connection.query(

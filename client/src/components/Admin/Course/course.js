@@ -45,11 +45,12 @@ const addDatacourse = () => {
         title: "SUCCESS",
         text: response.data.message,
         icon: "success",
-        timer: 2000
+        timer: 2500
       });
       setTimeout(function(){
         window.location.reload();
-     }, 2000);
+     }, 3000);
+     
     } else {
       console.error('Unexpected response status:', response.status);
       // Handle unexpected response codes (optional)
