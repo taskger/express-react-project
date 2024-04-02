@@ -95,12 +95,7 @@ function App() {
                     <Route path='/admin/confirm' element={<Confirm />} />
                     <Route path='/user/' element={<Userhome />} />
                     <Route path='/user/schedule' element={<Userschedule />} />
-                    <Route path='/user/addcourse' element={
-                      <>
-                          <Navigate to="/admin/schedule" />
-                          <Alertcant />
-                      </>
-                    }/>
+                    <Route path="/user/addcourse" element={<Useraddcourse/>} />
                 </>
             )}
 

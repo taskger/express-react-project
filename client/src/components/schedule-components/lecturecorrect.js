@@ -1,7 +1,7 @@
 import React from 'react';
 import "./filter.css";
 
-const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setEnd_time,submit,edit}) => {
+const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setRoom,setStart_time,setEnd_time,submit,edit}) => {
   return (   
     <div key={course.id}>
                             <div className='lecturecorrect'>
@@ -15,6 +15,9 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                 data-subject={course.subject}
                                 data-num_students={course.num_students}
                                 data-sec={course.sec}
+                                data-room={course.room}
+                                data-lecture={course.lecture}
+                                data-practice={course.practice}
                                 data-day={course.day}
                                 data-start_time={course.start_time}
                                 data-end_time={course.end_time}
@@ -44,6 +47,7 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                               : course.lecture === 0 && course.practice === 1 ? 'ปฏิบัติ' : ''}
                                             </div>
                                         </div>
+                                        
                                         <div className='col-auto left'>
                                           <div className='catagory'>
                                             {course.catagory}
@@ -71,7 +75,7 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                         aria-label=".form-select-sm example"
                                         onChange={(event) =>{setDay(event.target.value);}}>
                                         <option selected >{course.day}</option>
-                                        <option value="วันจันทร์">วันจัทนร์</option>
+                                        <option value="วันจันทร์">วันจันทร์</option>
                                         <option value="วันอังคาร">วันอังคาร</option>
                                         <option value="วันพุธ">วันพุธ</option>
                                         <option value="วันพฤหัสบดี">วันพฤหัสบดี</option>
@@ -111,7 +115,8 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
                                             <option value="19:30">19.30</option>
                                             <option value="20:00">20.00</option>
                                         </select>
-                                        </div>                
+                                        </div>
+                                                        
                                         <div className='col'>
                                         <h7>สิ้นสุดการสอน</h7>
                                             <select id="endttime" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
@@ -146,8 +151,21 @@ const lecturecorrect = ({course,stackdata,getYearLabel,setDay,setStart_time,setE
 
                                             </select>                
                                         </div>
-                                        
                                     </div>
+                                    {course.practice === 1 ? (
+                                          <div className='row'>
+                                            <div className='col'>
+                                           <h7>ห้องเรียน</h7>
+                                           <select id="room" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+                                           onChange={(event) =>{setRoom(event.target.value);}}>
+                                               <option selected>{course.room}</option>
+                                               <option>Lab Com 23</option>
+                                               <option>Lab Com DAT</option>
+                                               <option>Lab Com 2</option>
+                                           </select>
+                                           </div>
+                                           </div>
+                                          ) : null}
                                     </div>
                                 </div>
                                     <div className="modal-footer">

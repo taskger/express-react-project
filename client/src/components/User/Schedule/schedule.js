@@ -15,6 +15,8 @@ const Schedule = () => {
   const [main, setMain] = useState(null);
   const [sai, setSai] = useState(null);
   const [professer, setProfesser] = useState([]);
+  const [lecture, setLecture] = useState([]);
+  const [practice, setPractice] = useState(null);
 
   const updateFirstYear = (newFirstYear) => {
     setFirstYear(newFirstYear);
@@ -36,6 +38,12 @@ const Schedule = () => {
   };
   const updateProfesser = (newProfesserValue) => {
     setProfesser(newProfesserValue);
+  };
+  const updateLecture = (newLectureValue) => {
+    setLecture(newLectureValue);
+  };
+  const updatePractice = (newPracticeValue) => {
+    setPractice(newPracticeValue);
   };
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -111,6 +119,8 @@ const Schedule = () => {
               updateMain={updateMain}
               updateSai={updateSai}
               updateProfesser={updateProfesser}
+              updateLecture={updateLecture}
+              updatePractice={updatePractice}
             />
           )}
         </div>
@@ -124,7 +134,10 @@ const Schedule = () => {
            fourthyear={fourthyear}
            main={main}
            sai={sai}
-           professer={professer}/>
+           professer={professer}
+           lecturecheck={lecture}
+           practicecheck={practice}
+           />
     
             </div>
 

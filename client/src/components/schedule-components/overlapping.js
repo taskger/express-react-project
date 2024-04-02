@@ -3,7 +3,7 @@
   import "./filter.css";
   import Swal from 'sweetalert2'
 
-  const Overlapping = ({ courseyear, overlappingLectures, stackdata, getYearLabel, setDay, setStart_time, setEnd_time, deleteschedule, edit }) => {
+  const Overlapping = ({ courseyear, overlappingLectures, stackdata, getYearLabel, setDay, setRoom, setStart_time, setEnd_time, deleteschedule, edit }) => {
       const [showFirstModal, setShowoverlapping] = useState(false);
       const [showSecondModal, setShoweditoverlapping] = useState(false);
       const [selectedCourseId, setSelectedCourseId] = useState([]);
@@ -59,6 +59,9 @@
                           data-subject={lecture.subject}
                           data-num_students={lecture.num_students}
                           data-sec={lecture.sec}
+                          data-room={lecture.room}
+                          data-lecture={lecture.lecture}
+                          data-practice={lecture.practice}
                           data-day={lecture.day}
                           data-start_time={lecture.start_time}
                           data-end_time={lecture.end_time}
@@ -124,7 +127,7 @@
                                           aria-label=".form-select-sm example"
                                           onChange={(event) =>{setDay(event.target.value);}}>
                                           <option selected >{selectedCourseId.day}</option>
-                                          <option value="วันจันทร์">วันจัทนร์</option>
+                                          <option value="วันจันทร์">วันจันทร์</option>
                                           <option value="วันอังคาร">วันอังคาร</option>
                                           <option value="วันพุธ">วันพุธ</option>
                                           <option value="วันพฤหัสบดี">วันพฤหัสบดี</option>
@@ -201,6 +204,20 @@
                                           </div>
                                           
                                       </div>
+                                      {selectedCourseId.practice === 1 ? (
+                                          <div className='row'>
+                                            <div className='col'>
+                                           <h7>ห้องเรียน</h7>
+                                           <select id="room" className="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+                                           onChange={(event) =>{setRoom(event.target.value);}}>
+                                               <option selected>{selectedCourseId.room}</option>
+                                               <option>Lab Com 23</option>
+                                               <option>Lab Com DAT</option>
+                                               <option>Lab Com 2</option> 
+                                           </select>
+                                           </div>
+                                           </div>
+                                          ) : null}
                                       </div>
                                       
                                   </div>
