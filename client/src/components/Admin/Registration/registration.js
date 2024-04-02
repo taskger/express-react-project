@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 import Navbar from '../Navbar';
 import "./registration.css"; // Import the external CSS file
+import Swal from 'sweetalert2'
 
 const Registration = () => {
   const [startDate, setStartDate] = useState('');
@@ -15,6 +17,7 @@ const Registration = () => {
     const selectedEndDate = event.target.value;
     setEndDate(selectedEndDate);
   };
+  
   const reset = () => {
     const endDateInput = document.getElementById('enddate');
     const startDateInput = document.getElementById('startdate');
@@ -43,6 +46,36 @@ const Registration = () => {
 
   }, [startDate, endDate]);
 
+  const update = () => {
+    Axios.patch(`http://localhost:3000/user/regis`, {
+      startdate: startDate,
+      enddate: endDate
+    })
+    .catch(error => {
+      console.error(error);
+    });
+    
+  }
+  useEffect(() => {
+    Axios.get('http://localhost:3000/user/readregis')
+      .then(response => {
+        const startDate = new Date(response.data.results[0].startdate);
+        const endDate = new Date(response.data.results[0].enddate);
+
+        startDate.setDate(startDate.getDate() + 1);
+        endDate.setDate(endDate.getDate() + 1);
+
+        const fixstartDate = startDate.toISOString().split('T')[0];
+        const fixendDate = endDate.toISOString().split('T')[0];
+
+        setStartDate(fixstartDate);
+        setEndDate(fixendDate);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <div>
       <Navbar /> 
@@ -53,21 +86,21 @@ const Registration = () => {
             <div className="row">
               <h1 className="login-form-title">กำหนดวันลงทะเบียน</h1>
             </div>
-            <form>
+            <form onSubmit={update}>
             <div className="row">
               <div className="col">
                 <label htmlFor="startdate" className="login-form-label">
                   วันเริ่มการลงทะเบียน
                 </label>
                 <input type="date" id="startdate" name="startdate" required className="login-form-input" 
-                  onChange={handleStartDateChange} />
+                  onChange={handleStartDateChange} value={startDate}/>
               </div>
               <div className="col">
                 <label htmlFor="enddate" className="login-form-label">
                   วันสิ้นสุดการลงทะเบียน
                 </label>
                 <input type="date" id="enddate" name="enddate" required className="login-form-input" 
-                onChange={handleEndDateChange}/>
+                onChange={handleEndDateChange} value={endDate}/>
               </div>
             </div>
             <button type="submit" className="btn registration submit btn-primary btn-block">ยืนยัน</button>

@@ -9,6 +9,16 @@ const Practice = ({listcourse,sendData}) => {
   const [end_time_practice, setEnd_time] = useState(null);
   const [catagory_practice, setCatagory] = useState(null);
   const [studentyear, setStudentyear] = useState(null);
+  const [allsec, setAllsec] = useState([]);
+
+  useEffect(() => {
+    const sec = [];
+    for (let i = 830 ; i <= 870; i++) {
+      sec.push(i);
+    }
+    setAllsec(sec);
+  }, []);
+
   useEffect(() => {
     sendData({
       subject_practice,
@@ -62,15 +72,8 @@ const Practice = ({listcourse,sendData}) => {
               }}
               >
               <option selected>กรุณาเลือกหมู่เรียนปฏิบัติ</option>
-              <option>831</option>
-              <option>832</option>
-              <option>833</option>
-              <option>834</option>
-              <option>835</option>
-              <option>836</option>
-              <option>837</option>
-              <option>838</option>
-              <option>839</option>
+              {allsec.map((e) => <option value={e} key={e}>{e}</option> )}
+
 
             </select>
             <label htmlFor="year" className="form-label">วัน<span className="form-required" title="This field is required.">*</span></label>
@@ -82,7 +85,7 @@ const Practice = ({listcourse,sendData}) => {
                   setDay(event.target.value)
                 }}>
               <option selected>กรุณาเลือกวัน</option>
-              <option value="วันจัทนร์">วันจัทนร์</option>
+              <option value="วันจันทร์">วันจันทร์</option>
               <option value="วันอังคาร">วันอังคาร</option>
               <option value="วันพุธ">วันพุธ</option>
               <option value="วันพฤหัสบดี">วันพฤหัสบดี</option>

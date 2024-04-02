@@ -3,6 +3,11 @@ import "./index.css"; // Import the external CSS file
 import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const Navbar = () => {
+  const logout = (res) => {
+    console.log("Logging out...");
+    localStorage.removeItem('user');
+    window.location.href = 'http://localhost:3000/';
+  }
   return (
     <div>
       <head>
@@ -35,7 +40,10 @@ const Navbar = () => {
               <img className='imgprofiledefault' src="/img/profile_default.png" alt="profile" width="85" height="85"/>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/">Logout</a></li>
+                <div className='name-navbar'>
+                    <h1 className='first-font-navbar'>Admin</h1>
+                </div>
+              <li><button class="dropdown-item2"  onClick={logout}>Logout</button></li>
             </ul>
             
           </div>

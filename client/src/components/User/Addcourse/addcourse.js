@@ -27,7 +27,7 @@ const Schedule = () => {
   const [practice, setPractice] = useState(false); 
 
   const [semester, setSemester] = useState(null);
-  const [professor] = useState("test");
+  const [professor, setProfessor] = useState(null);
 
 
   //ทำแสดงชั้นปี
@@ -36,6 +36,14 @@ const Schedule = () => {
 
   //ดึงปีปัจจุบัน
   const [year, setYear] = useState(null);
+
+  useEffect(() => {
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const { name, surname } = userData;
+  setProfessor(name+ ' '+surname)
+  },[setProfessor]);
+  
+  console.log(professor)
 
   useEffect(() => {
     const currYear = new Date().getFullYear();
@@ -73,13 +81,16 @@ const Schedule = () => {
   const [end_time_lecture, setEnd_time_lecture] = useState("");
   const [catagory_lecture, setCatagory_lecture] = useState("");
   const [studentyear_lecture, setStudentyear_lecture] = useState();
+  const [classroom_lecture] = useState("");
+  const [classroom_practice] = useState("");
 
   //ปีหลักสูตรใช้ดึงข้อมูลมาโชว์ของปีหลักสูตรนั้นมาโชว์
   const uniqueYears = new Set();
   const [courseyear, setCourseYear] = useState(null); //เก็บหลักสูตรทั้งหมดที่ดึงมา
   const [selectcourseyear, setselectCourseYear] = useState(null); //เก็บปีหลักสูตรที่ select
   const [listcourse, setListcourse] = useState(null); //เก็บข้อมูลในปีหลักสูตรที่ดึงมา
-
+  const [schedule, setSchedule] = useState(null); //เช็ควิชาซ้ำ
+  console.log(courseyear)
   useEffect(() => { //ดึงหลักสูตรทั้งหมดใน table
     Axios.get(`http://localhost:3000/readcourse`).then(response => 
       {
@@ -89,12 +100,21 @@ const Schedule = () => {
         console.error(error);
       });
   },[]);
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`).then(response =>
+      {
+        setSchedule(response.data.results)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },[year,semester]);
 
   useEffect(() => { //ดีงข้อมูลจากปีที่เลือก
     Axios.get(`http://localhost:3000/readcourse/single/${selectcourseyear}`).then(response => 
     {
-      setListcourse(response.data.results)
 
+      setListcourse(response.data.results)
     })
     .catch(error => {
       console.error(error);
@@ -140,6 +160,43 @@ const Schedule = () => {
   };
 
   const addLecture = () =>{
+    const filteredDatasubject = schedule.filter(course => {
+      let filterCondition;
+        if(subject_lecture === course.subject && sec_lecture == course.sec && selectedLecture === true){
+            filterCondition = true; 
+          }else{
+            filterCondition = false; 
+          }
+        return filterCondition;
+    });
+    if(filteredDatasubject.length > 0){
+      Swal.fire({
+        title: "ข้อมูลภาคบรรยาย",
+        text: "มีรายวิชาและหมู่เรียนนี้อยู่ในระบบแล้ว",
+        icon: "warning"
+      });
+      return;
+    }
+    
+    const filteredDatasubjectpractice = schedule.filter(course => {
+      let filterCondition;
+        if(subject_practice === course.subject && sec_practice == course.sec && selectedPractice === true){
+            filterCondition = true; 
+          }else{
+            filterCondition = false; 
+          }
+        return filterCondition;
+    });
+    
+    if(filteredDatasubjectpractice.length > 0){
+      Swal.fire({
+        title: "ข้อมูลภาคปฏิบัติ",
+        text: "มีรายวิชาและหมู่เรียนนี้อยู่ในระบบแล้ว",
+        icon: "warning"
+      });
+      return;
+    }
+
     if (semester === null && selectedLecture === true){
       Swal.fire({
         title: "ข้อมูลไม่ครบ",
@@ -156,6 +213,8 @@ const Schedule = () => {
       });
       return;
     }
+
+
     if (subject_lecture === null && selectedLecture === true){
       Swal.fire({
         title: "ข้อมูลภาคบรรยาย",
@@ -175,7 +234,7 @@ const Schedule = () => {
     if (sec_lecture === null && selectedLecture === true){
       Swal.fire({
         title: "ข้อมูลภาคบรรยาย",
-        text: "กรุณาเลือก sec",
+        text: "กรุณาเลือกหมู่เรียน",
         icon: "warning"
       });
       return;
@@ -188,7 +247,7 @@ const Schedule = () => {
       });
       return;
     }
-    if (start_time_lecture === null && end_time_lecture === null && selectedLecture === true){
+    if ((start_time_lecture === null || end_time_lecture === null) && selectedLecture === true){
       Swal.fire({
         title: "ข้อมูลภาคบรรยาย",
         text: "กรุณาระบุเวลาที่จะสอน",
@@ -196,6 +255,19 @@ const Schedule = () => {
       });
       return;
     }
+    if (start_time_lecture && end_time_lecture){
+    const start_lecture = start_time_lecture.split(':')[0]
+    const end_lecture = end_time_lecture.split(':')[0]
+      if ((start_lecture >= end_lecture) && selectedLecture === true){
+        Swal.fire({
+          title: "ข้อมูลภาคบรรยาย",
+          text: "กรุณาระบุเวลาให้ถูกต้อง",
+          icon: "warning"
+        });
+        return;
+      }
+    }
+
     if (catagory_lecture === null && selectedLecture === true){
       Swal.fire({
         title: "ข้อมูลภาคบรรยาย",
@@ -232,7 +304,7 @@ const Schedule = () => {
     if (sec_practice === null && selectedPractice === true){
       Swal.fire({
         title: "ข้อมูลภาคปฏิบัติ",
-        text: "กรุณาเลือก sec",
+        text: "กรุณาเลือกหมู่เรียน",
         icon: "warning"
       });
       return;
@@ -245,13 +317,26 @@ const Schedule = () => {
       });
       return;
     }
-    if (start_time_practice === null && end_time_practice === null && selectedPractice === true){
+    if ((start_time_practice === null || end_time_practice === null) && selectedPractice === true){
       Swal.fire({
         title: "ข้อมูลภาคปฏิบัติ",
         text: "กรุณาระบุเวลาที่จะสอน",
         icon: "warning"
       });
       return;
+    }
+    if (start_time_practice && end_time_practice){
+      const start_practice = start_time_practice.split(':')[0]
+      const end_practice = end_time_practice.split(':')[0]
+      
+      if ((start_practice >= end_practice) && selectedPractice === true){
+        Swal.fire({
+          title: "ข้อมูลภาคปฏิบัติ",
+          text: "กรุณาระบุเวลาให้ถูกต้อง",
+          icon: "warning"
+        });
+        return;
+      }
     }
     if (catagory_practice === null && selectedPractice === true){
       Swal.fire({
@@ -269,6 +354,7 @@ const Schedule = () => {
       });
       return;
     }
+
     if (selectedLecture === true){
       Axios.post('http://localhost:3000/user/addcourse/createlecture',{
         year_lecture: year,
@@ -283,6 +369,8 @@ const Schedule = () => {
         catagory_lecture:catagory_lecture,
         lecture: lecture,
         studentyear_lecture: studentyear_lecture,
+        classroom_lecture:classroom_lecture,
+
       });
     }
     if (selectedPractice === true){
@@ -299,6 +387,7 @@ const Schedule = () => {
         catagory_practice:catagory_practice,
         practice: practice,
         studentyear_practice:studentyear_practice,
+        classroom_lecture:classroom_practice
       });
     }
 

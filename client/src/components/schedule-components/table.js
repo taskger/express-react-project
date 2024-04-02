@@ -11,103 +11,283 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 //ตาราง
 //ถ้าวิชาซ้อนกัน
 // export อาจต้องใส่หน่วยกิตใน table ของวิชา
-const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryear,main,sai,professer}) => {
+const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai,professer,lecturecheck,practicecheck}) => {
   const [courseyear, setCourseYear] = useState(null); //เก็บหลักสูตรทั้งหมดที่ดึงมา
   const [id, setID] = useState(null);
   const [subject, setSubject] = useState(null);
   const [num_students, setNum_students] = useState(null);
   const [sec, setSec] = useState(null);
+  const [room, setRoom] = useState(null);
+  const [lecture, setLecture] = useState(null);
+  const [practice, setPractice] = useState(null);
   const [day, setDay] = useState(null);
   const [start_time, setStart_time] = useState(null);
   const [end_time, setEnd_time] = useState(null);
   const [professor, setProfessor] = useState(null);
-  
+  const [startdate, setStartDate] = useState('');
+  const [enddate, setEndDate] = useState('');
+
   const stackdata = (event) => {
     setID(event.currentTarget.getAttribute("data-id"));
     setSubject(event.currentTarget.getAttribute("data-subject"));
     setNum_students(event.currentTarget.getAttribute("data-num_students"));
     setProfessor(event.currentTarget.getAttribute("data-professor"));
     setSec(event.currentTarget.getAttribute("data-sec"));
+    setRoom(event.currentTarget.getAttribute("data-room"));
+    setLecture(event.currentTarget.getAttribute("data-lecture"));
+    setPractice(event.currentTarget.getAttribute("data-practice"));
     setDay(event.currentTarget.getAttribute("data-day"));
     setStart_time(event.currentTarget.getAttribute("data-start_time"));
     setEnd_time(event.currentTarget.getAttribute("data-end_time"));
   }
 
+  useEffect(() => {
+    Axios.get(`http://localhost:3000/user/readregis`)
+      .then(response => {
+        const startDate = new Date(response.data.results[0].startdate);
+        const endDate = new Date(response.data.results[0].enddate);
 
+        startDate.setDate(startDate.getDate() + 1);
+        endDate.setDate(endDate.getDate() + 1);
+
+        const fixstartDate = startDate.toISOString().split('T')[0];
+        const fixendDate = endDate.toISOString().split('T')[0];
+
+        setStartDate(fixstartDate);
+        setEndDate(fixendDate);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const { name, surname,role } = userData;
+
+  const regisData = JSON.parse(localStorage.getItem('regis'));
+  const { date } = regisData;
 
   const edit = () => {
-    Axios.patch(`http://localhost:3000/updateschedule`, {
-      id: id,
-      subject_edit: subject,
-      num_students_edit: num_students,
-      sec_edit: sec,
-      day_edit: day,
-      start_time_edit: start_time,
-      end_time_edit: end_time,
-    })
-    .then(() => {
-      // Fetch updated data after the patch operation is successful
-      return Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`);
-    })
-    .then(response => {
-      // Filter the data based on the selected years and categories
-      const filteredData = response.data.results.filter(course => {
-        let filterCondition;
-        console.log(course)
-          if (!firstyear && !secondyear && !thirdyear && !fourthyear) {
-              filterCondition = true; 
-          } else if (firstyear && course.studentyear === "ชั้นปี 1") {
-              filterCondition = true;
-          } else if (secondyear && course.studentyear === "ชั้นปี 2") {
-              filterCondition = true;
-          } else if (thirdyear && course.studentyear === "ชั้นปี 3") {
-              filterCondition = true;            
+    const professorParts = professor.split(' ');
+    const professorFirstName = professorParts[0];
+    const professorLastName = professorParts[1];
 
-          } else if (fourthyear && course.studentyear === "ชั้นปี 4") {
-              filterCondition = true;
-          } else {
-              filterCondition = false;
-          }
-
-          if (!professer.length) {
-              filterCondition = filterCondition && true;
-          } else if (professer.includes(course.professor)) {
-            filterCondition = filterCondition && true;
-          } else {
-              filterCondition = filterCondition && false;
-          }
-
-          if (!main && !sai) {
-              filterCondition = filterCondition && true; // Display all courses if both main and sai are not selected
-          } else if (main && course.catagory === "วิชาหลัก") {
-              filterCondition = filterCondition && true;
-          } else if (sai && course.catagory === "วิชาเลือก") {
-              filterCondition = filterCondition && true;
-          } else {
-              filterCondition = filterCondition && false;
-          }
-          if (!professer.length) {
-              filterCondition = filterCondition && true;
-          } else if (professer.includes(course.professor)) {
-            filterCondition = filterCondition && true;
-          } else {
-              filterCondition = filterCondition && false;
-          }
-
-          return filterCondition;
+    const start_edit = start_time.split(':')[0]
+    const end_edit = end_time.split(':')[0]
+    
+    if ((start_edit >= end_edit)){
+      Swal.fire({
+        title: "เกิดข้อผิดพลาด",
+        text: "กรุณาระบุเวลาให้ถูกต้อง",
+        icon: "warning"
       });
+      return;
+    }
+    if ((date >= startdate && date <= enddate) || (role === 'admin')) {
+      if ((name === professorFirstName && surname === professorLastName) || role === 'admin') {
+        Axios.patch(`http://localhost:3000/updateschedule`, {
+          id: id,
+          subject_edit: subject,
+          num_students_edit: num_students,
+          sec_edit: sec,
+          room_edit: room,
+          day_edit: day,
+          start_time_edit: start_time,
+          end_time_edit: end_time,
+        })
+        .then(() => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            html: `แก้ไขข้อมูลรายวิชา: ${subject} <br>
+            หมู่เรียน: ${sec} <br>
+            ผู้สอน: ${professor} <br>
+            ${day} ${start_time} - ${end_time}<br>
+            ห้องเรียน: ${room}`
+         });       
+          return Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`);
+          
+        })
+        .then(response => {
+          // Filter the data based on the selected years and categories
+          const filteredData = response.data.results.filter(course => {
+            let filterCondition;
+            console.log(course)
+              if (!firstyear && !secondyear && !thirdyear && !fourthyear) {
+                  filterCondition = true; 
+              } else if (firstyear && course.studentyear === "ชั้นปี 1") {
+                  filterCondition = true;
+              } else if (secondyear && course.studentyear === "ชั้นปี 2") {
+                  filterCondition = true;
+              } else if (thirdyear && course.studentyear === "ชั้นปี 3") {
+                  filterCondition = true;            
 
-      setCourseYear(filteredData);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+              } else if (fourthyear && course.studentyear === "ชั้นปี 4") {
+                  filterCondition = true;
+              } else {
+                  filterCondition = false;
+              }
+
+              if (!professer.length) {
+                  filterCondition = filterCondition && true;
+              } else if (professer.includes(course.professor)) {
+                filterCondition = filterCondition && true;
+              } else {
+                  filterCondition = filterCondition && false;
+              }
+
+
+              if (!lecturecheck && !practicecheck){
+                filterCondition = filterCondition && true;
+              }
+              else if (lecturecheck && course.lecture == 1){
+                filterCondition = filterCondition && true;
+              }else if (practicecheck && course.practice == 1 ){
+                filterCondition = filterCondition && true;
+              }else{
+                filterCondition = filterCondition && false;
+              }
+              
+              if (!main && !sai) {
+                  filterCondition = filterCondition && true; // Display all courses if both main and sai are not selected
+              } else if (main && course.catagory === "วิชาหลัก") {
+                  filterCondition = filterCondition && true;
+              } else if (sai && course.catagory === "วิชาเลือก") {
+                  filterCondition = filterCondition && true;
+              } else {
+                  filterCondition = filterCondition && false;
+              }
+              if (!professer.length) {
+                  filterCondition = filterCondition && true;
+              } else if (professer.includes(course.professor)) {
+                filterCondition = filterCondition && true;
+              } else {
+                  filterCondition = filterCondition && false;
+              }
+
+              return filterCondition;
+          });
+
+          setCourseYear(filteredData);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+        } else {
+          Swal.fire({
+              icon: 'error',
+              title: 'ไม่สามารถแก้ไขได้',
+              text: 'เนื่องจาก : ชื่อและนามสกุลไม่ตรงกับชื่อผู้สอน',
+          });
+      }
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'ไม่สามารถแก้ไขได้',
+            html: `เนื่องจาก : หมดเวลาลงทะเบียนแล้ว <br>`,
+          });
+    }
   }
 
   useEffect(() => {
     if (year && semester) {
       Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`).then(response => {
-        // Filter the data based on the selected years and categories
+        const filteredData = response.data.results.filter(course => {
+          let filterCondition;
+          console.log(course)
+            if (!firstyear && !secondyear && !thirdyear && !fourthyear) {
+                filterCondition = true; 
+            } else if (firstyear && course.studentyear === "ชั้นปี 1") {
+                filterCondition = true;
+            } else if (secondyear && course.studentyear === "ชั้นปี 2") {
+                filterCondition = true;
+            } else if (thirdyear && course.studentyear === "ชั้นปี 3") {
+                filterCondition = true;            
+
+            } else if (fourthyear && course.studentyear === "ชั้นปี 4") {
+                filterCondition = true;
+            } else {
+                filterCondition = false;
+            }
+
+            if (!professer.length) {
+                filterCondition = filterCondition && true;
+            } else if (professer.includes(course.professor)) {
+              filterCondition = filterCondition && true;
+            } else {
+                filterCondition = filterCondition && false;
+            }
+
+            if (!lecturecheck && !practicecheck){
+              filterCondition = filterCondition && true;
+            }
+            else if (lecturecheck && course.lecture == 1){
+              filterCondition = filterCondition && true;
+            }else if (practicecheck && course.practice == 1 ){
+              filterCondition = filterCondition && true;
+            }else{
+              filterCondition = filterCondition && false;
+            }
+
+            if (!main && !sai) {
+                filterCondition = filterCondition && true; // Display all courses if both main and sai are not selected
+            } else if (main && course.catagory === "วิชาหลัก") {
+                filterCondition = filterCondition && true;
+            } else if (sai && course.catagory === "วิชาเลือก") {
+                filterCondition = filterCondition && true;
+            } else {
+                filterCondition = filterCondition && false;
+            }
+            if (!professer.length) {
+                filterCondition = filterCondition && true;
+            } else if (professer.includes(course.professor)) {
+              filterCondition = filterCondition && true;
+            } else {
+                filterCondition = filterCondition && false;
+            }
+
+            return filterCondition;
+        });
+
+        setCourseYear(filteredData);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
+  }, [year, semester, firstyear, secondyear, thirdyear, fourthyear, main, sai,professer,lecturecheck,practicecheck]);
+  
+
+  const deleteschedule = (id,professor) => {
+    const professorParts = professor.split(' ');
+    const professorFirstName = professorParts[0];
+    const professorLastName = professorParts[1];
+    if ((date >= startdate && date <= enddate) || role === 'admin') {
+      if ((name === professorFirstName && surname === professorLastName) || role === 'admin') {
+      Axios.delete(`http://localhost:3000/deleteschedule/single/${id}`).then(response =>
+        {
+          setCourseYear(
+            courseyear.filter((val) =>{
+              return val.id !== id;
+            })
+          )
+        }
+      )
+      .then(() => {
+        return Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`);
+      })
+      .then(response => {
         const filteredData = response.data.results.filter(course => {
           let filterCondition;
           console.log(course)
@@ -159,78 +339,22 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
       .catch(error => {
         console.error(error);
       });
-    }
-  }, [year, semester, firstyear, secondyear, thirdyear, fourthyear, main, sai,professer]);
-  
-
-  const deleteschedule = (id) => {
-    Axios.delete(`http://localhost:3000/deleteschedule/single/${id}`).then(response =>
-      {
-        setCourseYear(
-          courseyear.filter((val) =>{
-            return val.id !== id;
-          })
-        )
+      } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'ไม่สามารถลบได้',
+            text: 'เนื่องจาก ชื่อและนามสกุลไม่ตรงกับชื่อผู้สอน',
+        });
       }
-    )
-    .then(() => {
-      // Fetch updated data after the patch operation is successful
-      return Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`);
-    })
-    .then(response => {
-      // Filter the data based on the selected years and categories
-      const filteredData = response.data.results.filter(course => {
-        let filterCondition;
-        console.log(course)
-          if (!firstyear && !secondyear && !thirdyear && !fourthyear) {
-              filterCondition = true; 
-          } else if (firstyear && course.studentyear === "ชั้นปี 1") {
-              filterCondition = true;
-          } else if (secondyear && course.studentyear === "ชั้นปี 2") {
-              filterCondition = true;
-          } else if (thirdyear && course.studentyear === "ชั้นปี 3") {
-              filterCondition = true;            
-
-          } else if (fourthyear && course.studentyear === "ชั้นปี 4") {
-              filterCondition = true;
-          } else {
-              filterCondition = false;
-          }
-
-          if (!professer.length) {
-              filterCondition = filterCondition && true;
-          } else if (professer.includes(course.professor)) {
-            filterCondition = filterCondition && true;
-          } else {
-              filterCondition = filterCondition && false;
-          }
-
-          if (!main && !sai) {
-              filterCondition = filterCondition && true; // Display all courses if both main and sai are not selected
-          } else if (main && course.catagory === "วิชาหลัก") {
-              filterCondition = filterCondition && true;
-          } else if (sai && course.catagory === "วิชาเลือก") {
-              filterCondition = filterCondition && true;
-          } else {
-              filterCondition = filterCondition && false;
-          }
-          if (!professer.length) {
-              filterCondition = filterCondition && true;
-          } else if (professer.includes(course.professor)) {
-            filterCondition = filterCondition && true;
-          } else {
-              filterCondition = filterCondition && false;
-          }
-
-          return filterCondition;
+    } else {
+      Swal.fire({
+          icon: 'error',
+          title: 'ไม่สามารถลบได้',
+          html: `เนื่องจาก : หมดเวลาลงทะเบียนแล้ว <br>
+          กรุณาติดต่อผู้จัดตาราง <br>`,
       });
-
-      setCourseYear(filteredData);
-    })
-    .catch(error => {
-      console.error(error);
-    });
   }
+}
   const submit = () => {
     Swal.fire({
       color:"#000",
@@ -246,7 +370,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
       cancelButtonText: `ยกเลิก`
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteschedule(id)
+        deleteschedule(id,professor)
       }else if (result.dismiss === Swal.DismissReason.cancel) {
         document.getElementById(`editlecturecorrect-${id}`).click();
       }
@@ -345,6 +469,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
                                 course={course}
                                 stackdata={stackdata}
                                 setDay={setDay}
+                                setRoom={setRoom}
                                 setStart_time={setStart_time}
                                 setEnd_time={setEnd_time}
                                 submit={submit}
@@ -360,6 +485,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,otheryea
                                 overlappingLectures={sortedCourses}
                                 stackdata={stackdata}
                                 setDay={setDay}
+                                setRoom={setRoom}
                                 setStart_time={setStart_time}
                                 setEnd_time={setEnd_time}
                                 deleteschedule={deleteschedule}

@@ -10,11 +10,13 @@ const saltRounds = 10; // จำนวนรอบในการผสม
 const xlsx = require("xlsx");
 app.use(express.json());
 
-
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true 
+    saveUninitialized: true,
+    cookie : {
+        maxAge : 600000
+    }
 }));
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -123,10 +125,8 @@ app.post("/google", async (req, res) =>{
     }
 });
 
-
 app.get("/accept/:status", async (req,res) => {
     const { status } = req.params;   
-
     try {
         connection.query("SELECT * FROM idUser WHERE status = ? ", [status], (err, results, fields) => {
             if (err) {
@@ -137,6 +137,22 @@ app.get("/accept/:status", async (req,res) => {
         });
     } catch (err) {
         console.log(err);
+        return res.status(500).send();
+    }
+});
+
+app.get("/navbar/:status", async (req, res) => {
+    const { status } = req.params;
+    try {
+        connection.query("SELECT * FROM idUser WHERE status = ? ", [status], (err, results, fields) => {
+            if (err) {
+                console.error(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({ results });
+        });
+    } catch (err) {
+        console.error('Error handling request:', err);
         return res.status(500).send();
     }
 });
@@ -152,6 +168,85 @@ app.get('/logout', (req, res) => {
     });
 });
 
+app.patch("/user/regis", async (req,res) => {
+    const { 
+        startdate ,
+        enddate
+        } = req.body;
+    try {
+        connection.query("UPDATE registration SET startdate = ?, enddate = ?",
+        [ 
+            startdate ,
+            enddate
+        ]
+        , (err, results,fields) =>{
+            if (err) {
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({results});
+        })
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+})
+
+app.get("/user/readregis", async (req,res) => {
+    try {
+        connection.query("SELECT * FROM registration", (err, results,fields) =>{
+            if (err) {
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({results});
+        })
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+
+})
+
+app.post('/confirm/:email', (req, res) => {
+    const email = req.params.email;
+    const status = req.body.status;
+    try {
+        // สมมติว่าตาราง idUser มีฟิลด์ email เป็น primary key
+        connection.query("UPDATE idUser SET status = ? WHERE email = ? ", [status, email], (err, results, fields) => {
+            if (err) { 
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({results});
+        })
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+
+})
+
+app.delete('/delete/:email', async (req, res) => {
+    const { email } = req.params;  
+    try {
+        connection.query(`DELETE FROM idUser WHERE email = ?`, email, (err, results, fields) => {
+            if (err) {
+                console.log(err);
+                return res.status(400).send();
+            }
+            return res.status(200).json({results});
+        })
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send();
+    }
+})
+
+
+
+
+
 app.post("/user/addcourse/createlecture", async (req, res) => {
     const { 
          year_lecture,
@@ -160,6 +255,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
          subject_lecture , 
          num_students_lecture , 
          sec_lecture , 
+         classroom_lecture ,
          day_lecture , 
          start_time_lecture , 
          end_time_lecture ,
@@ -170,7 +266,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,lecture,studentyear) VALUES(?,?,?,?,?,?,?, ?,?,?, ?, ?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec,room, day, start_time, end_time, catagory ,lecture,studentyear) VALUES(?,?,?,?,?,?,?,?, ?,?,?, ?, ?)",
             [ 
                 year_lecture,
                 semester_lecture ,
@@ -178,6 +274,7 @@ app.post("/user/addcourse/createlecture", async (req, res) => {
                 subject_lecture , 
                 num_students_lecture , 
                 sec_lecture , 
+                classroom_lecture ,
                 day_lecture , 
                 start_time_lecture , 
                 end_time_lecture ,
@@ -206,17 +303,18 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
          subject_practice , 
          num_students_practice , 
          sec_practice , 
+         classroom_practice,
          day_practice , 
          start_time_practice , 
          end_time_practice ,
          catagory_practice,
          practice ,
-         studentyear_practice
+         studentyear_practice,
          } = req.body;
 
     try{
         connection.query(
-            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec, day, start_time, end_time, catagory ,practice,studentyear) VALUES(?,?,?,?,?,?,?, ?,?, ?, ?, ?)",
+            "INSERT INTO schedules(year, semester , professor , subject, num_students, sec,room, day, start_time, end_time, catagory ,practice,studentyear) VALUES(?,?,?,?,?,?,?,?, ?,?, ?, ?, ?)",
             [ 
                 year_practice,
                 semester_practice ,
@@ -224,6 +322,7 @@ app.post("/user/addcourse/createpractice", async (req, res) => {
                 subject_practice , 
                 num_students_practice , 
                 sec_practice , 
+                classroom_practice,
                 day_practice , 
                 start_time_practice , 
                 end_time_practice ,
@@ -274,6 +373,7 @@ app.get("/readschedule", async (req,res) => {
         return res.status(500).send();
     }
 })
+
 app.get("/readschedule/:year.:semester", async (req,res) => {
     const { year } = req.params;  
     const { semester } = req.params;  
@@ -292,6 +392,7 @@ app.get("/readschedule/:year.:semester", async (req,res) => {
         return res.status(500).send();
     }
 });
+
 app.get("/readcourse/single/:year", async (req, res) => {
     const { year } = req.params;  
     try {
@@ -307,6 +408,7 @@ app.get("/readcourse/single/:year", async (req, res) => {
         return res.status(500).send();
     }
 });
+
 app.delete("/deleteschedule/single/:id", async (req, res) => {
     const { id } = req.params;  
     try {
@@ -322,21 +424,24 @@ app.delete("/deleteschedule/single/:id", async (req, res) => {
         return res.status(500).send();
     }
 });
+
 app.patch("/updateschedule", async (req,res) => {
     const { 
         id,
         subject_edit ,
         num_students_edit , 
         sec_edit , 
+        room_edit ,
         day_edit , 
         start_time_edit , 
         end_time_edit , 
         } = req.body;
     try {
-        connection.query("UPDATE schedules SET subject = ?, num_students = ?, sec = ?, day = ?, start_time = ?, end_time = ? WHERE id = ?",
+        connection.query("UPDATE schedules SET subject = ?, num_students = ?, sec = ? , room = ?, day = ?, start_time = ?, end_time = ? WHERE id = ?",
         [ subject_edit ,
           num_students_edit , 
           sec_edit , 
+          room_edit ,
           day_edit , 
           start_time_edit , 
           end_time_edit ,
@@ -366,7 +471,7 @@ connection.connect((err) => {
     const year = req.body.year;
     console.log("Selected year:", year);
     const dataserver = req.body.dataserver;
-    
+
     connection.query(
       "SELECT COUNT(*) AS count FROM courses WHERE year = ?",
       [year],

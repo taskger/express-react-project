@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
 
-
+.dropdown-item2{
+    color: black;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    width: 100px;
+    height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
 div .nav-link.admin {
     font-family: 'Mitr', sans-serif;
     color: white;
