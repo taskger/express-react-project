@@ -8,6 +8,8 @@ const bcrypt = require('bcrypt');
 const { request } = require('http');
 const saltRounds = 10; // จำนวนรอบในการผสม
 const xlsx = require("xlsx");
+require('dotenv').config();
+
 app.use(express.json());
 
 app.use(session({
@@ -25,13 +27,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client' , 'src' , 'components' , 'Admin' , 'Home')));
 
 
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    port: "3306",
-    database: "se"
-})
+const connection = mysql.createConnection(process.env.DATABASE_URL);
+
 
 app.post('/check', async (request, response) => {
     const { username, password } = request.body;
