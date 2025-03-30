@@ -29,7 +29,7 @@ function LoginForm(){
         event.preventDefault();
         
         try {
-            const response = await Axios.post('http://localhost:3000/check', { username, password });
+            const response = await Axios.post('https://projectschedule-server.vercel.app/check', { username, password });
             
             if (response.status === 200) {
                 localStorage.setItem('user',JSON.stringify({
