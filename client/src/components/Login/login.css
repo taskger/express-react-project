@@ -62,7 +62,7 @@ div .empty h1{
 button.button-login{
   display: grid;
   place-self: center;
-  margin-top: 60px;
+  margin-top: 40px;
   width: 363px;
   height: 74px;
   font-size: 28px;
@@ -81,11 +81,11 @@ button.button-login:hover{
 
 .Rabop-font {
   
-  font-size: 64px;
+  font-size: 44px;
   color: #007E70;
   font-family: Roboto;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 40px;
   text-shadow: #000000;
 }
 
@@ -101,8 +101,8 @@ button.button-login:hover{
 
 .four-font {
   text-align: center;
-  margin-top: 30px;
-  padding: 30px;
+  margin-top: 20px;
+  padding: 20px;
 }
 
 .outline-login-google  div{
