@@ -38,7 +38,7 @@ function App() {
   }
 
   useEffect(() => {
-    Axios.get(`http://localhost:3000/user/readregis`)
+    Axios.get(`https://projectschedule-server.vercel.app/user/readregis`)
       .then(response => {
         const startDate = new Date(response.data.results[0].startdate);
         const endDate = new Date(response.data.results[0].enddate);
