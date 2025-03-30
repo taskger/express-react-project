@@ -14,7 +14,7 @@
     {
       "src": "/(.*)",
       "dest": "./index.js"
-    }a
+    }
   ],
   "env": {
     "NODE_ENV": "production"
