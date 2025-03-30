@@ -85,12 +85,10 @@ function LoginForm(){
    
   return (
     <div className="container-login">
-        <div className='img-kaset'>
-            <img src ="img/kaset.png" className="logo" alt="logo"/>
-        </div>
+
         <div className='container-input'>
             <div className='empty'>
-                <h1 className='Rabop-font'>ระบบจัดตารางสอน</h1>
+                <h1 className='Rabops-font'>ระบบจัดตารางสอน</h1>
             </div>
             <form onSubmit={handleSubmit}>
             <div className='input-all'>

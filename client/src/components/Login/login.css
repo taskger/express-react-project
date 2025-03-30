@@ -9,16 +9,12 @@ div .empty h1{
 
 }
 .container-login {
-  display: flex;
   height: 100%;
 }
 
-.img-kaset {
-  width: 1300px;
-}
 
 .logo {
-  width: 92.94%;
+  width: 100%;
 }
 
 .container-input {
@@ -27,12 +23,13 @@ div .empty h1{
   padding-left: 20px;
 }
 .empty {
-  height: 200px;
+  height: auto;
+  font-size: 20px;
+  text-align: center;
+  color: #96BB7C;
 }
 
-.input-all {
-  height: 600px;
-}
+
 
 .input-User {
   width: 80%;
@@ -63,6 +60,9 @@ div .empty h1{
 
 
 button.button-login{
+  display: grid;
+  place-self: center;
+  margin-top: 80px;
   width: 362px;
   height: 74px;
   font-size: 28px;
@@ -71,10 +71,8 @@ button.button-login{
   background-color: #96BB7C;
   color: #FFFFFF;
   display: block;
-  margin: auto;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
-
 }
 button.button-login:hover{
   background-color: #668154;
@@ -107,20 +105,14 @@ button.button-login:hover{
   height: 90px;
 }
 
-.login-google{
-  padding-left:10px; 
-  width: 100%;
-  height: 86px;
-  border-radius: 10px;
-  background-color: #D8D8D8;
-  border: 0px;
-  display: flex;
-  margin: auto;
-  font-size: 24px;
-  padding-left: 25px;
+.outline-login-google  div{
+  display: grid;
+  place-self: center;
+  width: 400px;
+  height: 70px;
 }
-
-.outline-login-google {
-  display: flex;
-  margin: auto;
+.outline-login-google  div:hover{
+  background-color:rgba(200, 195, 195, 0.1);
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
+  
 }
