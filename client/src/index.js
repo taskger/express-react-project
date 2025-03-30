@@ -9,13 +9,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap/js/dist/dropdown';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <GoogleOAuthProvider clientId="1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com">
     <App />
+    </GoogleOAuthProvider>
 
   </React.StrictMode>,
 );

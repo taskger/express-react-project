@@ -1,18 +1,22 @@
 
 import "./index.css"; // Import the external CSS file
 import { Link } from 'react-router-dom'; // Import Link from React Router
-import { GoogleLogout } from 'react-google-login';
+import { googleLogout } from '@react-oauth/google';
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 const Navbar = () => {
-  const clientId = "1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com";
-  const logout = (res) => {
-    console.log("Logging out...");
-    localStorage.removeItem('user');
-    window.location.href = 'http://localhost:3000/';
-  }
+
   
+  const handleLogout = () => {
+    try {
+      googleLogout(); // Call Google logout
+      localStorage.removeItem('user'); // Clear local storage
+      window.location.href = 'http://localhost:3000/'; // Redirect to home
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -62,11 +66,9 @@ const Navbar = () => {
                 <p>Loading...</p>
               )}
               <div className="google-logout-navbar">
-                <GoogleLogout
-                  clientId={clientId}
-                  buttonText="Logout"
-                  onLogoutSuccess={logout}
-                />
+              <button onClick={handleLogout}>
+                Logout
+              </button>
               </div>
             </ul>
           </div>

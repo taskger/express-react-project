@@ -3,27 +3,27 @@ import "./login.css";
 
 
 import { gapi } from "gapi-script";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from '@react-oauth/google';
 import { useState, useEffect } from "react";
 import Axios from 'axios';
 import Swal from 'sweetalert2'
+import { jwtDecode } from "jwt-decode";
 
 
 function LoginForm(){
-    const clientId = "1012567060456-cj1br6iuqir1rnq2q0du3vb1h769ihm1.apps.googleusercontent.com";
 
     const [username,setUser] = useState("");
     const [password,setPassword] = useState("");
 
-    useEffect(() => {
-        const initClient = () => {
-            gapi.client.init ({
-                clientID : clientId,
-                scope: ''
-            })
-        }
-        gapi.load("client:auth2", initClient)
-    }, [])
+    // useEffect(() => {
+    //     const initClient = () => {
+    //         gapi.client.init ({
+    //             clientID : clientId,
+    //             scope: ''
+    //         })
+    //     }
+    //     gapi.load("client:auth2", initClient)
+    // }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -43,41 +43,37 @@ function LoginForm(){
         }
     };
     
-    const onSuccess = (res) => {
-        const { email, familyName, givenName, imageUrl } = res.profileObj;
-        console.log(email)
-        console.log(givenName)
-        console.log(familyName)
-        console.log(imageUrl)
-        Axios.post('http://localhost:3000/google',{
-            Name : givenName ,
-            Surname : familyName,
-            e_mail : email ,
-            Img : imageUrl,
-            Role : "user" ,
+    const onSuccess = (decoded) => {
+        // decoded now contains the JWT payload
+        const { email, family_name, given_name, picture } = decoded;
+        
+        Axios.post('http://localhost:3000/google', {
+            Name: given_name,
+            Surname: family_name,
+            e_mail: email,
+            Img: picture,
+            Role: "user",
             Status: false
-        })  .then(response => {
+        }).then(response => {
             if (response.status === 200) {
-                localStorage.setItem('user',JSON.stringify({
-                    name:givenName,
-                    surname:familyName,
+                localStorage.setItem('user', JSON.stringify({
+                    name: given_name,
+                    surname: family_name,
                     e_mail: email,
-                    img : imageUrl,
-                    role:"user"
-                })) // Assuming successful login response has status 200
-                window.location.href = 'http://localhost:3000/user'; // Redirect to '/user' page
+                    img: picture,
+                    role: "user"
+                }))
+                window.location.href = 'http://localhost:3000/user';
             } else if (response.status === 204) {
                 Swal.fire({
-                    color:"#000",
-                    width:500,
+                    color: "#000",
+                    width: 500,
                     html: "โปรดรอการยืนยัน"
-                  });  // Handle login failure (e.g., display error message)
+                });
             }
-          })
-          .catch(error => {
+        }).catch(error => {
             console.error('Error logging in:', error);
-            // Handle login errors (e.g., network issues, server errors)
-          });
+        });
     }
 
     const [showPassword,setShowPassword] = useState(false);
@@ -122,14 +118,14 @@ function LoginForm(){
                 </div>
                 <h1 className="four-font">หรือ</h1>
                     <div className="outline-login-google">
-                        <GoogleLogin
-                            className="login-google"
-                            clientId={clientId}
-                            buttonText = "เข้าสู่ระบบผ่าน Google"
-                            onSuccess={onSuccess}
-                            cookiePolicy={"single_host_origin"}
-                            isSignedIn={true}
-                            prompt="login"
+                    <GoogleLogin
+                        onSuccess={(credentialResponse) => {
+                            const decoded = jwtDecode(credentialResponse.credential);
+                            onSuccess(decoded);
+                        }}
+                        onError={() => {
+                            console.log('Login Failed');
+                        }}
                         />
                     </div>
                 </div>

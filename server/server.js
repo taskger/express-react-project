@@ -30,9 +30,7 @@ app.use(express.static(path.join(__dirname, 'client' , 'src' , 'components' , 'A
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 
-app.use("/",(req,res) => {
-    res.send("server is running")
-});
+
 app.post('/check', async (request, response) => {
     const { username, password } = request.body;
     console.log("Received username:", username);
