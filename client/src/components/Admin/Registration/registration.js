@@ -48,7 +48,7 @@ const Registration = () => {
 
   const update = () => {
     Axios.patch(`https://projectschedule-server.vercel.app/user/regis`, {
-      startdate: startDate,
+      startdate: startDate-1,
       enddate: endDate
     })
     .catch(error => {
@@ -62,7 +62,7 @@ const Registration = () => {
         const startDate = new Date(response.data.results[0].startdate);
         const endDate = new Date(response.data.results[0].enddate);
 
-        startDate.setDate(startDate.getDate());
+        startDate.setDate(startDate.getDate() + 1);
         endDate.setDate(endDate.getDate() + 1);
 
         const fixstartDate = startDate.toISOString().split('T')[0];
