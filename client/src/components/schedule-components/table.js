@@ -42,7 +42,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai
   }
 
   useEffect(() => {
-    Axios.get(`http://localhost:3000/user/readregis`)
+    Axios.get(`https://projectschedule-server.vercel.app/user/readregis`)
       .then(response => {
         const startDate = new Date(response.data.results[0].startdate);
         const endDate = new Date(response.data.results[0].enddate);
@@ -86,7 +86,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai
     }
     if ((date >= startdate && date <= enddate) || (role === 'admin')) {
       if ((name === professorFirstName && surname === professorLastName) || role === 'admin') {
-        Axios.patch(`http://localhost:3000/updateschedule`, {
+        Axios.patch(`https://projectschedule-server.vercel.app/updateschedule`, {
           id: id,
           subject_edit: subject,
           num_students_edit: num_students,
@@ -116,7 +116,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai
             ${day} ${start_time} - ${end_time}<br>
             ห้องเรียน: ${room}`
          });       
-          return Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`);
+          return Axios.get(`https://projectschedule-server.vercel.app/readschedule/${year}.${semester}`);
           
         })
         .then(response => {
@@ -202,7 +202,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai
 
   useEffect(() => {
     if (year && semester) {
-      Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`).then(response => {
+      Axios.get(`https://projectschedule-server.vercel.app/readschedule/${year}.${semester}`).then(response => {
         const filteredData = response.data.results.filter(course => {
           let filterCondition;
           console.log(course)
@@ -275,7 +275,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai
     const professorLastName = professorParts[1];
     if ((date >= startdate && date <= enddate) || role === 'admin') {
       if ((name === professorFirstName && surname === professorLastName) || role === 'admin') {
-      Axios.delete(`http://localhost:3000/deleteschedule/single/${id}`).then(response =>
+      Axios.delete(`https://projectschedule-server.vercel.app/deleteschedule/single/${id}`).then(response =>
         {
           setCourseYear(
             courseyear.filter((val) =>{
@@ -285,7 +285,7 @@ const Table = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,main,sai
         }
       )
       .then(() => {
-        return Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`);
+        return Axios.get(`https://projectschedule-server.vercel.app/readschedule/${year}.${semester}`);
       })
       .then(response => {
         const filteredData = response.data.results.filter(course => {

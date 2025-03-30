@@ -36,7 +36,7 @@ const addDatacourse = () => {
     });
     return; // Prevent further processing if no data is available
   }
-  else {Axios.post('http://localhost:3000/create',{
+  else {Axios.post('https://projectschedule-server.vercel.app/create',{
     dataserver : data,
     year: selectedValue,
   }).then((response) => {

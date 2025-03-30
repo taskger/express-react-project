@@ -47,7 +47,7 @@ function LoginForm(){
         // decoded now contains the JWT payload
         const { email, family_name, given_name, picture } = decoded;
         
-        Axios.post('http://localhost:3000/google', {
+        Axios.post('https://projectschedule-server.vercel.app/google', {
             Name: given_name,
             Surname: family_name,
             e_mail: email,

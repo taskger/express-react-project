@@ -47,7 +47,7 @@ const Registration = () => {
   }, [startDate, endDate]);
 
   const update = () => {
-    Axios.patch(`http://localhost:3000/user/regis`, {
+    Axios.patch(`https://projectschedule-server.vercel.app/user/regis`, {
       startdate: startDate,
       enddate: endDate
     })
@@ -57,7 +57,7 @@ const Registration = () => {
     
   }
   useEffect(() => {
-    Axios.get('http://localhost:3000/user/readregis')
+    Axios.get('https://projectschedule-server.vercel.app/user/readregis')
       .then(response => {
         const startDate = new Date(response.data.results[0].startdate);
         const endDate = new Date(response.data.results[0].enddate);

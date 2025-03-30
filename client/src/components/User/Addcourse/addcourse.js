@@ -92,7 +92,7 @@ const Schedule = () => {
   const [schedule, setSchedule] = useState(null); //เช็ควิชาซ้ำ
   console.log(courseyear)
   useEffect(() => { //ดึงหลักสูตรทั้งหมดใน table
-    Axios.get(`http://localhost:3000/readcourse`).then(response => 
+    Axios.get(`https://projectschedule-server.vercel.app/readcourse`).then(response => 
       {
         setCourseYear(response.data.results)
       })
@@ -101,7 +101,7 @@ const Schedule = () => {
       });
   },[]);
   useEffect(() => {
-    Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`).then(response =>
+    Axios.get(`https://projectschedule-server.vercel.app/readschedule/${year}.${semester}`).then(response =>
       {
         setSchedule(response.data.results)
       })
@@ -111,7 +111,7 @@ const Schedule = () => {
   },[year,semester]);
 
   useEffect(() => { //ดีงข้อมูลจากปีที่เลือก
-    Axios.get(`http://localhost:3000/readcourse/single/${selectcourseyear}`).then(response => 
+    Axios.get(`https://projectschedule-server.vercel.app/readcourse/single/${selectcourseyear}`).then(response => 
     {
 
       setListcourse(response.data.results)
@@ -356,7 +356,7 @@ const Schedule = () => {
     }
 
     if (selectedLecture === true){
-      Axios.post('http://localhost:3000/user/addcourse/createlecture',{
+      Axios.post('https://projectschedule-server.vercel.app/user/addcourse/createlecture',{
         year_lecture: year,
         semester_lecture: semester,
         professor_lecture: professor,
@@ -374,7 +374,7 @@ const Schedule = () => {
       });
     }
     if (selectedPractice === true){
-      Axios.post('http://localhost:3000/user/addcourse/createpractice',{
+      Axios.post('https://projectschedule-server.vercel.app/user/addcourse/createpractice',{
         year_practice: year,
         semester_practice: semester,
         professor_practice: professor,

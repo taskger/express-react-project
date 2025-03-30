@@ -88,14 +88,14 @@ const Schedule = () => {
       });
       return; // Prevent further processing if no data is available
     }else {
-      Axios.get(`http://localhost:3000/readschedule/${year}.${semester}`)
+      Axios.get(`https://projectschedule-server.vercel.app/readschedule/${year}.${semester}`)
     .then((response) => {
       if (response.status === 200) {
         // รับข้อมูลตารางเรียน
         const scheduleData = response.data.results;
 
         // ดึงข้อมูลจากตารางอื่น ๆ ที่ต้องการ เช่นข้อมูลวิชา
-        Axios.get(`http://localhost:3000/readcourse/`)
+        Axios.get(`https://projectschedule-server.vercel.app/readcourse/`)
           .then((response) => {
             if (response.status === 200) {
               const courseData = response.data.results;

@@ -88,7 +88,7 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
   const [data, setData] = useState(null);
 
   useEffect(() => {
-      Axios.get(`http://localhost:3000/accept/${1}`)
+      Axios.get(`https://projectschedule-server.vercel.app/accept/${1}`)
           .then(response => {
               setData(response.data.results);
           })

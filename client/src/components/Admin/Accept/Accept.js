@@ -6,7 +6,7 @@ function Accept() {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        Axios.get(`http://localhost:3000/accept/${0}`)
+        Axios.get(`https://projectschedule-server.vercel.app/accept/${0}`)
             .then(response => {
                 setData(response.data.results); // Assuming the response contains the data you need
                 console.log(response.data); // Log the response data
@@ -27,7 +27,7 @@ function Accept() {
         setData(updatedData); // อัปเดตข้อมูลใหม่ใน state
     
         // ส่งคำขอ POST เพื่อบันทึกการเปลี่ยนแปลงลงในฐานข้อมูล
-        Axios.post(`http://localhost:3000/confirm/${email}`, { status: true })
+        Axios.post(`https://projectschedule-server.vercel.app/confirm/${email}`, { status: true })
             .then(response => {
                 console.log("Confirmation successful:", response.data);
                 window.location.reload(); // รีโหลดหน้าหลังจากการยืนยันเสร็จสิ้น
@@ -43,7 +43,7 @@ function Accept() {
         setData(updatedData); // อัปเดตข้อมูลใหม่ใน state
     
         // ส่งคำขอ DELETE เพื่อลบข้อมูลออกจากฐานข้อมูล
-        Axios.delete(`http://localhost:3000/delete/${email}`)
+        Axios.delete(`https://projectschedule-server.vercel.app/delete/${email}`)
             .then(response => {
                 console.log("Deletion successful:", response.data);
                 window.location.reload();
