@@ -12,7 +12,7 @@ const Navbar = () => {
     try {
       googleLogout(); // Call Google logout
       localStorage.removeItem('user'); // Clear local storage
-      window.location.href = 'http://localhost:3000/'; // Redirect to home
+      window.location.href = 'http://projectschedule.vercel.app/'; // Redirect to home
     } catch (error) {
       console.error('Logout error:', error);
     }

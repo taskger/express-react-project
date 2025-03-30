@@ -63,7 +63,7 @@ function LoginForm(){
                     img: picture,
                     role: "user"
                 }))
-                window.location.href = 'http://localhost:3000/user';
+                window.location.href = 'http://projectschedule.vercel.app/user';
             } else if (response.status === 204) {
                 Swal.fire({
                     color: "#000",
