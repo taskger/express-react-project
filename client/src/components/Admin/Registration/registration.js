@@ -62,7 +62,7 @@ const Registration = () => {
         const startDate = new Date(response.data.results[0].startdate);
         const endDate = new Date(response.data.results[0].enddate);
 
-        startDate.setDate(startDate.getDate() + 1);
+        startDate.setDate(startDate.getDate());
         endDate.setDate(endDate.getDate() + 1);
 
         const fixstartDate = startDate.toISOString().split('T')[0];
