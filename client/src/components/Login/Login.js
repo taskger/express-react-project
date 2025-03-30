@@ -35,7 +35,7 @@ function LoginForm(){
                 localStorage.setItem('user',JSON.stringify({
                     role:"admin"
                 }))
-                window.location.href = 'http://localhost:3000/admin';
+                window.location.href = 'http://localhost/admin';
             }
         } catch (error) {
             console.error('Error:', error);
