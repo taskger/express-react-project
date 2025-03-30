@@ -11,6 +11,9 @@ const xlsx = require("xlsx");
 require('dotenv').config();
 const cors = require('cors');
 
+app.use('/', (req,res) => {
+    res('server running')
+})
 app.use(cors({
     origin: ['http://localhost:3000', 'https://projectschedule.vercel.app'],
     credentials: true,
