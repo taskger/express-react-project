@@ -9,6 +9,14 @@ const { request } = require('http');
 const saltRounds = 10; // จำนวนรอบในการผสม
 const xlsx = require("xlsx");
 require('dotenv').config();
+const cors = require('cors');
+
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://projectschedule.vercel.app'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.json());
 
