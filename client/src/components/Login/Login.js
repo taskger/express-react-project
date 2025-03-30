@@ -35,7 +35,7 @@ function LoginForm(){
                 localStorage.setItem('user',JSON.stringify({
                     role:"admin"
                 }))
-                window.location.href = 'http://localhost/admin';
+                window.location.href = 'https://projectschedule.vercel.app/admin';
             }
         } catch (error) {
             console.error('Error:', error);
@@ -63,7 +63,7 @@ function LoginForm(){
                     img: picture,
                     role: "user"
                 }))
-                window.location.href = 'http://projectschedule.vercel.app/user';
+                window.location.href = 'https://projectschedule.vercel.app/user';
             } else if (response.status === 204) {
                 Swal.fire({
                     color: "#000",

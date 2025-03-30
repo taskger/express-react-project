@@ -42,7 +42,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
 
 
   const edit = () => {
-    Axios.patch(`http://projectschedule.vercel.app/updateschedule`, {
+    Axios.patch(`https://projectschedule.vercel.app/updateschedule`, {
       id: id,
       subject_edit: subject,
       num_students_edit: num_students,
@@ -53,7 +53,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
     })
     .then(() => {
       // Fetch updated data after the patch operation is successful
-      return Axios.get(`http://projectschedule.vercel.app/readschedule/${year}.${semester}`);
+      return Axios.get(`https://projectschedule.vercel.app/readschedule/${year}.${semester}`);
     })
     .then(response => {
       // Filter the data based on the selected years and categories
@@ -83,7 +83,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
 
   useEffect(() => {
     if (year && semester) {
-      Axios.get(`http://projectschedule.vercel.app/readschedule/${year}.${semester}`).then(response => {
+      Axios.get(`https://projectschedule.vercel.app/readschedule/${year}.${semester}`).then(response => {
         // Filter the data based on the selected years and categories
         const filteredData = response.data.results.filter(course => {
           const filterCondition =
@@ -113,7 +113,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
 
   console.log(courseyear)
   const deleteschedule = () => {
-    Axios.delete(`http://projectschedule.vercel.app/deleteschedule/single/${id}`).then(response =>
+    Axios.delete(`https://projectschedule.vercel.app/deleteschedule/single/${id}`).then(response =>
       {
         setCourseYear(
           courseyear.filter((val) =>{
@@ -124,7 +124,7 @@ const Schedule = ({year,semester,firstyear,secondyear,thirdyear,fourthyear,other
     )
     .then(() => {
       // Fetch updated data after the patch operation is successful
-      return Axios.get(`http://projectschedule.vercel.app/readschedule/${year}.${semester}`);
+      return Axios.get(`https://projectschedule.vercel.app/readschedule/${year}.${semester}`);
     })
     .then(response => {
       // Filter the data based on the selected years and categories

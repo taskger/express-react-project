@@ -6,7 +6,7 @@ const Navbar = () => {
   const logout = (res) => {
     console.log("Logging out...");
     localStorage.removeItem('user');
-    window.location.href = 'http://projectschedule.vercel.app/';
+    window.location.href = 'https://projectschedule.vercel.app/';
   }
   return (
     <div>
