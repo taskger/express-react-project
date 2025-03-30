@@ -105,7 +105,11 @@ button.button-login:hover{
   height: 90px;
 }
 
+.outline-login-google  div{
+  display: grid;
+  place-self: center;
 
+}
 .outline-login-google  div:hover{
   background-color:rgba(200, 195, 195, 0.1);
   transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
