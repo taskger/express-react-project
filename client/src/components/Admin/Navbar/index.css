@@ -55,9 +55,9 @@ div .nav-link:hover {
     }       
 
   }
-.container-fluid{
+.container-fluid .nav{
     background-color: #123733;
-    z-index: 2;
+    z-index: 3;
 }
 .navbar-brand{
     color: white;
