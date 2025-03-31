@@ -3,9 +3,12 @@
 
 2.รายวิชาปฎิบัติไม่แสดงในหน้า user จะแสดงแต่หน้า admin
 # Project Schedule
-
 ## Features
-- **User Feature**: Users can [describe what users can do].
+- **User Feature**: เพิ่มรายวิชาที่ต้องการสอน
+                    แก้ไขรายวิชาของตัวเอง
+                    ลบรายวิชาของตัวเอง
+                    แสดงรายวิชาเฉพาะที่เลือก
+                    ดูรายวิชาในปีการศึกษาอื่น
 - **Admin Feature**: Admins can manage users, view analytics, and configure settings.
 - **Additional Features**: [Any other important features].
 
