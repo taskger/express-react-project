@@ -10,7 +10,7 @@
 
 ## Technologies Used
 - **Frontend**: [HTML, CSS ,JavaScript,React,Boostrap]
-- **Backend**: [ode.js, Express]
+- **Backend**: [node.js, Express]
 - **Database**: [MySQL TiDB]
 
 
