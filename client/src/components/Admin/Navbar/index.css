@@ -56,7 +56,7 @@ div .nav-link:hover {
 
   }
 .container-fluid .nav{
-    background-color: #123733;
+    background-color: rgb(36, 89, 83);
     z-index: 3;
 }
 .navbar-brand{
