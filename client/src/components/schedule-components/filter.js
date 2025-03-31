@@ -147,14 +147,14 @@ const Filter = ({updateFirstYear,updateSecondYear,updateThirdYear,updateFourYear
           <div className='form-check-main'>
             <div className = "row">
               <div className = "col"> 
-                <input className="boxcheck" type="checkbox" value="บรรยาย" id="checkmain" onChange={Checkboxlecture}/>
-                <label className="subject_main" htmlFor="checkmain"> บรรยาย </label>
+                <input className="boxcheck" type="checkbox" value="บรรยาย" id="checklecture" onChange={Checkboxlecture}/>
+                <label className="subject_main" htmlFor="checklecture"> บรรยาย </label>
               </div>
             </div> 
             <div className = "row">
               <div className = "col">
-                <input className="boxcheck" type="checkbox" value="ปฏิบัติ" id="checksai" onChange={Checkboxpractice}/>
-                <label className="subject_sai" htmlFor="checksai"> ปฏิบัติ </label>
+                <input className="boxcheck" type="checkbox" value="ปฏิบัติ" id="checlpratice" onChange={Checkboxpractice}/>
+                <label className="subject_sai" htmlFor="checlpratice"> ปฏิบัติ </label>
               </div>
             </div>
           </div>
