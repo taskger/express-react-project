@@ -30,6 +30,25 @@ function App() {
       icon: "warning"
     });
   }
+  const AlertManual = () => {
+    Swal.fire({
+      title: "คำเตือนก่อนใช้งาน",
+      icon: "warning",
+      html: `
+      เว็บไซต์นี้ User จะเข้าสู่ระบบผ่าน GOOGLE ซึ่งจะเก็บข้อมูล ชื่่อ-นามสกุล รูปโปรไฟล์จาก GOOGLE เข้า DATABASE
+      <br><br>
+      ถ้าไม่ต้องให้เก็บข้อมูลส่วนตัวสามารถเข้าสู่ระบบในตำแหน่งผู้จัดตาราง (Admin) เพื่อดูตัวอย่างการทำงาน
+      <br>
+      <b>User : admin</b>
+      <br>
+      <b>Pass : admin</b>
+      <br>
+      <br>
+      สามารถอ่านรายละเอียด และดูข้อมูลเพิ่มเติมได้ที่ 
+      <a href="https://github.com/taskger/express-react-project" autofocus>Github</a>
+  `,
+    });
+  }
   const Alertcant = () => {
     Swal.fire({
       text: "ขออภัย ผู้จัดตารางไม่สามารถเพิ่มรายวิชาได้",
@@ -38,7 +57,7 @@ function App() {
   }
 
   useEffect(() => {
-    Axios.get(`https://projectschedule-server.vercel.app/user/readregis`)
+    Axios.get(`https://localhost:3000/user/readregis`)
       .then(response => {
         const startDate = new Date(response.data.results[0].startdate);
         const endDate = new Date(response.data.results[0].enddate);
@@ -51,6 +70,7 @@ function App() {
 
         setStartDate(fixstartDate);
         setEndDate(fixendDate);
+ 
       })
       .catch(error => {
         console.error(error);
@@ -71,12 +91,18 @@ function App() {
   const userData = JSON.parse(localStorage.getItem('user'));
   let role = userData ? userData.role : null;
 
+
   return (
     <BrowserRouter>
         <Routes>
           {role === null && (
             <>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={
+                <>
+                <Login />
+                <AlertManual />
+                </>
+              }/>
             <Route path='*' element={
               <>
                   <Navigate to="/" />

@@ -4,11 +4,23 @@ import './Accept.css';
 
 function Accept() {
     const [data, setData] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         Axios.get(`https://projectschedule-server.vercel.app/accept/${0}`)
             .then(response => {
                 setData(response.data.results); // Assuming the response contains the data you need
+                console.log(response.data); // Log the response data
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        Axios.get(`https://projectschedule-server.vercel.app/accept/${1}`)
+            .then(response => {
+                setUser(response.data.results); // Assuming the response contains the data you need
                 console.log(response.data); // Log the response data
             })
             .catch(error => {
@@ -55,8 +67,43 @@ function Accept() {
 
     return (
         <div>
+            <h1>Account รอก่อนยืนยัน</h1>
             {data ? (
                 data.map(item => (
+                    <div className='box-accept' key={item.id}>
+                        <div className='in-accept'>
+                            <div className='item-accept'>
+                                <div className='img-accept'>
+                                    <img className='logo-accept' src={item.img} alt='sdsd' />
+                                </div>
+                                <div className='kit-accept'/>
+                                <div className='name-accept'>
+                                    <h1 className='first-font-accept'>{item.name}</h1>
+                                    <h1 className='sec-font-accept'>{item.surname}</h1>
+                                </div>
+                                <div className='kit-accept'/>
+                                <div className='email-accept'>
+                                    <h1 className='three-font-accept'>{item.email}</h1>
+                                </div>
+                                <div className='kit-accept'/>
+                                <div className='button-accept'>
+                                    <div>
+                                        <button className='yan-accpet' onClick={() => handleConfirmation(item.email)}>ยืนยัน</button>
+                                    </div>
+                                    <div>
+                                        <button className='yox-accpet' onClick={() => handleDeleted(item.email)}>ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <p>Loading...</p>
+            )}
+            <h1>Account ในระบบ</h1>
+            {user ? (
+                user.map(item => (
                     <div className='box-accept' key={item.id}>
                         <div className='in-accept'>
                             <div className='item-accept'>
