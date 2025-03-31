@@ -4,26 +4,15 @@
 2.รายวิชาปฎิบัติไม่แสดงในหน้า user จะแสดงแต่หน้า admin
 # Project Schedule
 ## Features
-- **User Feature**: เพิ่มรายวิชาที่ต้องการสอน
-  
-                    แก้ไขรายวิชาของตัวเอง
-                    ลบรายวิชาของตัวเอง
-                    แสดงรายวิชาเฉพาะที่เลือก
-                    ดูรายวิชาในปีการศึกษาอื่น
-- **Admin Feature**: Admins can manage users, view analytics, and configure settings.
-- **Additional Features**: [Any other important features].
+- **User Feature**: เพิ่มรายวิชาที่ต้องการสอน, แก้ไขรายวิชาของตัวเอง, ลบรายวิชาของตัวเอง, แสดงรายวิชา, ดูรายวิชาในปีการศึกษาอื่น
+- **Admin Feature**: กำหนดช่วงเวลาลงทะเบียนรายวิชา, เพิ่มข้อมูลหลักสูตร, อนุมัติผู้ใช้เข้าสู่ระบบ, ลบข้อมูลผู้ใช้, แสดงรายวิชา, แก้ไขและลบข้อมูลผู้ใช้ทุกคน
+- **Additional Features**: การเข้าสู่ระบบด้วย Google,ตัวกรองแสดงรายวิชา,
 
 ## Technologies Used
-- **Frontend**: [List technologies like React, HTML, CSS, JavaScript, etc.]
-- **Backend**: [List backend technologies like Node.js, Express, etc.]
-- **Database**: [List database like MongoDB, MySQL, etc.]
-- **Other**: [Any other technologies like APIs, AI, etc.]
+- **Frontend**: [HTML, CSS ,JavaScript,React,Boostrap]
+- **Backend**: [ode.js, Express]
+- **Database**: [MySQL TiDB]
 
 ## Demo
-- You can access the demo of the project [here](#) (Insert demo link if available, or instructions on how to run the project locally).
+- You can access the demo of the project [here](#) ([Insert demo link if available, or instructions on how to run the project locally](https://portfolio-chayanon.vercel.app/)).
 
-## Installation and Setup
-### For Local Setup:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/yourproject.git
