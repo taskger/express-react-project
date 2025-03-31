@@ -90,7 +90,9 @@ function App() {
 
   const userData = JSON.parse(localStorage.getItem('user'));
   let role = userData ? userData.role : null;
-
+  console.log(regisDate)
+  console.log(startDate)
+  console.log(endDate)
 
   return (
     <BrowserRouter>
