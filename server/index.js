@@ -13,7 +13,7 @@ const cors = require('cors');
 
 
 app.use(cors({
-    origin: ['https://projectschedule.vercel.app','https://projectschedule.vercel.app', 'http://localhost:3000'],
+    origin: ['https://projectschedule.vercel.app','http://projectschedule.vercel.app', 'http://localhost:3000'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization']
