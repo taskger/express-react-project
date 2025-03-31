@@ -59,6 +59,9 @@ div .nav-link:hover {
     background-color: rgb(36, 89, 83);
     z-index: 3;
 }
+.container-fluid .navbar-toggler{
+    z-index: 3;
+}
 .navbar-brand{
     color: white;
     transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */
