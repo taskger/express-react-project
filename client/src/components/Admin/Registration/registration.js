@@ -48,7 +48,7 @@ const Registration = () => {
 
   const update = () => {
     Axios.patch(`https://projectschedule-server.vercel.app/user/regis`, {
-      startdate: startDate-1,
+      startdate: startDate,
       enddate: endDate
     })
     .catch(error => {
