@@ -55,7 +55,10 @@ div .nav-link:hover {
     }       
 
   }
-
+.container-fluid{
+    background-color: #123733;
+    z-index: 2;
+}
 .navbar-brand{
     color: white;
     transition: background-color 0.3s, color 0.3s; /* Smooth transition effect */

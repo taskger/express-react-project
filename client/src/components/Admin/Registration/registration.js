@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Navbar from '../Navbar';
 import "./registration.css"; // Import the external CSS file
-import Swal from 'sweetalert2'
 
 const Registration = () => {
   const [startDate, setStartDate] = useState('');

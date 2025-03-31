@@ -91,7 +91,7 @@ function Accept() {
                                         <button className='yan-accpet' onClick={() => handleConfirmation(item.email)}>ยืนยัน</button>
                                     </div>
                                     <div>
-                                        <button className='yox-accpet' onClick={() => handleDeleted(item.email)}>ยกเลิก</button>
+                                        <button className='yox-accpet' onClick={() => handleDeleted(item.email)}>ลบ</button>
                                     </div>
                                 </div>
                             </div>
@@ -122,10 +122,7 @@ function Accept() {
                                 <div className='kit-accept'/>
                                 <div className='button-accept'>
                                     <div>
-                                        <button className='yan-accpet' onClick={() => handleConfirmation(item.email)}>ยืนยัน</button>
-                                    </div>
-                                    <div>
-                                        <button className='yox-accpet' onClick={() => handleDeleted(item.email)}>ยกเลิก</button>
+                                        <button className='yox-accpet' onClick={() => handleDeleted(item.email)}>ลบ</button>
                                     </div>
                                 </div>
                             </div>
