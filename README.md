@@ -14,5 +14,27 @@
 - **Database**: [MySQL TiDB]
 
 ## Demo
-- You can access the demo of the project [here](#) ([Insert demo link if available, or instructions on how to run the project locally](https://portfolio-chayanon.vercel.app/)).
+คลิกที่ลิ้ง [here](#) ([DEMO](https://portfolio-chayanon.vercel.app/)) เพื่อลองใช้งาน
+
+  ### Login
+    \*\*\*สำหรับ User ที่เข้าสู่ระบบจะเก็บข้อมูล ชื่อ นามสกุล และ รูปภาพ ที่ใช้ภายใน Google เข้าสู่ Database
+    1.เข้าสู่ระบบสถานะ User
+      1.1 เข้าสู่ระบบผ่าน Google
+      1.2 รอการยืนยันเข้าในหน้า Admin
+      1.3 เมือยืนยันเสร็จสิ้นสามารถเข้าใช้งานได้
+    2.เข้าสู่ระบบสถานะ Admin
+      2.1 กรอก User:admin Pass:admin เพื่อเข้าสู่ระบบ
+  ### User
+    1.เข้าสู่ระบบผ่าน GOOGLE
+    2.หน้าแรก
+      2.1 แสดงข้อมูลระยะเวลาก่อนถึงวันลงทะเบียน
+    3.หน้าตารางสอน 
+      3.1 แสดงข้อมูลรายวิชาที่เพิ่ม
+      3.2 เลือกปีการศึกษาที่ต้อง
+      3.3 เลือกภาคการศึกษาที่ต้องการ
+      3.4 ตัวกรองเลือกแสดงเฉพาะข้อมูลที่ต้องการ
+      3.5 ลบหรือแก้ไขรายวิชาที่ต้องการ
+    4.รูปโปรไฟล์
+      4.1 ออกจากระบบ
+  ### Admin
 
