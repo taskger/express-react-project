@@ -55,12 +55,15 @@ div .nav-link:hover {
     }       
 
   }
+@media only screen and (max-width: 950px) {
 .container-fluid .nav{
     background-color: rgb(36, 89, 83);
     z-index: 3;
 }
 .container-fluid .navbar-toggler{
+    background-color: rgb(36, 89, 83);
     z-index: 3;
+}
 }
 .navbar-brand{
     color: white;

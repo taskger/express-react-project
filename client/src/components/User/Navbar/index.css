@@ -46,3 +46,12 @@ div .nav-link:hover {
     margin-left: 20px;
     margin-bottom: 10px;
 }
+@media only screen and (max-width: 950px) {
+    .google-logout-navbar {
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+    .dropdown-menu{
+        width: 200px;
+    }
+}
