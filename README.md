@@ -59,8 +59,9 @@
     6.รูปโปรไฟล์
       6.1 ออกจากระบบ
 ### Database
-    Col1  | Col2  |  Col3 | Col4
------ | ----- | ----- | ----- |
-Test1 | Test1 | Test1 | Test1 |
-Test2 | Test2 | Test2 | Test2 |
-Test3 | Test3 | Test3 | Test3 |
+| Month    | Savings |
+| -------- | ------- |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
+
