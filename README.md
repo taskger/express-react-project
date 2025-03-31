@@ -1,8 +1,15 @@
 # bug
 1.หลังเพิ่มรายวิชาแล้วจะขึ้น alert(ยังถึงวันลงทะเบียน)
-
 2.รายวิชาปฎิบัติไม่แสดงในหน้า user จะแสดงแต่หน้า admin
+
 # Project Schedule
+
+- [Features](#feature)
+- [Technologies Used](#technologies)
+- [Demo](#demo)
+- [How to use](#howtouse)
+- [Database](#contact)
+- 
 ## Features
 - **User Feature**: เพิ่มรายวิชาที่ต้องการสอน, แก้ไขรายวิชาของตัวเอง, ลบรายวิชาของตัวเอง, แสดงรายวิชา, ดูรายวิชาในปีการศึกษาอื่น
 - **Admin Feature**: กำหนดช่วงเวลาลงทะเบียนรายวิชา, เพิ่มข้อมูลหลักสูตร, อนุมัติผู้ใช้เข้าสู่ระบบ, ลบข้อมูลผู้ใช้, แสดงรายวิชา, แก้ไขและลบข้อมูลผู้ใช้ทุกคน
@@ -13,9 +20,10 @@
 - **Backend**: [ode.js, Express]
 - **Database**: [MySQL TiDB]
 
+
 ## Demo
 คลิกที่ลิ้ง ([DEMO](https://portfolio-chayanon.vercel.app/)) เพื่อทดลองใช้งาน
-
+## How to use
   ### Login
     \*สำหรับ User ที่เข้าสู่ระบบจะเก็บข้อมูล ชื่อ นามสกุล และ รูปภาพ ที่ใช้ภายใน Google เข้าสู่ Database\*
     1.เข้าสู่ระบบสถานะ User
@@ -60,19 +68,27 @@
       6.1 ออกจากระบบ
 ### Database
 #### courses (หลักสูตร)
-| Column    | Type |  Length | Required |  Description | Sample | 
+
+| Column       | Type |  Length | Required |  Description | Sample | 
+| -------- | -------- | -------- | -------- | -------- |--------|
 | id (Primary) | int | 11 | Yes | ลำดับ | 1 |
 | courseid  | varchar   | 255 | Yes | รหัสวิชา | 01204466 |
 | subject | varchar    | 255 | Yes | ชื่อวิชา | Deep learning |
 | credit    | int    | 11 | No | หน่วยกิต | 3 |
 | unit    | int    | 11 | No | หน่วยกิต | 3 |
 | year    | int    | 11 | No | ปีหลักสูตร | 2565 |
+
+| Column    | Type |  Length | Required |  Description | Sample | 
+| -------- | -------- | -------- | -------- | -------- |--------|
+
+
+
 #### idUser
 #### idadmin
 #### registration
 #### schedules
 | Column    | Type |  Length | Required |  Description | Sample | 
-| id (Primary) | int | 11 | Yes | ลำดับ | 1 |
+| -------- | -------- | -------- | -------- | -------- |--------|
 | January  | $250    | -------- | ------- | -------- | ------- |
 | February | $80     | -------- | ------- | -------- | ------- |
 | March    | $420    | -------- | ------- | -------- | ------- |
