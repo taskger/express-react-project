@@ -78,17 +78,44 @@
 | unit    | int    | 11 | No | หน่วยกิต | 3 |
 | year    | int    | 11 | No | ปีหลักสูตร | 2565 |
 
+#### idUser
 | Column    | Type |  Length | Required |  Description | Sample | 
 | -------- | -------- | -------- | -------- | -------- |--------|
+| id (Primary) | int | 11 | Yes | ลำดับ | 1 |
+| name  | varchar   | 255 | Yes | ชื่อ | chayanon|
+| surname | varchar    | 255 | Yes | นามสกุล | poolwas |
+| email    | varchar    | 255 | Yes | อีเมล์ | chayanon.poolwas@gmail.com |
+| img    | varchar    | 255 | No | รูป | https://lh3.googleusercontent.com/a/jo0FeiAlYi5qzkTKw=s96-c |
+| role    | varchar    | 5 | No | ตำแหน่ง | user |
+| status    | tinyint    | 1 | No | สถานะการอนุมัติ | 1 |
 
-
-
-#### idUser
 #### idadmin
+| Column    | Type |  Length | Required |  Description | Sample | 
+| -------- | -------- | -------- | -------- | -------- |--------|
+| id (Primary) | int | 11 | Yes | ลำดับ | 1 |
+| username  | varchar   | 255 | Yes | ชื่อผู้ใช้ | admin |
+| password | varchar    | 255 | Yes | รหัสผ่าน | admin |
 #### registration
+| Column    | Type |  Length | Required |  Description | Sample | 
+| -------- | -------- | -------- | -------- | -------- |--------|
+| id (Primary) | int | 11 | Yes | ลำดับ | 1 |
+| startdate  | date |  | No | วันเริ่มต้น | 2025-03-31|
+| enddate | date    |  | No | วันสิ้นสุด | 2026-02-06 |
 #### schedules
 | Column    | Type |  Length | Required |  Description | Sample | 
 | -------- | -------- | -------- | -------- | -------- |--------|
-| January  | $250    | -------- | ------- | -------- | ------- |
-| February | $80     | -------- | ------- | -------- | ------- |
-| March    | $420    | -------- | ------- | -------- | ------- |
+| id (Primary) | int | 11 | Yes | ลำดับ | 1 |
+| year  | int   | 11 | No | ปีการศึกษา | 2568 |
+| semester | varchar    | 255 | No | ภาคการศึกษา | เทอมต้น |
+| professor    | varchar    | 255 | No | ชื่อ | chayanon poolwas |
+| subject    | varchar    | 255 | No | ชื่อวิชา | Deep Learing |
+| num_students    | int    | 11 | No | จำนวนผู้เรียน | 30 |
+| sec    | varchar    | 255 | No | กลุ่มเรียน | 800 |
+| room  | varchar   | 255 | No | ห้อง |  |
+| day | varchar    | 255 | No | วัน | วันจันทร์ |
+| start_time    | time    |  | No | วันเริ่มต้น | 09:00:00 |
+| end_time    | time    |  | No | วันสิ้นสุด |12:00:00 |
+| catagory    | varchar    | 255 | No | ประเภทวิชา | วิชาหลัก |
+| lecture    | varchar    | 255 | No | วิชาบรรยาย | 1 |
+| practice    | varchar    | 255 | No | วิชาปฏิบัติ | 0 |
+| studentyear    | varchar    | 255 | No | ปีที่สามารถลงทะเบียน | ชั้นปี 2 |
