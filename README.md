@@ -59,9 +59,20 @@
     6.รูปโปรไฟล์
       6.1 ออกจากระบบ
 ### Database
-| Month    | Savings |
-| -------- | ------- |
-| January  | $250    |
-| February | $80     |
-| March    | $420    |
-
+#### courses (หลักสูตร)
+| Column    | Type |  Length | Required |  Description | Sample | 
+| id (Primary) | int | 11 | Yes | ลำดับ | 1 |
+| courseid  | varchar   | 255 | Yes | รหัสวิชา | 01204466 |
+| subject | varchar    | 255 | Yes | ชื่อวิชา | Deep learning |
+| credit    | int    | 11 | No | หน่วยกิต | 3 |
+| unit    | int    | 11 | No | หน่วยกิต | 3 |
+| year    | int    | 11 | No | ปีหลักสูตร | 2565 |
+#### idUser
+#### idadmin
+#### registration
+#### schedules
+| Column    | Type |  Length | Required |  Description | Sample | 
+| id (Primary) | int | 11 | Yes | ลำดับ | 1 |
+| January  | $250    | -------- | ------- | -------- | ------- |
+| February | $80     | -------- | ------- | -------- | ------- |
+| March    | $420    | -------- | ------- | -------- | ------- |
