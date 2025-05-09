@@ -159,7 +159,7 @@ const Schedule = () => {
   
   };
 
-  const addLecture = () =>{
+  const addLecture = async () =>{
     const filteredDatasubject = schedule.filter(course => {
       let filterCondition;
         if(subject_lecture === course.subject && sec_lecture == course.sec && selectedLecture === true){
@@ -355,40 +355,51 @@ const Schedule = () => {
       return;
     }
 
-    if (selectedLecture === true){
-      Axios.post('https://projectschedule-server.vercel.app/user/addcourse/createlecture',{
-        year_lecture: year,
-        semester_lecture: semester,
-        professor_lecture: professor,
-        subject_lecture: subject_lecture,
-        num_students_lecture: num_students_lecture,
-        sec_lecture: sec_lecture,
-        day_lecture: day_lecture,
-        start_time_lecture: start_time_lecture,
-        end_time_lecture: end_time_lecture,
-        catagory_lecture:catagory_lecture,
-        lecture: lecture,
-        studentyear_lecture: studentyear_lecture,
-        classroom_lecture:classroom_lecture,
-
-      });
+    if (selectedLecture){
+      try {
+        const response = await Axios.post('https://projectschedule-server.vercel.app/user/addcourse/createlecture', {
+          year_lecture: year,
+          semester_lecture: semester,
+          professor_lecture: professor,
+          subject_lecture: subject_lecture,
+          num_students_lecture: num_students_lecture,
+          sec_lecture: sec_lecture,
+          day_lecture: day_lecture,
+          start_time_lecture: start_time_lecture,
+          end_time_lecture: end_time_lecture,
+          catagory_lecture: catagory_lecture,
+          lecture: lecture,
+          studentyear_lecture: studentyear_lecture,
+          classroom_lecture: classroom_lecture,
+        });
+      
+        console.log("✅ Success:", response.status, response.data);
+      } catch (error) {
+        console.error("❌ Error:", error.response?.status, error.response?.data);
+      }
     }
-    if (selectedPractice === true){
-      Axios.post('https://projectschedule-server.vercel.app/user/addcourse/createpractice',{
-        year_practice: year,
-        semester_practice: semester,
-        professor_practice: professor,
-        subject_practice: subject_practice,
-        num_students_practice: num_students_practice,
-        sec_practice: sec_practice,
-        day_practice: day_practice,
-        start_time_practice: start_time_practice,
-        end_time_practice: end_time_practice,
-        catagory_practice:catagory_practice,
-        practice: practice,
-        studentyear_practice:studentyear_practice,
-        classroom_lecture:classroom_practice
-      });
+    if (selectedPractice){
+      try {
+        const response = await Axios.post('https://projectschedule-server.vercel.app/user/addcourse/createpractice', {
+          year_practice: year,
+          semester_practice: semester,
+          professor_practice: professor,
+          subject_practice,
+          num_students_practice,
+          sec_practice,
+          day_practice,
+          start_time_practice,
+          end_time_practice,
+          catagory_practice,
+          practice,
+          studentyear_practice,
+          classroom_lecture: classroom_practice
+        });
+  
+        console.log("✅ Practice added:", response.data);
+      } catch (error) {
+        console.error("❌ Error adding practice:", error);
+      }
     }
 
     window.location.reload();
